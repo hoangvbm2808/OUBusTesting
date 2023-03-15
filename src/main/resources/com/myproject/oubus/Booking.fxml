@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="875.0" stylesheets="@../../../css/Booking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="431.99998779296874" minWidth="10.0" prefWidth="279.00001220703126" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.4000366210937" minWidth="10.0" prefWidth="116.20002441406251" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="597.7999633789062" minWidth="10.0" prefWidth="126.5999755859375" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.4000244140624" minWidth="10.0" prefWidth="343.0000244140625" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="196.4" minHeight="10.0" prefHeight="106.20001831054688" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="509.59999008178715" minHeight="10.0" prefHeight="277.5999755859375" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="255.19998779296873" minHeight="0.0" prefHeight="58.4000244140625" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <Label text="Thông tin chuyến đi" textFill="#ff6e6c" GridPane.halignment="CENTER">
+         <font>
+            <Font name="Tahoma Bold" size="26.0" />
+         </font>
+      </Label>
+      <VBox prefHeight="319.0" prefWidth="134.0" spacing="10.0" GridPane.rowIndex="1">
+         <children>
+            <HBox prefHeight="22.0" prefWidth="301.0">
+               <children>
+                  <Label text="Mã chuyến:" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="26.0" prefWidth="44.0" text="A123" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="301.0">
+               <children>
+                  <HBox prefHeight="22.0" prefWidth="301.0">
+                     <children>
+                        <Label text="Điểm đi:" textFill="#ff6e6c">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label text="Sài Gòn" textFill="#ff6e6c">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="301.0">
+               <children>
+                  <Label text="Điểm đến:" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="Nha Trang" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="301.0">
+               <children>
+                  <Label text="Giờ khởi hành:" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="16:12" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="301.0">
+               <children>
+                  <Label text="Biển số xe: " textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="51A-12345" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="301.0">
+               <children>
+                  <Label text="Tên tài xế:" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="M.Hoàng" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="22.0" prefWidth="301.0">
+               <children>
+                  <Label text="Giá vé:" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+                  <Label text="300.000" textFill="#ff6e6c">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+         <GridPane.margin>
+            <Insets left="10.0" top="5.0" />
+         </GridPane.margin>
+      </VBox>
+      <VBox prefHeight="255.0" prefWidth="107.0" spacing="35.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <children>
+            <HBox prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A01">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A02">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A03">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A04">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A05">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A06">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A07">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A08">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="50.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A09">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A10">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets right="15.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin>
+      </VBox>
+      <VBox alignment="TOP_RIGHT" prefHeight="255.0" prefWidth="77.0" spacing="35.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <children>
+            <HBox prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B01">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B02">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B03">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B04">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B05">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B06">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B07">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B08">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="50.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B09">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B10">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+         </children>
+         <GridPane.margin>
+            <Insets left="20.0" />
+         </GridPane.margin>
+      </VBox>
+      <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Thông tin khách đi" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+         <font>
+            <Font name="Tahoma" size="17.0" />
+         </font>
+      </Label>
+      <VBox prefHeight="255.0" prefWidth="286.0" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="242.0" spacing="10.0" styleClass="HBoxCss">
+               <children>
+                  <Label contentDisplay="TOP" text="Họ tên:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField prefHeight="26.0" prefWidth="174.0" styleClass="lbName" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="40.0" right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="221.0" spacing="10.0">
+               <children>
+                  <Label contentDisplay="TOP" text="Số điện thoại:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField prefHeight="26.0" prefWidth="174.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="237.0" spacing="10.0">
+               <children>
+                  <Label contentDisplay="TOP" text="Điểm đón:">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField prefHeight="26.0" prefWidth="174.0" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="20.0" right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" layoutX="10.0" layoutY="92.0" prefHeight="29.0" prefWidth="237.0" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="83.0" styleClass="ButtonBook" text="Đặt vé" textFill="WHITE">
+                     <font>
+                        <Font name="Tahoma Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <GridPane.margin>
+            <Insets left="20.0" top="10.0" />
+         </GridPane.margin>
+      </VBox>
+   </children>
+</GridPane>
