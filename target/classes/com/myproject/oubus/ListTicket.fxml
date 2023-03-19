@@ -18,7 +18,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField prefHeight="26.0" prefWidth="214.79999387264252" promptText="Nhập tên...">
+                        <TextField editable="false" prefHeight="26.0" prefWidth="214.79999387264252" promptText="Nhập tên...">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
