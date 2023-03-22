@@ -13,7 +13,7 @@ import javafx.fxml.Initializable;
  *
  * @author vbmho
  */
-public class MainScreenStaffController implements Initializable {
+public class MainStaffScreenController implements Initializable {
 
     /**
      * Initializes the controller class.

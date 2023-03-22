@@ -7,6 +7,8 @@ package com.myproject.pojo;
 import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 /**
  *
@@ -14,48 +16,36 @@ import java.time.LocalDate;
  */
 public class ChuyenDi {
 
-    /**
-     * @return the isDelete
-     */
-    public int getIsDelete() {
-        return isDelete;
-    }
-
-    /**
-     * @param isDelete the isDelete to set
-     */
-    public void setIsDelete(int isDelete) {
-        this.isDelete = isDelete;
-    }
+    
 
     /**
      * @return the gioKhoiHanh
      */
-    public Time getGioKhoiHanh() {
+    public LocalTime getGioKhoiHanh() {
         return gioKhoiHanh;
     }
 
     /**
      * @param gioKhoiHanh the gioKhoiHanh to set
      */
-    public void setGioKhoiHanh(Time gioKhoiHanh) {
+    public void setGioKhoiHanh(LocalTime gioKhoiHanh) {
         this.gioKhoiHanh = gioKhoiHanh;
     }
     private String maChuyenDi;
     private String maXe;
     private int giaVe;
-    private Date ngayKhoiHanh;
-    private Time gioKhoiHanh;
+    private LocalDate ngayKhoiHanh;
+    private LocalTime gioKhoiHanh;
     private String diemKhoiHanh;
     private String diemKetThuc;
     private int soGheTrong;
     private int soGheDat;
-    private int isDelete;
+    private String trangThai;
 
     public ChuyenDi() {
     }
 
-    public ChuyenDi(String maChuyenDi, String maXe, int giaVe, Date ngayKhoiHanh, Time gioKhoiHanh, String diemKhoiHanh, String diemKetThuc, int soGheTrong, int soGheDat, int isDelete) {
+    public ChuyenDi(String maChuyenDi, String maXe, int giaVe, LocalDate ngayKhoiHanh, LocalTime gioKhoiHanh, String diemKhoiHanh, String diemKetThuc, int soGheTrong, int soGheDat, String trangThai) {
         this.maChuyenDi = maChuyenDi;
         this.maXe = maXe;
         this.giaVe = giaVe;
@@ -65,7 +55,7 @@ public class ChuyenDi {
         this.diemKetThuc = diemKetThuc;
         this.soGheTrong = soGheTrong;
         this.soGheDat = soGheDat;
-        this.isDelete = isDelete;
+        this.trangThai = trangThai;
     }
 
     
@@ -115,14 +105,14 @@ public class ChuyenDi {
     /**
      * @return the thoiGianKhoiHanh
      */
-    public Date getNgayKhoiHanh() {
+    public LocalDate getNgayKhoiHanh() {
         return ngayKhoiHanh;
     }
 
     /**
      * @param ngayKhoiHanh the ngayKhoiHanh to set
      */
-    public void setNgayKhoiHanh(Date ngayKhoiHanh) {
+    public void setNgayKhoiHanh(LocalDate ngayKhoiHanh) {
         this.ngayKhoiHanh = ngayKhoiHanh;
     }
 
@@ -184,6 +174,20 @@ public class ChuyenDi {
     
     @Override
     public String toString(){
-        return this.maChuyenDi;
+        return this.getMaChuyenDi();
+    }
+
+    /**
+     * @return the trangThai
+     */
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    /**
+     * @param trangThai the trangThai to set
+     */
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
     }
 }

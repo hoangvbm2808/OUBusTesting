@@ -55,14 +55,25 @@ public class LoginController implements Initializable {
                     Account a = acService.getAccount(txtTaiKhoan.getText());             
                     if (a != null) {                      
                         if (a.getMatKhau().equals(txtMatKhau.getText())) {
-//                            Utils.getBox("Đăng nhập thành công", Alert.AlertType.INFORMATION).show();     
-                            FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("MainScreenStaff.fxml"));
+                            if (a.getMaQuyen()== 2 ){
+                                FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("MainStaffScreen.fxml"));
+
+                                Scene scene = new Scene(fxmloader.load());
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.setTitle("OuBus");
+                                stage.show();
+                            }
+                            else {
+                                FXMLLoader fxmloader2 = new FXMLLoader(App.class.getResource("MainAdminScreen.fxml"));
+
+                                Scene scene = new Scene(fxmloader2.load());
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.setTitle("OuBus");
+                                stage.show();
+                            }
                             
-                            Scene scene = new Scene(fxmloader.load());
-                            Stage stage = new Stage();
-                            stage.setScene(scene);
-                            stage.setTitle("OuBus");
-                            stage.show();
                         }
                         else{
                             Utils.getBox("Mật khẩu không chính xác", Alert.AlertType.WARNING).show();
