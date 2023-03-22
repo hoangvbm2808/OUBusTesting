@@ -46,7 +46,7 @@
       </TextField>
       <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="3">
          <children>
-            <Button mnemonicParsing="false" onAction="#loginHanler" prefHeight="40.0" prefWidth="114.0" text="Đăng nhập">
+            <Button mnemonicParsing="false" onAction="#loginHandler" prefHeight="40.0" prefWidth="114.0" text="Đăng nhập">
                <font>
                   <Font size="18.0" />
                </font>

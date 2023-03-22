@@ -47,7 +47,7 @@ public class LoginController implements Initializable {
         // TODO
     }    
     
-    public void loginHanler(ActionEvent event) throws IOException, SQLException {
+    public void loginHandler(ActionEvent event) throws IOException, SQLException {
         if (this.txtTaiKhoan.getText().isEmpty() || this.txtMatKhau.getText().isEmpty()){
              Utils.getBox("Vui lòng nhập tài khoản, mật khẩu.", Alert.AlertType.WARNING).show();
         } else{
@@ -55,10 +55,10 @@ public class LoginController implements Initializable {
                     Account a = acService.getAccount(txtTaiKhoan.getText());             
                     if (a != null) {                      
                         if (a.getMatKhau().equals(txtMatKhau.getText())) {
-                            Utils.getBox("Đăng nhập thành công", Alert.AlertType.INFORMATION).show();     
+//                            Utils.getBox("Đăng nhập thành công", Alert.AlertType.INFORMATION).show();     
                             FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("MainScreenStaff.fxml"));
                             
-                            Scene scene = new Scene(fxmloader .load());
+                            Scene scene = new Scene(fxmloader.load());
                             Stage stage = new Stage();
                             stage.setScene(scene);
                             stage.setTitle("OuBus");
