@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -111,21 +110,12 @@
    <center>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="40.0" prefWidth="920.0" styleClass="Subject" stylesheets="@CSS/styleList.css" text="Danh sách chuyến đi" textAlignment="CENTER">
+            <Label alignment="CENTER" prefHeight="18.0" prefWidth="936.0" styleClass="Subject" stylesheets="@../../../css/mainstaffscreen.css" text="Danh sách chuyến đi">
                <font>
-                  <Font size="18.0" />
-               </font></Label>
-            <TableView prefHeight="423.0" prefWidth="914.0">
-              <columns>
-                  <TableColumn fx:id="maColumn" prefWidth="79.1999740600586" text="Mã xe" />
-                  <TableColumn fx:id="noiDiColumn" prefWidth="132.79998779296875" text="Nơi đi" />
-                  <TableColumn fx:id="noiDenColumn" prefWidth="129.6000518798828" text="Nơi đến" />
-                  <TableColumn fx:id="ngayKhoiHanhColumn" prefWidth="158.39996337890625" text="Ngày khởi hành" />
-                  <TableColumn fx:id="tgKhoiHanhColumn" prefWidth="176.79998779296875" text="Thời gian khởi hành" />
-                  <TableColumn fx:id="giaColumn" prefWidth="91.19989013671875" text="Gía vé" />
-                  <TableColumn prefWidth="156.0001220703125" text="Số lượng khách" />
-              </columns>
-            </TableView>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tableChuyenDi" prefHeight="423.0" prefWidth="914.0" />
          </children>
       </VBox>
    </center>

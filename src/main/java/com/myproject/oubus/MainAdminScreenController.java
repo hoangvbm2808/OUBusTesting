@@ -4,8 +4,10 @@
  */
 package com.myproject.oubus;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.Initializable;
 
 /**
@@ -23,4 +25,14 @@ public class MainAdminScreenController implements Initializable {
         // TODO
     }    
     
+    //File
+    public void ActionSeeTourist() throws IOException {
+        App.setRoot("ListTourAdmin");
+    }
+    
+    //Exit
+    public void ActionClose() {
+        Platform.exit();
+        System.exit(0);
+    }
 }

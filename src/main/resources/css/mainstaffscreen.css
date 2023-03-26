@@ -5,3 +5,7 @@
 .mainFxmlClass {
 
 }
+
+Label.Subject {
+    -fx-alignment: CENTER;
+}

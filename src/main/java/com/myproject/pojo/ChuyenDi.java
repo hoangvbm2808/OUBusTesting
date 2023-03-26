@@ -15,11 +15,11 @@ import java.time.LocalTime;
  * @author dell
  */
 public class ChuyenDi {
-    private String maChuyenDi;
-    private String maXe;
+    private int maChuyenDi;
+    private int maXe;
     private int giaVe;
-    private LocalDate ngayKhoiHanh;
-    private LocalTime gioKhoiHanh;
+    private Date ngayKhoiHanh;
+    private String gioKhoiHanh;
     private String diemKhoiHanh;
     private String diemKetThuc;
     private int soGheTrong;
@@ -30,21 +30,23 @@ public class ChuyenDi {
     /**
      * @return the gioKhoiHanh
      */
-    public LocalTime getGioKhoiHanh() {
+    public String getGioKhoiHanh() {
         return gioKhoiHanh;
     }
 
     /**
      * @param gioKhoiHanh the gioKhoiHanh to set
      */
-    public void setGioKhoiHanh(LocalTime gioKhoiHanh) {
+    public void setGioKhoiHanh(String gioKhoiHanh) {
         this.gioKhoiHanh = gioKhoiHanh;
     }
     
     public ChuyenDi() {
     }
 
-    public ChuyenDi(String maChuyenDi, String maXe, int giaVe, LocalDate ngayKhoiHanh, LocalTime gioKhoiHanh, String diemKhoiHanh, String diemKetThuc, int soGheTrong, int soGheDat, String trangThai) {
+    public ChuyenDi(int maChuyenDi, int maXe, int giaVe, Date ngayKhoiHanh, 
+            String gioKhoiHanh, String diemKhoiHanh, String diemKetThuc, 
+            int soGheTrong, int soGheDat, String trangThai) {
         this.maChuyenDi = maChuyenDi;
         this.maXe = maXe;
         this.giaVe = giaVe;
@@ -76,42 +78,42 @@ public class ChuyenDi {
     /**
      * @return the maChuyenDi
      */
-    public String getMaChuyenDi() {
+    public int getMaChuyenDi() {
         return maChuyenDi;
     }
 
     /**
      * @param maChuyenDi the maChuyenDi to set
      */
-    public void setMaChuyenDi(String maChuyenDi) {
+    public void setMaChuyenDi(int maChuyenDi) {
         this.maChuyenDi = maChuyenDi;
     }
 
     /**
      * @return the maXe
      */
-    public String getMaXe() {
+    public int getMaXe() {
         return maXe;
     }
 
     /**
      * @param maXe the maXe to set
      */
-    public void setMaXe(String maXe) {
+    public void setMaXe(int maXe) {
         this.maXe = maXe;
     }
 
     /**
      * @return the thoiGianKhoiHanh
      */
-    public LocalDate getNgayKhoiHanh() {
+    public Date getNgayKhoiHanh() {
         return ngayKhoiHanh;
     }
 
     /**
      * @param ngayKhoiHanh the ngayKhoiHanh to set
      */
-    public void setNgayKhoiHanh(LocalDate ngayKhoiHanh) {
+    public void setNgayKhoiHanh(Date ngayKhoiHanh) {
         this.ngayKhoiHanh = ngayKhoiHanh;
     }
 
@@ -171,10 +173,6 @@ public class ChuyenDi {
         this.soGheDat = soGheDat;
     }
     
-    @Override
-    public String toString(){
-        return this.getMaChuyenDi();
-    }
 
     /**
      * @return the trangThai
