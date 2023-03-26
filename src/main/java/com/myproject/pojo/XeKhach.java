@@ -10,17 +10,15 @@ package com.myproject.pojo;
  */
 public class XeKhach {
     private String maXe;
-    private String maNhanVien;
-    private String BienSoXe;
+    private String bienSoXe;
     private int soGhe;
 
     public XeKhach() {
     }
 
-    public XeKhach(String maXe, String maNhanVien, String BienSoXe, int soGhe) {
+    public XeKhach(String maXe, String BienSoXe, int soGhe) {
         this.maXe = maXe;
-        this.maNhanVien = maNhanVien;
-        this.BienSoXe = BienSoXe;
+        this.bienSoXe = BienSoXe;
         this.soGhe = soGhe;
     }
     
@@ -39,31 +37,17 @@ public class XeKhach {
     }
 
     /**
-     * @return the maNhanVien
-     */
-    public String getMaNhanVien() {
-        return maNhanVien;
-    }
-
-    /**
-     * @param maNhanVien the maNhanVien to set
-     */
-    public void setMaNhanVien(String maNhanVien) {
-        this.maNhanVien = maNhanVien;
-    }
-
-    /**
      * @return the BienSoXe
      */
     public String getBienSoXe() {
-        return BienSoXe;
+        return bienSoXe;
     }
 
     /**
      * @param BienSoXe the BienSoXe to set
      */
     public void setBienSoXe(String BienSoXe) {
-        this.BienSoXe = BienSoXe;
+        this.bienSoXe = BienSoXe;
     }
 
     /**

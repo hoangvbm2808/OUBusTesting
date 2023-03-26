@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -85,6 +86,10 @@ public class LoginController implements Initializable {
                     Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
         }
+    }
+    public void ActionClose() {
+        Platform.exit();
+        System.exit(0);
     }
     
 }

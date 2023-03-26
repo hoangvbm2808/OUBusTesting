@@ -11,10 +11,6 @@ import java.sql.Date;
  * @author Admin
  */
 public class NhanVien {
-
-    
-
-    // 
     private String maNhanVien;
     private String tenNhanVien;
     private int maLoaiNhanVien;
@@ -22,13 +18,15 @@ public class NhanVien {
     private String soDienThoai;
     private String cMND;
     private String queQuan;
+    private int maAccount;
     
     //
     public NhanVien(){
         
     }
     
-    public NhanVien(String maNV, String tenNV, int maLoaiNV, Date nS, String sDT, String cMND, String qQ){
+    public NhanVien(String maNV, String tenNV, int maLoaiNV, Date nS, String sDT, 
+            String cMND, String qQ, int maAccount){
         this.maNhanVien = maNV;
         this.tenNhanVien = tenNV;
         this.maLoaiNhanVien = maLoaiNV;
@@ -36,6 +34,7 @@ public class NhanVien {
         this.soDienThoai = sDT;
         this.cMND = cMND;
         this.queQuan = qQ;
+        this.maAccount = maAccount;
     }
     
     //
@@ -136,5 +135,19 @@ public class NhanVien {
      */
     public void setQueQuan(String queQuan) {
         this.queQuan = queQuan;
+    }
+
+    /**
+     * @return the maAccount
+     */
+    public int getMaAccount() {
+        return maAccount;
+    }
+
+    /**
+     * @param maAccount the maAccount to set
+     */
+    public void setMaAccount(int maAccount) {
+        this.maAccount = maAccount;
     }
 }

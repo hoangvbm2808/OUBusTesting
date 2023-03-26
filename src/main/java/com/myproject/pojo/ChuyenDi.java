@@ -15,8 +15,17 @@ import java.time.LocalTime;
  * @author dell
  */
 public class ChuyenDi {
+    private String maChuyenDi;
+    private String maXe;
+    private int giaVe;
+    private LocalDate ngayKhoiHanh;
+    private LocalTime gioKhoiHanh;
+    private String diemKhoiHanh;
+    private String diemKetThuc;
+    private int soGheTrong;
+    private int soGheDat;
+    private String trangThai;
 
-    
 
     /**
      * @return the gioKhoiHanh
@@ -31,17 +40,7 @@ public class ChuyenDi {
     public void setGioKhoiHanh(LocalTime gioKhoiHanh) {
         this.gioKhoiHanh = gioKhoiHanh;
     }
-    private String maChuyenDi;
-    private String maXe;
-    private int giaVe;
-    private LocalDate ngayKhoiHanh;
-    private LocalTime gioKhoiHanh;
-    private String diemKhoiHanh;
-    private String diemKetThuc;
-    private int soGheTrong;
-    private int soGheDat;
-    private String trangThai;
-
+    
     public ChuyenDi() {
     }
 

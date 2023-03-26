@@ -26,7 +26,8 @@ public class AccountService {
             ResultSet rs = stm.executeQuery("SELECT * FROM account");
             
             while(rs.next()){
-                Account a = new Account(rs.getString("TaiKhoan"), rs.getString("MatKhau"), rs.getString("MaNhanVien"), rs.getInt("MaQuyen"));
+                Account a = new Account(rs.getInt("id"), rs.getString("TaiKhoan"), 
+                        rs.getString("MatKhau"), rs.getInt("MaQuyen"));
                 results.add(a);
             }
         }
@@ -42,7 +43,8 @@ public class AccountService {
                        
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
-                results = new Account(rs.getString("TaiKhoan"), rs.getString("MatKhau") , rs.getString("MaNhanVien"), rs.getInt("MaQuyen"));
+                results = new Account(rs.getInt("id"), rs.getString("TaiKhoan"), 
+                        rs.getString("MatKhau"), rs.getInt("MaQuyen"));
             }
         }
         return results;

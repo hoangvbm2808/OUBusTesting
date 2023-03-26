@@ -11,16 +11,16 @@ package com.myproject.pojo;
 public class Account {
     private String taiKhoan;
     private String matKhau;
-    private String maNhanVien;
     private int maQuyen;
+    private int id;
 
     public Account(){
     }
 
-    public Account(String taiKhoan, String matKhau, String maNhanVien, int maQuyen) {
+    public Account(int id, String taiKhoan, String matKhau, int maQuyen) {
+        this.id=id;
         this.taiKhoan = taiKhoan;
         this.matKhau = matKhau;
-        this.maNhanVien = maNhanVien;
         this.maQuyen = maQuyen;
     }
     
@@ -53,20 +53,6 @@ public class Account {
     }
 
     /**
-     * @return the maNhanVien
-     */
-    public String getMaNhanVien() {
-        return maNhanVien;
-    }
-
-    /**
-     * @param maNhanVien the maNhanVien to set
-     */
-    public void setMaNhanVien(String maNhanVien) {
-        this.maNhanVien = maNhanVien;
-    }
-
-    /**
      * @return the maQuyen
      */
     public int getMaQuyen() {
@@ -78,5 +64,19 @@ public class Account {
      */
     public void setMaQuyen(int maQuyen) {
         this.maQuyen = maQuyen;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 }

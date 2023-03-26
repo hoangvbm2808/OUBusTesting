@@ -11,16 +11,15 @@ import java.sql.Date;
  * @author Admin
  */
 public class DoanhThuChuyenDi {
-
-    /**
-     * @return the maChuyenDi
-     */
-   
     private String maChuyenDi;
     private int doanhThu;
     private int soVeDat;
     private Date ngay;
     
+    
+     /**
+     * @return the maChuyenDi
+     */
     public DoanhThuChuyenDi(){
        
     }

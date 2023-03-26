@@ -11,7 +11,35 @@ import java.sql.Date;
  * @author dell
  */
 public class VeXe {
+    private int maVe;
+    private String tenKhachHang;
+    private Date ngayDat; 
+    private String sdt;
+    private String viTriGhe;
+    private String trangThai;
+    private String maChuyenDi;
+    private String maNhanVien;
+    private String maDoanhThu;
+        
+    public VeXe() {
+    }
 
+    
+    public VeXe(int maVe, String tenKhachHang, Date ngayDat, String sdt, 
+            String maChuyenDi, String viTriGhe, String trangThai, 
+            String maNhanVien, String maDoanhThu) {
+        this.maVe = maVe;
+        this.tenKhachHang = tenKhachHang;
+        this.ngayDat = ngayDat;
+        this.sdt = sdt;
+        this.maChuyenDi = maChuyenDi;
+        this.viTriGhe = viTriGhe;
+        this.trangThai = trangThai;
+        this.maNhanVien = maNhanVien;
+        this.maDoanhThu = maDoanhThu;
+    }
+    
+    
     /**
      * @return the maNhanVien
      */
@@ -39,40 +67,20 @@ public class VeXe {
     public void setTrangThai(String trangThai) {
         this.trangThai = trangThai;
     }
-    private String maVe;
-    private String tenKhachHang;
-    private Date ngayDat; 
-    private String sdt;
-    private String maChuyenDi;
-    private String viTriGhe;
-    private String trangThai;
-    private String maNhanVien;
 
-    public VeXe() {
-    }
-
-    public VeXe(String maVe, String tenKhachHang, Date ngayDat, String sdt, String maChuyenDi, String viTriGhe, String trangThai, String maNhanVien) {
-        this.maVe = maVe;
-        this.tenKhachHang = tenKhachHang;
-        this.ngayDat = ngayDat;
-        this.sdt = sdt;
-        this.maChuyenDi = maChuyenDi;
-        this.viTriGhe = viTriGhe;
-        this.trangThai = trangThai;
-        this.maNhanVien = maNhanVien;
-    }
+  
     
     /**
      * @return the maVe
      */
-    public String getMaVe() {
+    public int getMaVe() {
         return maVe;
     }
 
     /**
      * @param maVe the maVe to set
      */
-    public void setMaVe(String maVe) {
+    public void setMaVe(int maVe) {
         this.maVe = maVe;
     }
 
@@ -144,5 +152,19 @@ public class VeXe {
      */
     public void setViTriGhe(String viTriGhe) {
         this.viTriGhe = viTriGhe;
+    }
+
+    /**
+     * @return the maDoanhThu
+     */
+    public String getMaDoanhThu() {
+        return maDoanhThu;
+    }
+
+    /**
+     * @param maDoanhThu the maDoanhThu to set
+     */
+    public void setMaDoanhThu(String maDoanhThu) {
+        this.maDoanhThu = maDoanhThu;
     }
 }
