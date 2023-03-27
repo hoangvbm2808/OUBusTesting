@@ -34,4 +34,20 @@ public class ChuyenDiService {
         }
         return chuyendi;
     }
+     
+     public ChuyenDi getChuyenDiByMaChuyenDi(int MaChuyenDi) throws SQLException{
+        ChuyenDi result = null;
+        try(Connection conn = jdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareCall("SELECT * FROM chuyendi WHERE  id = ?");
+            stm.setInt(1, MaChuyenDi);
+            
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                
+                result  = new ChuyenDi(rs.getInt("id"), rs.getInt("maXe"), rs.getInt("giaVe"),  rs.getDate("ngayKhoiHanh"), rs.getString("gioKhoiHanh"),
+                       rs.getString("diemKhoiHanh"), rs.getString("diemKetThuc"), rs.getInt("soGheTrong"), rs.getInt("soGheDat"), rs.getString("trangThai"));
+            }
+        }
+        return result; 
+    }
 }

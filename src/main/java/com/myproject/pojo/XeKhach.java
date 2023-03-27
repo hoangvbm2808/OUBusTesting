@@ -9,30 +9,32 @@ package com.myproject.pojo;
  * @author dell
  */
 public class XeKhach {
-    private String maXe;
+    private int maXe;
     private String bienSoXe;
     private int soGhe;
+    private int maNhanVien;
 
     public XeKhach() {
     }
 
-    public XeKhach(String maXe, String BienSoXe, int soGhe) {
+    public XeKhach(int maXe, String BienSoXe, int soGhe, int MaNhanVien) {
         this.maXe = maXe;
         this.bienSoXe = BienSoXe;
         this.soGhe = soGhe;
+        this.maNhanVien = MaNhanVien;
     }
     
     /**
      * @return the maXe
      */
-    public String getMaXe() {
+    public Integer getMaXe() {
         return maXe;
     }
 
     /**
      * @param maXe the maXe to set
      */
-    public void setMaXe(String maXe) {
+    public void setMaXe(int maXe) {
         this.maXe = maXe;
     }
 
@@ -66,6 +68,20 @@ public class XeKhach {
     
     @Override
     public String toString(){
-        return this.maXe;
+        return String.valueOf(this.maXe);
+    }
+
+    /**
+     * @return the maNhanVien
+     */
+    public int getMaNhanVien() {
+        return maNhanVien;
+    }
+
+    /**
+     * @param maNhanVien the maNhanVien to set
+     */
+    public void setMaNhanVien(int maNhanVien) {
+        this.maNhanVien = maNhanVien;
     }
 }

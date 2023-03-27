@@ -63,6 +63,10 @@ public class LoginController implements Initializable {
                                 stage.setScene(scene);
                                 stage.setTitle("OuBus");
                                 stage.show();
+                                Button btn = (Button) event.getSource();
+                                Stage stagelogin = (Stage) btn.getScene().getWindow();
+                                stagelogin.close();
+                                
                             }
                             else {
                                 FXMLLoader fxmloader2 = new FXMLLoader(App.class.getResource("MainAdminScreen.fxml"));
@@ -72,6 +76,9 @@ public class LoginController implements Initializable {
                                 stage.setScene(scene);
                                 stage.setTitle("OuBus");
                                 stage.show();
+                                Button btn = (Button) event.getSource();
+                                Stage stagelogin = (Stage) btn.getScene().getWindow();
+                                stagelogin.close();
                             }
                             
                         }

@@ -6,7 +6,6 @@ package com.myproject.services;
 
 import com.myproject.conf.jdbcUtils;
 import com.myproject.pojo.VeXe;
-import com.mysql.cj.xdevapi.PreparableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

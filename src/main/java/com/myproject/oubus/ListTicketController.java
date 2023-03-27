@@ -39,7 +39,7 @@ public class ListTicketController implements Initializable {
         colTen.setCellValueFactory(new PropertyValueFactory("tenKhachHang"));
         colTen.setPrefWidth(200);
         
-        TableColumn colSdt = new TableColumn("Số điện thoạt");
+        TableColumn colSdt = new TableColumn("Số điện thoại");
         colSdt.setCellValueFactory(new PropertyValueFactory("sdt"));
         colSdt.setPrefWidth(200);
         

@@ -8,7 +8,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -31,8 +36,15 @@ public class MainAdminScreenController implements Initializable {
     }
     
     //Exit
-    public void ActionClose() {
-        Platform.exit();
-        System.exit(0);
+    public void ActionClose(ActionEvent event) throws IOException {
+        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("Login.fxml"));
+                                Scene scene = new Scene(fxmloader.load());
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.setTitle("OuBus Login");
+                                stage.show();
+                                Button btn = (Button) event.getSource();
+                                Stage stagelogin = (Stage) btn.getScene().getWindow();
+                                stagelogin.close();
     }
 }

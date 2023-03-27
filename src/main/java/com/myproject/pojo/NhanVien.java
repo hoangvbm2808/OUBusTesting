@@ -11,9 +11,9 @@ import java.sql.Date;
  * @author Admin
  */
 public class NhanVien {
-    private String maNhanVien;
+    private int maNhanVien;
     private String tenNhanVien;
-    private int maLoaiNhanVien;
+    private String maLoaiNhanVien;
     private Date ngaySinh;
     private String soDienThoai;
     private String cMND;
@@ -25,7 +25,7 @@ public class NhanVien {
         
     }
     
-    public NhanVien(String maNV, String tenNV, int maLoaiNV, Date nS, String sDT, 
+    public NhanVien(int maNV, String tenNV, String maLoaiNV, Date nS, String sDT, 
             String cMND, String qQ, int maAccount){
         this.maNhanVien = maNV;
         this.tenNhanVien = tenNV;
@@ -42,14 +42,14 @@ public class NhanVien {
     /**
      * @return the maNhanVien
      */
-    public String getMaNhanVien() {
+    public int getMaNhanVien() {
         return maNhanVien;
     }
 
     /**
      * @param maNhanVien the maNhanVien to set
      */
-    public void setMaNhanVien(String maNhanVien) {
+    public void setMaNhanVien(int maNhanVien) {
         this.maNhanVien = maNhanVien;
     }
 
@@ -70,14 +70,14 @@ public class NhanVien {
     /**
      * @return the maLoaiNhanVien
      */
-    public int getMaLoaiNhanVien() {
+    public String getMaLoaiNhanVien() {
         return maLoaiNhanVien;
     }
 
     /**
      * @param maLoaiNhanVien the maLoaiNhanVien to set
      */
-    public void setMaLoaiNhanVien(int maLoaiNhanVien) {
+    public void setMaLoaiNhanVien(String maLoaiNhanVien) {
         this.maLoaiNhanVien = maLoaiNhanVien;
     }
 

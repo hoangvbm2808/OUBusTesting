@@ -1,7 +1,6 @@
 com\myproject\services\AccountService.class
 com\myproject\pojo\VeXe.class
 com\myproject\conf\Utils.class
-com\myproject\services\TicketService.class
 com\myproject\oubus\ListTicketController.class
 com\myproject\oubus\MainAdminScreenController.class
 module-info.class
