@@ -4,8 +4,8 @@
  */
 package com.myproject.oubus;
 
-import com.mycompany.conf.HashUtils;
-import com.mycompany.conf.Utils;
+import com.myproject.conf.HashUtils;
+import com.myproject.conf.Utils;
 import com.myproject.conf.jdbcUtils;
 import com.myproject.pojo.Account;
 import com.myproject.services.AccountService;
@@ -58,7 +58,6 @@ public class LoginController implements Initializable {
                         if (a.getMatKhau().equals(txtMatKhau.getText())) {
                             if (a.getMaQuyen()== 2 ){
                                 FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("MainStaffScreen.fxml"));
-
                                 Scene scene = new Scene(fxmloader.load());
                                 Stage stage = new Stage();
                                 stage.setScene(scene);

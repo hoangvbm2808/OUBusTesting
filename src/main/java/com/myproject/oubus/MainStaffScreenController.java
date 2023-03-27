@@ -4,8 +4,11 @@
  */
 package com.myproject.oubus;
 
+import com.myproject.conf.Utils;
 import com.myproject.pojo.ChuyenDi;
+import com.myproject.pojo.VeXe;
 import com.myproject.services.ChuyenDiService;
+import com.myproject.services.TicketService;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -17,7 +20,11 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -28,6 +35,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 
 /**
@@ -37,7 +45,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class MainStaffScreenController implements Initializable {
     static ChuyenDiService c = new ChuyenDiService();
+    static TicketService ticket = new TicketService();
     @FXML private TableView<ChuyenDi> tableChuyenDi;
+    @FXML private TableView<VeXe> tableVeXe;
     /**
      * Initializes the controller class.
      */
@@ -78,69 +88,42 @@ public class MainStaffScreenController implements Initializable {
         colTrangThai.setCellValueFactory(new PropertyValueFactory("trangThai"));
         
         TableColumn colDatVe = new TableColumn();
-        colDatVe.setCellFactory(e -> {
-            Button btn = new Button("Đặt vé");
+        colDatVe.setCellFactory(evt -> {
+            Button btn = new Button("Xem vé");
+            btn.setOnAction(e -> {
+                try {
+                    Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+//                    App.setRoot("ListTicket");
+                    TableCell cell = (TableCell) btn.getParent();
+                    ChuyenDi q = (ChuyenDi) cell.getTableRow().getItem();
+                    try {   
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("ListTicket.fxml"));
+                        Parent ticketView = loader.load();
+                        Scene scene = new Scene(ticketView);
+                        ListTicketController controller = loader.getController();
+                        int id = q.getMaChuyenDi();
+                        controller.loadTableDataTicket(id);
+                        stage.setScene(scene);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+
             TableCell cellXem = new TableCell();
             cellXem.setGraphic(btn);
             return cellXem;
-//            btn.setOnAction(evt -> { try {
-//                App.setRoot("ListTicket");
-//                } catch (IOException ex) {
-//                    Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//});
-//            return true;
-//                Alert a = MessageBox.getBox("Question", "Are you sure to delete this question?", Alert.AlertType.CONFIRMATION);
-//                a.showAndWait().ifPresent(res -> {
-//                    if (res == ButtonType.OK) {
-//                        Button b = (Button) evt.getSource();
-//                        TableCell cell = (TableCell) b.getParent();
-//                        Question q = (Question) cell.getTableRow().getItem();
-//                        
-//                        try {
-//                            if (s.deleteQuestion(q.getId()) == true) {
-//                                MessageBox.getBox("Question", "Delete successful", Alert.AlertType.INFORMATION).show();
-//                                this.loadTableData(null);
-//                            } else
-//                                MessageBox.getBox("Question", "Delete failed", Alert.AlertType.ERROR).show();
-//                        } catch (SQLException ex) {
-//                            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    }
-//                });
         });
         
         TableColumn colXem = new TableColumn();
         colXem.setCellFactory(e -> {
-            Button btn = new Button("Xem vé");
+            Button btn = new Button("Đặt vé");
             TableCell cellXem = new TableCell();
             cellXem.setGraphic(btn);
-            return cellXem;
-//            btn.setOnAction(evt -> { try {
-//                App.setRoot("ListTicket");
-//                } catch (IOException ex) {
-//                    Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//});
-//            return true;
-//                Alert a = MessageBox.getBox("Question", "Are you sure to delete this question?", Alert.AlertType.CONFIRMATION);
-//                a.showAndWait().ifPresent(res -> {
-//                    if (res == ButtonType.OK) {
-//                        Button b = (Button) evt.getSource();
-//                        TableCell cell = (TableCell) b.getParent();
-//                        Question q = (Question) cell.getTableRow().getItem();
-//                        
-//                        try {
-//                            if (s.deleteQuestion(q.getId()) == true) {
-//                                MessageBox.getBox("Question", "Delete successful", Alert.AlertType.INFORMATION).show();
-//                                this.loadTableData(null);
-//                            } else
-//                                MessageBox.getBox("Question", "Delete failed", Alert.AlertType.ERROR).show();
-//                        } catch (SQLException ex) {
-//                            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
-//                        }
-//                    }
-//                });
+             return cellXem;
         });
         
         this.tableChuyenDi.getColumns().addAll(colMaChuyen ,colGiaVe, 
@@ -154,4 +137,33 @@ public class MainStaffScreenController implements Initializable {
         this.tableChuyenDi.getItems().clear();
         this.tableChuyenDi.setItems(FXCollections.observableList(chuyendi));
     }
+    
+    public void ActionXemVe(ActionEvent ac) throws IOException {
+        App.setRoot("ListTicket");
+    }
+    
+//    private void loadTableDataTicket(int id) throws SQLException {
+//        List<VeXe> ve = ticket.getVeTheoMa(id);
+//        
+//        this.tableVeXe.setItems(FXCollections.observableList(ve));
+//    }
+                
+//    private void loadTableTicketColumns() {
+//        TableColumn colTen = new TableColumn("Ten");
+//        colTen.setCellValueFactory(new PropertyValueFactory("tenKhachHang"));
+//        
+//        TableColumn colSdt = new TableColumn("Số điện thoạt");
+//        colSdt.setCellValueFactory(new PropertyValueFactory("sdt"));
+//        
+//        TableColumn colNgayDat = new TableColumn("Ngày đặt");
+//        colNgayDat.setCellValueFactory(new PropertyValueFactory("ngayDat"));
+//        
+//        TableColumn colViTriGhe = new TableColumn("Số ghế");
+//        colViTriGhe.setCellValueFactory(new PropertyValueFactory("viTriGhe"));
+//        
+//        TableColumn colTrangThai = new TableColumn("Trạng thái");
+//        colTrangThai.setCellValueFactory(new PropertyValueFactory("trangThai"));
+//        
+//        tableVeXe.getColumns().addAll(colTen, colSdt, colNgayDat, colViTriGhe, colTrangThai);
+//    }
 }
