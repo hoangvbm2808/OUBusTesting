@@ -77,10 +77,12 @@ public class MainStaffScreenController implements Initializable {
         TableColumn colTrangThai = new TableColumn("trangThai");
         colTrangThai.setCellValueFactory(new PropertyValueFactory("trangThai"));
         
-//        TableColumn colDel = new TableColumn();
-//        colDel.setCellFactory(e -> {
-//            Button btn = new Button("Đặt vé");
-//            
+        TableColumn colDatVe = new TableColumn();
+        colDatVe.setCellFactory(e -> {
+            Button btn = new Button("Đặt vé");
+            TableCell cellXem = new TableCell();
+            cellXem.setGraphic(btn);
+            return cellXem;
 //            btn.setOnAction(evt -> { try {
 //                App.setRoot("ListTicket");
 //                } catch (IOException ex) {
@@ -106,11 +108,44 @@ public class MainStaffScreenController implements Initializable {
 //                        }
 //                    }
 //                });
-//        });
+        });
+        
+        TableColumn colXem = new TableColumn();
+        colXem.setCellFactory(e -> {
+            Button btn = new Button("Xem vé");
+            TableCell cellXem = new TableCell();
+            cellXem.setGraphic(btn);
+            return cellXem;
+//            btn.setOnAction(evt -> { try {
+//                App.setRoot("ListTicket");
+//                } catch (IOException ex) {
+//                    Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//});
+//            return true;
+//                Alert a = MessageBox.getBox("Question", "Are you sure to delete this question?", Alert.AlertType.CONFIRMATION);
+//                a.showAndWait().ifPresent(res -> {
+//                    if (res == ButtonType.OK) {
+//                        Button b = (Button) evt.getSource();
+//                        TableCell cell = (TableCell) b.getParent();
+//                        Question q = (Question) cell.getTableRow().getItem();
+//                        
+//                        try {
+//                            if (s.deleteQuestion(q.getId()) == true) {
+//                                MessageBox.getBox("Question", "Delete successful", Alert.AlertType.INFORMATION).show();
+//                                this.loadTableData(null);
+//                            } else
+//                                MessageBox.getBox("Question", "Delete failed", Alert.AlertType.ERROR).show();
+//                        } catch (SQLException ex) {
+//                            Logger.getLogger(PrimaryController.class.getName()).log(Level.SEVERE, null, ex);
+//                        }
+//                    }
+//                });
+        });
         
         this.tableChuyenDi.getColumns().addAll(colMaChuyen ,colGiaVe, 
                 colNgayKhoiHanh, colGioKhoiHanh, colDiemKhoiHanh, colDiemKetThuc,
-                colSoGheTrong, colTrangThai);
+                colSoGheTrong, colTrangThai,colDatVe, colXem);
     }
     
     private void loadTableData() throws SQLException {
