@@ -24,6 +24,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import static javafx.collections.FXCollections.*;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 
 /**
@@ -49,18 +50,18 @@ public class ListTourAdminController implements Initializable {
 //    private ObservableList<ChuyenDi> tourList;
 //    
 //    @FXML private TextField maField;
-//    
-//    @FXML private TextField maXeField;
-//    
-//    @FXML private TextField noiDiField;
-//    
-//    @FXML private TextField noiDenField;
-//    
-//    @FXML private DatePicker ngayKhoiHanhField;
-//    
-//    @FXML private TextField tgKhoiHanhField;
-//    
-//    @FXML private TextField giaVeField; 
+    
+    @FXML private TextField maXeField;
+    
+    @FXML private TextField noiDiField;
+    
+    @FXML private TextField noiDenField;
+    
+    @FXML private DatePicker ngayKhoiHanhField;
+    
+    @FXML private TextField tgKhoiHanhField;
+    
+    @FXML private TextField giaVeField; 
     
     /**
      * Initializes the controller class.
@@ -120,30 +121,44 @@ public class ListTourAdminController implements Initializable {
     }
     
     
-    //quay ve trang GD Nguoiquanly
-//    public void actionQuayVe() {
-//        App.setRoot("MainAdminScreen");
-//    }
+//    quay ve trang GD Nguoiquanly
+    public void actionQuayVe() throws IOException {
+        App.setRoot("MainAdminScreen");
+    }
     
     //them chuyen di
-    public void add(ActionEvent e) {
-//        ChuyenDi tour = new ChuyenDi();
-//        tour.setMaChuyenDi(maField.getText());
-//        tour.setMaXe(maXeField.getText());
+    public void add(ActionEvent e) throws SQLException {
+        ChuyenDi tour = new ChuyenDi(Integer.parseInt(giaVeField.getText()), 
+                noiDiField.getText(),noiDenField.getText(), Date.valueOf(ngayKhoiHanhField.getValue()),
+                tgKhoiHanhField.getText(), Integer.parseInt(maXeField.getText()));
+//         tour.setMaChuyenDi(maField.getText());
+//        tour.setMaXe(Integer.parseInt(maXeField.getText()));
 //        tour.setDiemKhoiHanh(noiDiField.getText());
 //        tour.setDiemKetThuc(noiDenField.getText());
-//        tour.setNgayKhoiHanh(ngayKhoiHanhField.getValue());
-//        LocalTime lt = LocalTime.parse(tgKhoiHanhField.getText(),formatter);
-//        tour.setGioKhoiHanh(lt);
+//        tour.setNgayKhoiHanh(Date.valueOf(ngayKhoiHanhField.getValue()));
+////        LocalTime lt = LocalTime.parse(tgKhoiHanhField.getText(),formatter);
+////        tour.setGioKhoiHanh(lt);
+//        tour.getGioKhoiHanh(tgKhoiHanhField.getText());
 //        tour.setGiaVe(Integer.parseInt(giaVeField.getText()));      
-//        
-//        tourList.add(tour);
-//        maField.setText("");
-//        noiDiField.setText("");
-//        noiDenField.setText("");
-////        ngayKhoiHanhField.setTime("");
-//        tgKhoiHanhField.setText("");
-//        giaVeField.setText("");
+        try {
+            c.addTour(tour);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Add successful");
+            alert.show();
+            loadTableData();
+//            tableChuyenDi.ad;
+            maXeField.setText("");
+            noiDiField.setText("");
+            noiDenField.setText("");
+    //        ngayKhoiHanhField.setTime("");
+            tgKhoiHanhField.setText("");
+            giaVeField.setText("");
+        } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Add failed" + ex.getMessage());
+            alert.show();
+        }
+        
     }
     
     

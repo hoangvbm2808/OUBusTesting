@@ -50,4 +50,28 @@ public class ChuyenDiService {
         }
         return result; 
     }
+     
+     public boolean addTour(ChuyenDi c) throws SQLException {
+        try ( Connection conn = jdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+            String sql = "INSERT INTO chuyendi(giaVe, ngayKhoiHanh, gioKhoiHanh, diemKhoiHanh, diemKetThuc, maXe) VALUES(?, ?, ?, ?, ?, ?)"; // sql injection
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setInt(1, c.getGiaVe());
+            stm.setDate(2, c.getNgayKhoiHanh());
+            stm.setString(3, c.getGioKhoiHanh());
+            stm.setString(4, c.getDiemKhoiHanh());
+            stm.setString(5, c.getDiemKetThuc());
+            stm.setInt(6, c.getMaXe());
+            int r = stm.executeUpdate();
+
+            try {
+                conn.commit();
+                return true;
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+                return false;
+            }
+        }
+    }
+    
 }

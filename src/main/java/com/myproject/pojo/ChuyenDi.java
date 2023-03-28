@@ -17,16 +17,17 @@ import java.sql.Date;
  * @author dell
  */
 public class ChuyenDi {
-    private int maChuyenDi;
+    private static int dem = 0;
+    private int maChuyenDi = ++dem;
     private int maXe;
     private int giaVe;
     private Date ngayKhoiHanh;
     private String gioKhoiHanh;
     private String diemKhoiHanh;
     private String diemKetThuc;
-    private int soGheTrong;
-    private int soGheDat;
-    private String trangThai;
+    private int soGheTrong = 20;
+    private int soGheDat = 0;
+    private String trangThai = "Chua khoi hanh";
 
 
     /**
@@ -44,6 +45,15 @@ public class ChuyenDi {
     }
     
     public ChuyenDi() {
+    }
+
+    public ChuyenDi( int giaVe, String diemKhoiHanh, String diemKetThuc,Date ngayKhoiHanh, String gioKhoiHanh, int maXe) {
+        this.maXe = maXe;
+        this.giaVe = giaVe;
+        this.ngayKhoiHanh = ngayKhoiHanh;
+        this.gioKhoiHanh = gioKhoiHanh;
+        this.diemKhoiHanh = diemKhoiHanh;
+        this.diemKetThuc = diemKetThuc;
     }
 
     public ChuyenDi(int maChuyenDi, int maXe, int giaVe, Date ngayKhoiHanh, 

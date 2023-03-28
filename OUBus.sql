@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `oubus` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `oubus` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_vi_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `oubus`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
@@ -54,17 +54,17 @@ CREATE TABLE `chuyendi` (
   `id` int NOT NULL AUTO_INCREMENT,
   `giaVe` int DEFAULT NULL,
   `ngayKhoiHanh` date DEFAULT NULL,
-  `gioKhoiHanh` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `gioKhoiHanh` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `diemKhoiHanh` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `diemKetThuc` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `soGheTrong` int DEFAULT NULL,
-  `soGheDat` int DEFAULT NULL,
-  `trangThai` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `soGheTrong` int DEFAULT '20',
+  `soGheDat` int DEFAULT '0',
+  `trangThai` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_vi_0900_ai_ci DEFAULT 'Chua khoi hanh',
   `maXe` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_chuyendi_xekhach_idx` (`maXe`),
   CONSTRAINT `fk_chuyendi_xekhach` FOREIGN KEY (`maXe`) REFERENCES `xekhach` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `chuyendi` (
 
 LOCK TABLES `chuyendi` WRITE;
 /*!40000 ALTER TABLE `chuyendi` DISABLE KEYS */;
-INSERT INTO `chuyendi` VALUES (1,120000,'2020-02-02','12','TPHCM','Gia Lai',45,0,'1',1);
+INSERT INTO `chuyendi` VALUES (1,120000,'2020-02-02','12','TPHCM','Gia Lai',19,1,'Chua khoi hanh',1),(2,200000,'2023-03-27','19h30','Nha Trang','TPHCM',19,1,'Chua khoi hanh',2),(3,80000,'2023-03-28','18h','Chau Doc','Tien Giang',20,0,'Chua khoi hanh',1),(4,50000,'2023-03-28','17h','Ben Tre','TP HCM',20,0,'Chua khoi hanh',2),(5,75000,'2023-03-14','9h','Tay Ninh','An Giang',20,0,'Chua khoi hanh',1),(6,60000,'2023-03-17','8h','Hau Giang','TP HCM',20,0,'Chua khoi hanh',2),(7,100000,'2023-03-13','7h30','Ben Tre','TP HCM',20,0,'Chua khoi hanh',1);
 /*!40000 ALTER TABLE `chuyendi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -90,7 +90,7 @@ CREATE TABLE `doanhthuchuyendi` (
   `soVeDat` int DEFAULT NULL,
   `ngay` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -99,7 +99,7 @@ CREATE TABLE `doanhthuchuyendi` (
 
 LOCK TABLES `doanhthuchuyendi` WRITE;
 /*!40000 ALTER TABLE `doanhthuchuyendi` DISABLE KEYS */;
-INSERT INTO `doanhthuchuyendi` VALUES (1,12000000,10,'2020-02-02');
+INSERT INTO `doanhthuchuyendi` VALUES (1,120000,1,'2020-02-02'),(2,200000,1,'2023-03-27');
 /*!40000 ALTER TABLE `doanhthuchuyendi` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,11 +144,11 @@ DROP TABLE IF EXISTS `vexe`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `vexe` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tenKhachHang` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tenKhachHang` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ngayDat` date DEFAULT NULL,
-  `sdt` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `viTriGhe` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `trangThai` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sdt` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `viTriGhe` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `trangThai` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `maChuyenDi` int DEFAULT NULL,
   `maNhanVien` int DEFAULT NULL,
   `maDoanhThu` int DEFAULT NULL,
@@ -159,7 +159,7 @@ CREATE TABLE `vexe` (
   CONSTRAINT `fk_doanhthu_vexe` FOREIGN KEY (`maDoanhThu`) REFERENCES `doanhthuchuyendi` (`id`),
   CONSTRAINT `fk_vexe_chuyendi` FOREIGN KEY (`maChuyenDi`) REFERENCES `chuyendi` (`id`),
   CONSTRAINT `fk_vexe_nhanvien` FOREIGN KEY (`maNhanVien`) REFERENCES `nhanvien` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -168,7 +168,7 @@ CREATE TABLE `vexe` (
 
 LOCK TABLES `vexe` WRITE;
 /*!40000 ALTER TABLE `vexe` DISABLE KEYS */;
-INSERT INTO `vexe` VALUES (1,'Phan Thi Yen Vi','2020-02-02','0123456789','23','1',1,2,1);
+INSERT INTO `vexe` VALUES (1,'Phan Thi Yen Vi','2020-02-02','0123456789','A01','Đã đặt',1,2,1),(2,'A','2023-03-27','0111111','B01','Đã xuất',2,1,2);
 /*!40000 ALTER TABLE `vexe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,9 +181,11 @@ DROP TABLE IF EXISTS `xekhach`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `xekhach` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `bienSoXe` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bienSoXe` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `soGhe` int DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `maNhanVien` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `maNhanVien` FOREIGN KEY (`id`) REFERENCES `nhanvien` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -193,7 +195,7 @@ CREATE TABLE `xekhach` (
 
 LOCK TABLES `xekhach` WRITE;
 /*!40000 ALTER TABLE `xekhach` DISABLE KEYS */;
-INSERT INTO `xekhach` VALUES (1,'55-A23',45),(2,'59-B12',45);
+INSERT INTO `xekhach` VALUES (1,'55-A23',20,1),(2,'59-B12',20,2);
 /*!40000 ALTER TABLE `xekhach` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -206,4 +208,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-26 13:13:34
+-- Dump completed on 2023-03-28 10:56:59
