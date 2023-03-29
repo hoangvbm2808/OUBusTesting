@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.*;
 import java.time.format.*;
@@ -24,8 +25,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import static javafx.collections.FXCollections.*;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
+import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 /**
  * FXML Controller class
@@ -63,6 +70,30 @@ public class ListTourAdminController implements Initializable {
     
     @FXML private TextField giaVeField; 
     
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    
+    StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
+        DateTimeFormatter dateFormatter
+                = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        @Override
+        public String toString(LocalDate date) {
+            if (date != null) {
+                return dateFormatter.format(date);
+            } else {
+                return "";
+            }
+        }
+
+        @Override
+        public LocalDate fromString(String string) {
+            if (string != null && !string.isEmpty()) {
+                return LocalDate.parse(string, dateFormatter);
+            } else {
+                return null;
+            }
+        }
+    };
     /**
      * Initializes the controller class.
      */
@@ -78,34 +109,50 @@ public class ListTourAdminController implements Initializable {
     }    
     
     private void loadTableColumns() {
-        TableColumn colMaChuyen = new TableColumn("maChuyenDi");
+        TableColumn colMaChuyen = new TableColumn("Mã chuyến");
         colMaChuyen.setCellValueFactory(new PropertyValueFactory("maChuyenDi"));
         
-        TableColumn colMaXe = new TableColumn("maXe");
+        TableColumn colMaXe = new TableColumn("Mã xe");
         colMaXe.setCellValueFactory(new PropertyValueFactory("maXe"));
         
-        TableColumn colGiaVe = new TableColumn("giaVe");
+        TableColumn colGiaVe = new TableColumn("Giá vé");
         colGiaVe.setCellValueFactory(new PropertyValueFactory("giaVe"));
         
-        TableColumn colNgayKhoiHanh = new TableColumn("ngayKhoiHanh");
+        TableColumn colNgayKhoiHanh = new TableColumn("Ngày Khởi Hành");
         colNgayKhoiHanh.setCellValueFactory(new PropertyValueFactory("ngayKhoiHanh"));
+        colNgayKhoiHanh.setCellFactory(column -> {
+            TableCell<ChuyenDi, Date> cell = new TableCell<ChuyenDi, Date>() {
+                private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) 
+                        setText(null);
+                    else 
+                        this.setText(format.format(item));
+                }
+            };
+
+            return cell;
+        });
         
-        TableColumn colGioKhoiHanh = new TableColumn("gioKhoiHanh");
+        TableColumn colGioKhoiHanh = new TableColumn("Giờ khởi hành");
         colGioKhoiHanh.setCellValueFactory(new PropertyValueFactory("gioKhoiHanh"));
         
-        TableColumn colDiemKhoiHanh = new TableColumn("diemKhoiHanh");
+        TableColumn colDiemKhoiHanh = new TableColumn("Điểm khởi hành");
         colDiemKhoiHanh.setCellValueFactory(new PropertyValueFactory("diemKhoiHanh"));
         
-        TableColumn colDiemKetThuc = new TableColumn("diemKetThuc");
+        TableColumn colDiemKetThuc = new TableColumn("Ddiemr kết thúc");
         colDiemKetThuc.setCellValueFactory(new PropertyValueFactory("diemKetThuc"));
         
-        TableColumn colSoGheTrong = new TableColumn("soGheTrong");
+        TableColumn colSoGheTrong = new TableColumn("Ghế trống");
         colSoGheTrong.setCellValueFactory(new PropertyValueFactory("soGheTrong"));
         
-        TableColumn colSoGheDat = new TableColumn("soGheDat");
+        TableColumn colSoGheDat = new TableColumn("Ghế đặt");
         colSoGheDat.setCellValueFactory(new PropertyValueFactory("soGheDat"));
         
-        TableColumn colTrangThai = new TableColumn("trangThai");
+        TableColumn colTrangThai = new TableColumn("Trạng thái");
         colTrangThai.setCellValueFactory(new PropertyValueFactory("trangThai"));
         
         this.tableChuyenDi.getColumns().addAll(colMaChuyen, colMaXe ,colGiaVe, 
@@ -122,15 +169,23 @@ public class ListTourAdminController implements Initializable {
     
     
 //    quay ve trang GD Nguoiquanly
-    public void actionQuayVe() throws IOException {
-        App.setRoot("MainAdminScreen");
+    public void actionQuayVe(ActionEvent event) throws IOException {
+         FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("MainAdminScreen.fxml"));
+                                Scene scene = new Scene(fxmloader.load());
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.show();
+                                Button btn = (Button) event.getSource();
+                                Stage stagelogin = (Stage) btn.getScene().getWindow();
+                                stagelogin.close();
     }
     
     //them chuyen di
     public void add(ActionEvent e) throws SQLException {
+        Time time = Time.valueOf(tgKhoiHanhField.getText() + ":00");
         ChuyenDi tour = new ChuyenDi(Integer.parseInt(giaVeField.getText()), 
                 noiDiField.getText(),noiDenField.getText(), Date.valueOf(ngayKhoiHanhField.getValue()),
-                tgKhoiHanhField.getText(), Integer.parseInt(maXeField.getText()));
+                time, Integer.parseInt(maXeField.getText()));
 //         tour.setMaChuyenDi(maField.getText());
 //        tour.setMaXe(Integer.parseInt(maXeField.getText()));
 //        tour.setDiemKhoiHanh(noiDiField.getText());

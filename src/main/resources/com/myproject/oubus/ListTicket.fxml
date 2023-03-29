@@ -17,7 +17,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField editable="false" prefHeight="26.0" prefWidth="214.79999387264252" promptText="Nhập tên...">
+                        <TextField prefHeight="30.0" prefWidth="242.0" promptText="Nhập...">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -41,6 +41,15 @@
                         <Font name="Tahoma Bold" size="24.0" />
                      </font>
                   </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="349.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#actionQuayVe" text="Quay lại">
+                     <VBox.margin>
+                        <Insets right="20.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
          </children>

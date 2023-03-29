@@ -11,65 +11,7 @@ import java.sql.Date;
  * @author dell
  */
 public class VeXe {
-    private int maVe;
-    private String tenKhachHang;
-    private Date ngayDat; 
-    private String sdt;
-    private String viTriGhe;
-    private String trangThai;
-    private String maChuyenDi;
-    private String maNhanVien;
-    private String maDoanhThu;
-        
-    public VeXe() {
-    }
 
-    
-    public VeXe(int maVe, String tenKhachHang, Date ngayDat, String sdt, 
-            String maChuyenDi, String viTriGhe, String trangThai, 
-            String maNhanVien, String maDoanhThu) {
-        this.maVe = maVe;
-        this.tenKhachHang = tenKhachHang;
-        this.ngayDat = ngayDat;
-        this.sdt = sdt;
-        this.maChuyenDi = maChuyenDi;
-        this.viTriGhe = viTriGhe;
-        this.trangThai = trangThai;
-        this.maNhanVien = maNhanVien;
-        this.maDoanhThu = maDoanhThu;
-    }
-    
-    
-    /**
-     * @return the maNhanVien
-     */
-    public String getMaNhanVien() {
-        return maNhanVien;
-    }
-
-    /**
-     * @param maNhanVien the maNhanVien to set
-     */
-    public void setMaNhanVien(String maNhanVien) {
-        this.maNhanVien = maNhanVien;
-    }
-
-    /**
-     * @return the trangThai
-     */
-    public String getTrangThai() {
-        return trangThai;
-    }
-
-    /**
-     * @param trangThai the trangThai to set
-     */
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
-    }
-
-  
-    
     /**
      * @return the maVe
      */
@@ -127,6 +69,34 @@ public class VeXe {
     }
 
     /**
+     * @return the viTriGhe
+     */
+    public String getViTriGhe() {
+        return viTriGhe;
+    }
+
+    /**
+     * @param viTriGhe the viTriGhe to set
+     */
+    public void setViTriGhe(String viTriGhe) {
+        this.viTriGhe = viTriGhe;
+    }
+
+    /**
+     * @return the trangThai
+     */
+    public String getTrangThai() {
+        return trangThai;
+    }
+
+    /**
+     * @param trangThai the trangThai to set
+     */
+    public void setTrangThai(String trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    /**
      * @return the maChuyenDi
      */
     public String getMaChuyenDi() {
@@ -141,17 +111,17 @@ public class VeXe {
     }
 
     /**
-     * @return the viTriGhe
+     * @return the maNhanVien
      */
-    public String getViTriGhe() {
-        return viTriGhe;
+    public String getMaNhanVien() {
+        return maNhanVien;
     }
 
     /**
-     * @param viTriGhe the viTriGhe to set
+     * @param maNhanVien the maNhanVien to set
      */
-    public void setViTriGhe(String viTriGhe) {
-        this.viTriGhe = viTriGhe;
+    public void setMaNhanVien(String maNhanVien) {
+        this.maNhanVien = maNhanVien;
     }
 
     /**
@@ -167,4 +137,34 @@ public class VeXe {
     public void setMaDoanhThu(String maDoanhThu) {
         this.maDoanhThu = maDoanhThu;
     }
+    private int maVe;
+    private String tenKhachHang;
+    private Date ngayDat; 
+    private String sdt;
+    private String viTriGhe;
+    private String trangThai;
+    private String maChuyenDi;
+    private String maNhanVien;
+    private String maDoanhThu;
+        
+    public VeXe() {
+    }
+
+    
+    public VeXe(int maVe, String tenKhachHang, Date ngayDat, String sdt, 
+            String maChuyenDi, String viTriGhe, String trangThai, 
+            String maNhanVien, String maDoanhThu) {
+        this.maVe = maVe;
+        this.tenKhachHang = tenKhachHang;
+        this.ngayDat = ngayDat;
+        this.sdt = sdt;
+        this.maChuyenDi = maChuyenDi;
+        this.viTriGhe = viTriGhe;
+        this.trangThai = trangThai;
+        this.maNhanVien = maNhanVien;
+        this.maDoanhThu = maDoanhThu;
+    }
 }
+    
+    
+    

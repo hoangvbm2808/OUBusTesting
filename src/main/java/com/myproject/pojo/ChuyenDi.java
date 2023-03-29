@@ -22,7 +22,7 @@ public class ChuyenDi {
     private int maXe;
     private int giaVe;
     private Date ngayKhoiHanh;
-    private String gioKhoiHanh;
+    private Time gioKhoiHanh;
     private String diemKhoiHanh;
     private String diemKetThuc;
     private int soGheTrong = 20;
@@ -33,21 +33,21 @@ public class ChuyenDi {
     /**
      * @return the gioKhoiHanh
      */
-    public String getGioKhoiHanh() {
+    public Time getGioKhoiHanh() {
         return gioKhoiHanh;
     }
 
     /**
      * @param gioKhoiHanh the gioKhoiHanh to set
      */
-    public void setGioKhoiHanh(String gioKhoiHanh) {
+    public void setGioKhoiHanh(Time gioKhoiHanh) {
         this.gioKhoiHanh = gioKhoiHanh;
     }
     
     public ChuyenDi() {
     }
 
-    public ChuyenDi( int giaVe, String diemKhoiHanh, String diemKetThuc,Date ngayKhoiHanh, String gioKhoiHanh, int maXe) {
+    public ChuyenDi( int giaVe, String diemKhoiHanh, String diemKetThuc,Date ngayKhoiHanh, Time gioKhoiHanh, int maXe) {
         this.maXe = maXe;
         this.giaVe = giaVe;
         this.ngayKhoiHanh = ngayKhoiHanh;
@@ -57,7 +57,7 @@ public class ChuyenDi {
     }
 
     public ChuyenDi(int maChuyenDi, int maXe, int giaVe, Date ngayKhoiHanh, 
-            String gioKhoiHanh, String diemKhoiHanh, String diemKetThuc, 
+            Time gioKhoiHanh, String diemKhoiHanh, String diemKetThuc, 
             int soGheTrong, int soGheDat, String trangThai) {
         this.maChuyenDi = maChuyenDi;
         this.maXe = maXe;

@@ -11,7 +11,9 @@ import com.myproject.services.ChuyenDiService;
 import com.myproject.services.TicketService;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -48,6 +50,7 @@ public class MainStaffScreenController implements Initializable {
     static TicketService ticket = new TicketService();
     @FXML private TableView<ChuyenDi> tableChuyenDi;
     @FXML private TableView<VeXe> tableVeXe;
+    
     /**
      * Initializes the controller class.
      */
@@ -69,8 +72,24 @@ public class MainStaffScreenController implements Initializable {
         TableColumn colGiaVe = new TableColumn("Giá vé");
         colGiaVe.setCellValueFactory(new PropertyValueFactory("giaVe"));
         
-        TableColumn colNgayKhoiHanh = new TableColumn("Ngày khởi hành");
+        TableColumn colNgayKhoiHanh = new TableColumn("Ngày Khởi Hành");
         colNgayKhoiHanh.setCellValueFactory(new PropertyValueFactory("ngayKhoiHanh"));
+        colNgayKhoiHanh.setCellFactory(column -> {
+            TableCell<ChuyenDi, Date> cell = new TableCell<ChuyenDi, Date>() {
+                private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) 
+                        setText(null);
+                    else 
+                        this.setText(format.format(item));
+                }
+            };
+
+            return cell;
+        });
         
         TableColumn colGioKhoiHanh = new TableColumn("Giờ khởi hành");
         colGioKhoiHanh.setCellValueFactory(new PropertyValueFactory("gioKhoiHanh"));

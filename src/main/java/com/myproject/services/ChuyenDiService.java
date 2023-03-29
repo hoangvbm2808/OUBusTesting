@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class ChuyenDiService {
             ResultSet rs = stm.executeQuery("SELECT * FROM chuyendi");
             while (rs.next()) {
                 ChuyenDi c = new ChuyenDi(rs.getInt("id"), rs.getInt("maXe"), rs.getInt("giaVe"), 
-                        rs.getDate("ngayKhoiHanh"), rs.getString("gioKhoiHanh"),
+                        rs.getDate("ngayKhoiHanh"), rs.getTime("gioKhoiHanh"),
                         rs.getString("diemKhoiHanh"), rs.getString("diemKetThuc"),
                         rs.getInt("soGheTrong"), rs.getInt("soGheDat"), rs.getString("trangThai"));
                 chuyendi.add(c);
@@ -44,7 +45,7 @@ public class ChuyenDiService {
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
                 
-                result  = new ChuyenDi(rs.getInt("id"), rs.getInt("maXe"), rs.getInt("giaVe"),  rs.getDate("ngayKhoiHanh"), rs.getString("gioKhoiHanh"),
+                result  = new ChuyenDi(rs.getInt("id"), rs.getInt("maXe"), rs.getInt("giaVe"),  rs.getDate("ngayKhoiHanh"), rs.getTime("gioKhoiHanh"),
                        rs.getString("diemKhoiHanh"), rs.getString("diemKetThuc"), rs.getInt("soGheTrong"), rs.getInt("soGheDat"), rs.getString("trangThai"));
             }
         }
@@ -58,7 +59,7 @@ public class ChuyenDiService {
             PreparedStatement stm = conn.prepareCall(sql);
             stm.setInt(1, c.getGiaVe());
             stm.setDate(2, c.getNgayKhoiHanh());
-            stm.setString(3, c.getGioKhoiHanh());
+            stm.setTime(3,c.getGioKhoiHanh());
             stm.setString(4, c.getDiemKhoiHanh());
             stm.setString(5, c.getDiemKetThuc());
             stm.setInt(6, c.getMaXe());

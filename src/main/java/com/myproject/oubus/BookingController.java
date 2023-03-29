@@ -14,8 +14,12 @@ import com.myproject.services.AccountService;
 import com.myproject.services.ChuyenDiService;
 import com.myproject.services.NhanVienService;
 import com.myproject.services.XeKhachService;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -40,6 +44,8 @@ public class BookingController implements Initializable {
     @FXML private Label bienSoXe;
     @FXML private Label nhanVien;
     @FXML private Label giaVe;
+    String pattern = "dd/MM/yyyy HH:mm:ss";
+    SimpleDateFormat df = new SimpleDateFormat(pattern);
     
     private static final ChuyenDiService cd = new ChuyenDiService();
     private static final XeKhachService xk = new XeKhachService();
@@ -58,12 +64,17 @@ public class BookingController implements Initializable {
         this.maChuyenDi.setText(String.valueOf(a.getMaChuyenDi()));
         this.diemKhoiHanh.setText(a.getDiemKhoiHanh());
         this.diemKetThuc.setText(a.getDiemKetThuc());
-        this.gioKhoiHanh.setText(a.getGioKhoiHanh());
+        this.gioKhoiHanh.setText(String.valueOf(a.getGioKhoiHanh()));
         this.giaVe.setText(String.valueOf(a.getGiaVe()));
         XeKhach b = xk.getXeKhachByMaXe(String.valueOf(a.getMaXe()));
         this.bienSoXe.setText(b.getBienSoXe());
         NhanVien c = nv.getNhanVienByMaNV(String.valueOf(b.getMaNhanVien()));
         this.nhanVien.setText(c.getTenNhanVien());
+        
+    }
+    
+    public void actionQuayVe() throws IOException {
+        App.setRoot("MainStaffScreen");
         
     }
     

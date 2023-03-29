@@ -30,13 +30,20 @@ public class MainAdminScreenController implements Initializable {
         // TODO
     }    
     
-    //File
-    public void ActionSeeTourist() throws IOException {
-        App.setRoot("ListTourAdmin");
+    //FileRôt
+    public void ActionSeeTourist(ActionEvent event) throws IOException {
+        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("ListTourAdmin.fxml"));
+                                Scene scene = new Scene(fxmloader.load());
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.show();
+                                Button btn = (Button) event.getSource();
+                                Stage stagelogin = (Stage) btn.getScene().getWindow();
+                                stagelogin.close();
     }
     
     //Exit
-    public void ActionClose(ActionEvent event) throws IOException {
+    public void ActionLockOut(ActionEvent event) throws IOException {
         FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("Login.fxml"));
                                 Scene scene = new Scene(fxmloader.load());
                                 Stage stage = new Stage();

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#ActionClose" prefHeight="651.0" prefWidth="917.0" stylesheets="@../../../css/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.MainAdminScreenController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="651.0" prefWidth="917.0" stylesheets="@../../../css/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.MainAdminScreenController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -17,7 +20,7 @@
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-              <MenuItem mnemonicParsing="false" onAction="#ActionClose" text="Đăng xuất">
+              <MenuItem mnemonicParsing="false" text="Đăng xuất">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
@@ -39,4 +42,16 @@
         </menus>
       </MenuBar>
    </top>
+   <bottom>
+      <HBox prefHeight="54.0" prefWidth="918.0">
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#ActionLockOut" prefHeight="53.0" prefWidth="103.0" text="Đăng xuất" />
+               </children>
+            </VBox>
+            <Button mnemonicParsing="false" onAction="#ActionSeeTourist" prefHeight="54.0" prefWidth="198.0" text="Xem danh sách chuyến" />
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

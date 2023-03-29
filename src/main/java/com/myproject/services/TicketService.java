@@ -22,15 +22,15 @@ public class TicketService {
     public List<VeXe> getVeTheoMa(int id) throws SQLException {
         List<VeXe> vexe = new ArrayList<>();
         try (Connection conn = jdbcUtils.getConn()) {
-            String sql = "SELECT * FROM vexe WHERE maChuyenDi=?";
+            String sql = "SELECT * FROM vexe WHERE id=?";
             PreparedStatement stm = conn.prepareCall(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 VeXe ve = new VeXe(rs.getInt("id"), rs.getString("tenKhachHang"), 
                         rs.getDate("ngayDat"), rs.getString("sdt"),
-                        rs.getString("viTriGhe"), rs.getString("trangThai"),
-                        rs.getString("maChuyenDi"), 
+                        rs.getString("maChuyenDi"), rs.getString("viTriGhe"),
+                        rs.getString("trangThai"), 
                         rs.getString("maNhanVien"), rs.getString("maDoanhThu"));
                     vexe.add(ve);
             }

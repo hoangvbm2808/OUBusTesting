@@ -5,14 +5,19 @@
 package com.myproject.oubus;
 
 import static com.myproject.oubus.MainStaffScreenController.ticket;
+import com.myproject.pojo.ChuyenDi;
 import com.myproject.pojo.VeXe;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,6 +30,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class ListTicketController implements Initializable {
     private int id;
     @FXML private TableView<VeXe> tableVeXe;
+    String pattern = "dd/MM/yyyy HH:mm:ss";
+    SimpleDateFormat df = new SimpleDateFormat(pattern);
     /**
      * Initializes the controller class.
      */
@@ -43,8 +50,25 @@ public class ListTicketController implements Initializable {
         colSdt.setCellValueFactory(new PropertyValueFactory("sdt"));
         colSdt.setPrefWidth(200);
         
+        
         TableColumn colNgayDat = new TableColumn("Ngày đặt");
         colNgayDat.setCellValueFactory(new PropertyValueFactory("ngayDat"));
+        colNgayDat.setCellFactory(column -> {
+            TableCell<ChuyenDi, Date> cell = new TableCell<ChuyenDi, Date>() {
+                private SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+                @Override
+                protected void updateItem(Date item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) 
+                        setText(null);
+                    else 
+                        this.setText(format.format(item));
+                }
+            };
+
+            return cell;
+        });
         colNgayDat.setPrefWidth(180);
         
         TableColumn colViTriGhe = new TableColumn("Số ghế");
@@ -75,5 +99,9 @@ public class ListTicketController implements Initializable {
      */
     public void setId(int id) {
         this.id = id;
+    }
+    
+    public void actionQuayVe() throws IOException {
+        App.setRoot("MainStaffScreen");
     }
 }
