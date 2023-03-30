@@ -45,11 +45,7 @@
             </VBox>
             <VBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="349.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#actionQuayVe" text="Quay lại">
-                     <VBox.margin>
-                        <Insets right="20.0" />
-                     </VBox.margin>
-                  </Button>
+                  <Button mnemonicParsing="false" onAction="#actionQuayVe" text="Quay lại" />
                </children>
             </VBox>
          </children>

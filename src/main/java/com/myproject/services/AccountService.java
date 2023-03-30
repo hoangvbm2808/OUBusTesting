@@ -50,6 +50,21 @@ public class AccountService {
         return results;
     }
     
+    public Account getAccountById(int id) throws SQLException{
+        Account results = null;
+        try(Connection conn = jdbcUtils.getConn()){
+            PreparedStatement stm = conn.prepareCall("SELECT * FROM account WHERE id = ?");
+            stm.setInt(1, id);
+                       
+            ResultSet rs = stm.executeQuery();
+            while(rs.next()){
+                results = new Account(rs.getInt("id"), rs.getString("TaiKhoan"), 
+                        rs.getString("MatKhau"), rs.getInt("MaQuyen"));
+            }
+        }
+        return results;
+    }
+    
     
 //    public Account checkAccount(){
 //        return;

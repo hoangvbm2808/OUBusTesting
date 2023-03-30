@@ -38,6 +38,7 @@ import javafx.scene.Scene;
 public class LoginController implements Initializable {
     @FXML private TextField txtTaiKhoan;
     @FXML private PasswordField txtMatKhau;
+    public static int mnv;
     private static final AccountService acService = new AccountService();
     
     /**
@@ -63,6 +64,7 @@ public class LoginController implements Initializable {
                                 stage.setScene(scene);
                                 stage.setTitle("OuBus");
                                 stage.show();
+                                this.mnv = a.getId();
                                 Button btn = (Button) event.getSource();
                                 Stage stagelogin = (Stage) btn.getScene().getWindow();
                                 stagelogin.close();
@@ -76,6 +78,7 @@ public class LoginController implements Initializable {
                                 stage.setScene(scene);
                                 stage.setTitle("OuBus");
                                 stage.show();
+                                this.mnv = a.getId();
                                 Button btn = (Button) event.getSource();
                                 Stage stagelogin = (Stage) btn.getScene().getWindow();
                                 stagelogin.close();

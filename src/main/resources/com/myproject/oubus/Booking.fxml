@@ -41,7 +41,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="maChuyenDi" prefHeight="26.0" prefWidth="44.0" text="A123" textFill="#ff6e6c">
+                  <Label fx:id="maChuyenDi" prefHeight="26.0" prefWidth="44.0" textFill="#ff6e6c">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -60,7 +60,7 @@
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label fx:id="diemKhoiHanh" text="Sài Gòn" textFill="#ff6e6c">
+                        <Label fx:id="diemKhoiHanh" textFill="#ff6e6c">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -79,7 +79,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="diemKetThuc" text="Nha Trang" textFill="#ff6e6c">
+                  <Label fx:id="diemKetThuc" textFill="#ff6e6c">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -96,7 +96,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="gioKhoiHanh" text="16:12" textFill="#ff6e6c">
+                  <Label fx:id="gioKhoiHanh" textFill="#ff6e6c">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -113,7 +113,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="bienSoXe" text="51A-12345" textFill="#ff6e6c">
+                  <Label fx:id="bienSoXe" textFill="#ff6e6c">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -130,7 +130,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="nhanVien" text="M.Hoàng" textFill="#ff6e6c">
+                  <Label fx:id="nhanVien" textFill="#ff6e6c">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -147,7 +147,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Label fx:id="giaVe" text="300.000" textFill="#ff6e6c">
+                  <Label fx:id="giaVe" textFill="#ff6e6c">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -166,7 +166,7 @@
          <children>
             <HBox prefHeight="20.0" prefWidth="126.0">
                <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A01">
+                  <RadioButton fx:id="A01" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A01">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -177,7 +177,7 @@
                         <ToggleGroup fx:id="Ghe" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A02" toggleGroup="$Ghe">
+                  <RadioButton fx:id="A02" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A02" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -186,26 +186,12 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
                <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A03" toggleGroup="$Ghe">
+                  <RadioButton fx:id="A03" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A03" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A04" toggleGroup="$Ghe">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </RadioButton>
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
-               <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A05" toggleGroup="$Ghe">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A06" toggleGroup="$Ghe">
+                  <RadioButton fx:id="A04" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A04" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -214,12 +200,26 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
                <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A07" toggleGroup="$Ghe">
+                  <RadioButton fx:id="A05" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A05" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A08" toggleGroup="$Ghe">
+                  <RadioButton fx:id="A06" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A06" toggleGroup="$Ghe">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton fx:id="A07" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A07" toggleGroup="$Ghe">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton fx:id="A08" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A08" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -228,12 +228,12 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="50.0" prefHeight="20.0" prefWidth="126.0">
                <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A09" toggleGroup="$Ghe">
+                  <RadioButton fx:id="A09" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A09" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A10" toggleGroup="$Ghe">
+                  <RadioButton fx:id="A10" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A10" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -252,26 +252,12 @@
          <children>
             <HBox prefHeight="20.0" prefWidth="126.0">
                <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B01" toggleGroup="$Ghe">
+                  <RadioButton fx:id="B01" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B01" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B02" toggleGroup="$Ghe">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </RadioButton>
-               </children>
-            </HBox>
-            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
-               <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B03" toggleGroup="$Ghe">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B04" toggleGroup="$Ghe">
+                  <RadioButton fx:id="B02" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B02" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -280,12 +266,12 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
                <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B05" toggleGroup="$Ghe">
+                  <RadioButton fx:id="B03" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B03" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B06" toggleGroup="$Ghe">
+                  <RadioButton fx:id="B04" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B04" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -294,12 +280,26 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
                <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B07" toggleGroup="$Ghe">
+                  <RadioButton fx:id="B05" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B05" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B08" toggleGroup="$Ghe">
+                  <RadioButton fx:id="B06" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B06" toggleGroup="$Ghe">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+               </children>
+            </HBox>
+            <HBox layoutX="10.0" layoutY="10.0" prefHeight="20.0" prefWidth="126.0">
+               <children>
+                  <RadioButton fx:id="B07" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B07" toggleGroup="$Ghe">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </RadioButton>
+                  <RadioButton fx:id="B08" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B08" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -308,12 +308,12 @@
             </HBox>
             <HBox layoutX="10.0" layoutY="50.0" prefHeight="20.0" prefWidth="126.0">
                <children>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B09" toggleGroup="$Ghe">
+                  <RadioButton fx:id="B09" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B09" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </RadioButton>
-                  <RadioButton mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B10" toggleGroup="$Ghe">
+                  <RadioButton fx:id="B10" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B10" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -339,7 +339,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="26.0" prefWidth="174.0" styleClass="lbName" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="txtHoVaTen" prefHeight="26.0" prefWidth="174.0" styleClass="lbName" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets left="40.0" right="10.0" />
                      </HBox.margin>
@@ -356,7 +356,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="26.0" prefWidth="174.0" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="txtSDT" prefHeight="26.0" prefWidth="174.0" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -376,7 +376,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="26.0" prefWidth="174.0" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="txtDiemDon" prefHeight="26.0" prefWidth="174.0" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets left="20.0" right="10.0" />
                      </HBox.margin>
@@ -385,7 +385,7 @@
             </HBox>
             <HBox alignment="CENTER" layoutX="10.0" layoutY="92.0" prefHeight="29.0" prefWidth="237.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="34.0" prefWidth="83.0" styleClass="ButtonBook" text="Đặt vé" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#bookingHandler" prefHeight="34.0" prefWidth="83.0" styleClass="ButtonBook" text="Đặt vé" textFill="WHITE">
                      <font>
                         <Font name="Tahoma Bold" size="14.0" />
                      </font>
@@ -415,5 +415,14 @@
             <Insets left="20.0" top="10.0" />
          </GridPane.margin>
       </VBox>
+      <HBox prefHeight="37.0" prefWidth="341.0" GridPane.columnSpan="4" GridPane.rowIndex="2">
+         <children>
+            <Label fx:id="time" text="Label">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </GridPane>

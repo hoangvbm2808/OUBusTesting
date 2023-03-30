@@ -27,7 +27,7 @@ public class TicketService {
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                VeXe ve = new VeXe(rs.getInt("id"), rs.getString("tenKhachHang"), 
+                VeXe ve = new VeXe( rs.getString("tenKhachHang"), 
                         rs.getDate("ngayDat"), rs.getString("sdt"),
                         rs.getString("maChuyenDi"), rs.getString("viTriGhe"),
                         rs.getString("trangThai"), 

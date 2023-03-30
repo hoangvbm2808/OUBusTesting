@@ -137,7 +137,8 @@ public class VeXe {
     public void setMaDoanhThu(String maDoanhThu) {
         this.maDoanhThu = maDoanhThu;
     }
-    private int maVe;
+    private static int dem = 2;
+    private int maVe = ++dem;
     private String tenKhachHang;
     private Date ngayDat; 
     private String sdt;
@@ -151,10 +152,9 @@ public class VeXe {
     }
 
     
-    public VeXe(int maVe, String tenKhachHang, Date ngayDat, String sdt, 
+    public VeXe(String tenKhachHang, Date ngayDat, String sdt, 
             String maChuyenDi, String viTriGhe, String trangThai, 
             String maNhanVien, String maDoanhThu) {
-        this.maVe = maVe;
         this.tenKhachHang = tenKhachHang;
         this.ngayDat = ngayDat;
         this.sdt = sdt;

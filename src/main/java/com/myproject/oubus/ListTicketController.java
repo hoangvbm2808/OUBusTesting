@@ -15,12 +15,17 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -101,7 +106,14 @@ public class ListTicketController implements Initializable {
         this.id = id;
     }
     
-    public void actionQuayVe() throws IOException {
-        App.setRoot("MainStaffScreen");
+    public void actionQuayVe(ActionEvent event) throws IOException {
+        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("MainStaffScreen.fxml"));
+                                Scene scene = new Scene(fxmloader.load());
+                                Stage stage = new Stage();
+                                stage.setScene(scene);
+                                stage.show();
+                                Button btn = (Button) event.getSource();
+                                Stage stagelogin = (Stage) btn.getScene().getWindow();
+                                stagelogin.close();
     }
 }
