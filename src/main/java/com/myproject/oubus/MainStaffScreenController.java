@@ -178,37 +178,4 @@ public class MainStaffScreenController implements Initializable {
         this.tableChuyenDi.setItems(FXCollections.observableList(chuyendi));
     }
     
-    public void ActionXemVe(ActionEvent ac) throws IOException {
-        App.setRoot("ListTicket");
-    }
-    
-    
-    public void ActionDatVe(ActionEvent ac) throws IOException {
-        App.setRoot("Booking");
-    }
-    
-//    private void loadTableDataTicket(int id) throws SQLException {
-//        List<VeXe> ve = ticket.getVeTheoMa(id);
-//        
-//        this.tableVeXe.setItems(FXCollections.observableList(ve));
-//    }
-                
-//    private void loadTableTicketColumns() {
-//        TableColumn colTen = new TableColumn("Ten");
-//        colTen.setCellValueFactory(new PropertyValueFactory("tenKhachHang"));
-//        
-//        TableColumn colSdt = new TableColumn("Số điện thoạt");
-//        colSdt.setCellValueFactory(new PropertyValueFactory("sdt"));
-//        
-//        TableColumn colNgayDat = new TableColumn("Ngày đặt");
-//        colNgayDat.setCellValueFactory(new PropertyValueFactory("ngayDat"));
-//        
-//        TableColumn colViTriGhe = new TableColumn("Số ghế");
-//        colViTriGhe.setCellValueFactory(new PropertyValueFactory("viTriGhe"));
-//        
-//        TableColumn colTrangThai = new TableColumn("Trạng thái");
-//        colTrangThai.setCellValueFactory(new PropertyValueFactory("trangThai"));
-//        
-//        tableVeXe.getColumns().addAll(colTen, colSdt, colNgayDat, colViTriGhe, colTrangThai);
-//    }
 }

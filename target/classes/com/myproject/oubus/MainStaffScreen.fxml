@@ -16,7 +16,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="630.0" prefWidth="914.0" stylesheets="" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.MainStaffScreenController">
    <top>
-      <VBox prefHeight="170.0" prefWidth="914.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="160.0" prefWidth="914.0" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="114.0" prefWidth="914.0">
                <children>
@@ -83,27 +83,23 @@
                   </GridPane>
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="78.0" prefWidth="914.0">
+            <HBox alignment="TOP_RIGHT" prefHeight="43.0" prefWidth="914.0">
                <children>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="38.0" prefWidth="118.0" styleClass="Search" text="Tìm kiếm">
                      <font>
                         <Font size="18.0" />
                      </font>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="38.0" prefWidth="118.0" styleClass="Search" text="Đặt vé">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                      <HBox.margin>
-                        <Insets left="20.0" right="20.0" />
+                        <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="38.0" prefWidth="118.0" styleClass="Search" text="Xem ">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Button>
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </HBox>
          </children>
       </VBox>

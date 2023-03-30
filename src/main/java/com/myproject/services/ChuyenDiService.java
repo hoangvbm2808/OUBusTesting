@@ -7,6 +7,7 @@ package com.myproject.services;
 import com.myproject.conf.jdbcUtils;
 import com.myproject.pojo.ChuyenDi;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -75,4 +76,38 @@ public class ChuyenDiService {
         }
     }
     
+     
+      public boolean deleteTour(int id) throws SQLException {
+         try (Connection conn = jdbcUtils.getConn()) {
+            String sql = "DELETE FROM chuyendi WHERE id=?";
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setInt(1, id);
+            
+            return stm.executeUpdate() > 0;
+        }
+     }
+     
+      public boolean updateTour(int maChuyenDi,int giaVe,String noiDi,String noiDen,Date ngayKH,String tg) throws SQLException {
+        try ( Connection conn = jdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+            String sql = "UPDATE chuyendi SET giaVe=?, diemKhoiHanh=?, diemKetThuc=?, ngayKhoiHanh=?,gioKhoiHanh=? WHERE id=?"; // sql injection
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setInt(1, giaVe);
+            stm.setString(2, noiDi);
+            stm.setString(3, noiDen);
+            stm.setDate(4, ngayKH);
+            stm.setString(5, tg);
+            stm.setInt(6, maChuyenDi);
+            int r = stm.executeUpdate();
+//            return r;
+            try {
+                conn.commit();
+                return true;
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+                return false;
+            }
+        }
+    }
+     
 }
