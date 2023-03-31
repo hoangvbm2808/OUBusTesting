@@ -64,7 +64,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="noiDiField" prefHeight="2.0" prefWidth="504.0" GridPane.columnIndex="3" />
-                        <TextField fx:id="tgKhoiHanhField" prefHeight="2.0" prefWidth="504.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                        <TextField fx:id="tgKhoiHanhField" prefHeight="2.0" prefWidth="504.0" promptText="6:00" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <Label text="Nơi đến" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.halignment="CENTER">
                            <font>
                               <Font size="15.0" />
@@ -93,17 +93,23 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="70.0">
                <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mã chuyến đi">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="maChuyenDi" strokeType="OUTSIDE" strokeWidth="0.0" />
                   <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#add" text="Thêm" textAlignment="CENTER" textOverrun="CLIP">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" text="Cập nhật" textAlignment="CENTER" textOverrun="CLIP">
+                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#update" text="Cập nhật" textAlignment="CENTER" textOverrun="CLIP">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" text="Xóa" textAlignment="CENTER" textOverrun="CLIP">
+                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#delete" text="Xóa" textAlignment="CENTER" textOverrun="CLIP">
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
@@ -119,6 +125,6 @@
       </VBox>
    </bottom>
    <center>
-      <TableView fx:id="tableChuyenDi" BorderPane.alignment="CENTER" />
+      <TableView fx:id="tableChuyenDi" onMouseClicked="#getTour" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

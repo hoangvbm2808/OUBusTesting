@@ -22,17 +22,35 @@ public class TicketService {
     public List<VeXe> getVeTheoMa(int id) throws SQLException {
         List<VeXe> vexe = new ArrayList<>();
         try (Connection conn = jdbcUtils.getConn()) {
-            String sql = "SELECT * FROM vexe WHERE id=?";
+            String sql = "SELECT * FROM vexe WHERE maChuyenDi=?";
             PreparedStatement stm = conn.prepareCall(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                VeXe ve = new VeXe( rs.getString("tenKhachHang"), 
+                VeXe ve = new VeXe( rs.getString("id"),rs.getString("tenKhachHang"), 
                         rs.getDate("ngayDat"), rs.getString("sdt"),
-                        rs.getString("maChuyenDi"), rs.getString("viTriGhe"),
+                        rs.getInt("maChuyenDi"), rs.getString("viTriGhe"),
                         rs.getString("trangThai"), 
-                        rs.getString("maNhanVien"), rs.getString("maDoanhThu"));
+                        rs.getInt("maNhanVien"), rs.getInt("maDoanhThu"), rs.getString("diemDon"));
                     vexe.add(ve);
+            }
+        }
+        return vexe;
+    }
+    
+    public VeXe getVeTheoMaVe(String id) throws SQLException {
+        VeXe vexe = null;
+        try (Connection conn = jdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareCall("SELECT * FROM vexe WHERE id=? ");
+            stm.setString(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                vexe = new VeXe( rs.getString("id"),rs.getString("tenKhachHang"), 
+                        rs.getDate("ngayDat"), rs.getString("sdt"),
+                        rs.getInt("maChuyenDi"), rs.getString("viTriGhe"),
+                        rs.getString("trangThai"), 
+                        rs.getInt("maNhanVien"), rs.getInt("maDoanhThu"), rs.getString("diemDon"));
+                    
             }
         }
         return vexe;

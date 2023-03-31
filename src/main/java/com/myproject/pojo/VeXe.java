@@ -5,6 +5,8 @@
 package com.myproject.pojo;
 
 import java.sql.Date;
+import java.util.UUID;
+
 
 /**
  *
@@ -15,14 +17,14 @@ public class VeXe {
     /**
      * @return the maVe
      */
-    public int getMaVe() {
+    public String getMaVe() {
         return maVe;
     }
 
     /**
      * @param maVe the maVe to set
      */
-    public void setMaVe(int maVe) {
+    public void setMaVe(String maVe) {
         this.maVe = maVe;
     }
 
@@ -99,62 +101,63 @@ public class VeXe {
     /**
      * @return the maChuyenDi
      */
-    public String getMaChuyenDi() {
+    public int getMaChuyenDi() {
         return maChuyenDi;
     }
 
     /**
      * @param maChuyenDi the maChuyenDi to set
      */
-    public void setMaChuyenDi(String maChuyenDi) {
+    public void setMaChuyenDi(int maChuyenDi) {
         this.maChuyenDi = maChuyenDi;
     }
 
     /**
      * @return the maNhanVien
      */
-    public String getMaNhanVien() {
+    public int getMaNhanVien() {
         return maNhanVien;
     }
 
     /**
      * @param maNhanVien the maNhanVien to set
      */
-    public void setMaNhanVien(String maNhanVien) {
+    public void setMaNhanVien(int maNhanVien) {
         this.maNhanVien = maNhanVien;
     }
 
     /**
      * @return the maDoanhThu
      */
-    public String getMaDoanhThu() {
+    public int getMaDoanhThu() {
         return maDoanhThu;
     }
 
     /**
      * @param maDoanhThu the maDoanhThu to set
      */
-    public void setMaDoanhThu(String maDoanhThu) {
+    public void setMaDoanhThu(int maDoanhThu) {
         this.maDoanhThu = maDoanhThu;
     }
-    private static int dem = 2;
-    private int maVe = ++dem;
+    private String maVe ;
     private String tenKhachHang;
     private Date ngayDat; 
     private String sdt;
     private String viTriGhe;
     private String trangThai;
-    private String maChuyenDi;
-    private String maNhanVien;
-    private String maDoanhThu;
+    private String diemDon;
+    private int maChuyenDi;
+    private int maNhanVien;
+    private int maDoanhThu;
         
     public VeXe() {
     }
 
     
     public VeXe(String tenKhachHang, Date ngayDat, String sdt, 
-            String maChuyenDi, String viTriGhe, String trangThai, 
-            String maNhanVien, String maDoanhThu) {
+            int maChuyenDi, String viTriGhe, String trangThai, 
+            int maNhanVien, int maDoanhThu, String diemDon) {
+        this.maVe = UUID.randomUUID().toString();
         this.tenKhachHang = tenKhachHang;
         this.ngayDat = ngayDat;
         this.sdt = sdt;
@@ -163,6 +166,36 @@ public class VeXe {
         this.trangThai = trangThai;
         this.maNhanVien = maNhanVien;
         this.maDoanhThu = maDoanhThu;
+        this.diemDon = diemDon;
+    }
+    
+    public VeXe(String id, String tenKhachHang, Date ngayDat, String sdt, 
+            int maChuyenDi, String viTriGhe, String trangThai, 
+            int maNhanVien, int maDoanhThu, String diemDon) {
+        this.maVe = id;
+        this.tenKhachHang = tenKhachHang;
+        this.ngayDat = ngayDat;
+        this.sdt = sdt;
+        this.maChuyenDi = maChuyenDi;
+        this.viTriGhe = viTriGhe;
+        this.trangThai = trangThai;
+        this.maNhanVien = maNhanVien;
+        this.maDoanhThu = maDoanhThu;
+        this.diemDon = diemDon;
+    }
+
+    /**
+     * @return the diemDon
+     */
+    public String getDiemDon() {
+        return diemDon;
+    }
+
+    /**
+     * @param diemDon the diemDon to set
+     */
+    public void setDiemDon(String diemDon) {
+        this.diemDon = diemDon;
     }
 }
     

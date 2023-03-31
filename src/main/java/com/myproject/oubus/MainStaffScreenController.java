@@ -107,12 +107,11 @@ public class MainStaffScreenController implements Initializable {
         colTrangThai.setCellValueFactory(new PropertyValueFactory("trangThai"));
         
         TableColumn colXemVe = new TableColumn();
-              colXemVe.setCellFactory(evt -> {
-            Button btn = new Button("Xem vé");
-            btn.setOnAction(e -> {
+            colXemVe.setCellFactory(evt -> {
+                Button btn = new Button("Xem vé");
+                btn.setOnAction(e -> {
                 try {
                     Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-//                    App.setRoot("ListTicket");
                     TableCell cell = (TableCell) btn.getParent();
                     ChuyenDi q = (ChuyenDi) cell.getTableRow().getItem();
                     try {   
@@ -161,14 +160,46 @@ public class MainStaffScreenController implements Initializable {
                         Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 });
-            TableCell cellXem = new TableCell();
-            cellXem.setGraphic(btn2);
-            return cellXem;
+            TableCell cellDat = new TableCell();
+            cellDat.setGraphic(btn2);
+            return cellDat;
         });
+            
+        TableColumn colBanVe = new TableColumn();
+            colBanVe.setCellFactory(evt -> {
+                Button btn3 = new Button("Bán vé");
+                btn3.setOnAction(e -> {
+                    try {
+                        Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+                        TableCell cell = (TableCell) btn3.getParent();
+                        ChuyenDi q = (ChuyenDi) cell.getTableRow().getItem();
+                        try {   
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("SellTicket.fxml"));
+                            Parent sellTicketView = loader.load();
+                            Scene scene = new Scene(sellTicketView);
+                            SellTicketController controller = loader.getController();
+                            int id = q.getMaChuyenDi();
+                            controller.loadSellTicket(id);
+                            stage.setScene(scene);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                });
+            TableCell cellBan = new TableCell();
+            cellBan.setGraphic(btn3);
+            return cellBan;
+        });
+        colBanVe.setPrefWidth(70);
+        colDatVe.setPrefWidth(70);
+        colXemVe.setPrefWidth(70);
         
         this.tableChuyenDi.getColumns().addAll(colMaChuyen ,colGiaVe, 
                 colNgayKhoiHanh, colGioKhoiHanh, colDiemKhoiHanh, colDiemKetThuc,
-                colSoGheTrong, colTrangThai,colXemVe, colDatVe);
+                colSoGheTrong, colTrangThai,colXemVe, colDatVe, colBanVe);
     }
     
     private void loadTableData() throws SQLException {
@@ -178,37 +209,4 @@ public class MainStaffScreenController implements Initializable {
         this.tableChuyenDi.setItems(FXCollections.observableList(chuyendi));
     }
     
-    public void ActionXemVe(ActionEvent ac) throws IOException {
-        App.setRoot("ListTicket");
-    }
-    
-    
-    public void ActionDatVe(ActionEvent ac) throws IOException {
-        App.setRoot("Booking");
-    }
-    
-//    private void loadTableDataTicket(int id) throws SQLException {
-//        List<VeXe> ve = ticket.getVeTheoMa(id);
-//        
-//        this.tableVeXe.setItems(FXCollections.observableList(ve));
-//    }
-                
-//    private void loadTableTicketColumns() {
-//        TableColumn colTen = new TableColumn("Ten");
-//        colTen.setCellValueFactory(new PropertyValueFactory("tenKhachHang"));
-//        
-//        TableColumn colSdt = new TableColumn("Số điện thoạt");
-//        colSdt.setCellValueFactory(new PropertyValueFactory("sdt"));
-//        
-//        TableColumn colNgayDat = new TableColumn("Ngày đặt");
-//        colNgayDat.setCellValueFactory(new PropertyValueFactory("ngayDat"));
-//        
-//        TableColumn colViTriGhe = new TableColumn("Số ghế");
-//        colViTriGhe.setCellValueFactory(new PropertyValueFactory("viTriGhe"));
-//        
-//        TableColumn colTrangThai = new TableColumn("Trạng thái");
-//        colTrangThai.setCellValueFactory(new PropertyValueFactory("trangThai"));
-//        
-//        tableVeXe.getColumns().addAll(colTen, colSdt, colNgayDat, colViTriGhe, colTrangThai);
-//    }
 }

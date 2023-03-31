@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="875.0" stylesheets="@../../../css/Ticket.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="875.0" stylesheets="@../../../css/Ticket.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.TicketController">
    <children>
       <VBox prefHeight="375.0" prefWidth="551.0">
          <children>
@@ -28,7 +28,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="Sài Gòn" textFill="#ff6e6c">
+                        <Label fx:id="diemKhoiHanh" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -56,7 +56,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="Nha Trang" textFill="#ff6e6c">
+                        <Label fx:id="diemKetThuc" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -81,7 +81,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="51A-123.45" textFill="#ff6e6c">
+                        <Label fx:id="bienSoXe" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -106,7 +106,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="14:30 14/4/2023" textFill="#ff6e6c">
+                        <Label fx:id="gioKhoiHanh" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -131,7 +131,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="A10" textFill="#ff6e6c">
+                        <Label fx:id="viTriGhe" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -156,7 +156,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="M. Hoàng" textFill="#ff6e6c">
+                        <Label fx:id="ten" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -181,7 +181,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="0399987202" textFill="#ff6e6c">
+                        <Label fx:id="sdt" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -206,7 +206,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="Gò Vấp" textFill="#ff6e6c">
+                        <Label fx:id="diemDon" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -231,7 +231,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="300.000 VNĐ" textFill="#ff6e6c">
+                        <Label fx:id="giaVe" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -256,7 +256,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="ABC" textFill="#ff6e6c">
+                        <Label fx:id="nhanVien" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -281,7 +281,7 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="186.0">
                      <children>
-                        <Label text="14:00 14/4/2023" textFill="#ff6e6c">
+                        <Label fx:id="ngayDat" textFill="#ff6e6c">
                            <font>
                               <Font name="Tahoma Bold" size="18.0" />
                            </font>
@@ -321,6 +321,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#actionQuayVe" prefHeight="47.0" prefWidth="64.0" text="Quay lại" />
          </children>
       </VBox>
    </children>

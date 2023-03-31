@@ -6,13 +6,10 @@ package com.myproject.oubus;
 
 import com.myproject.conf.Utils;
 import static com.myproject.oubus.LoginController.mnv;
-import static com.myproject.oubus.MainStaffScreenController.ticket;
-import com.myproject.pojo.Account;
 import com.myproject.pojo.ChuyenDi;
 import com.myproject.pojo.NhanVien;
 import com.myproject.pojo.VeXe;
 import com.myproject.pojo.XeKhach;
-import com.myproject.services.AccountService;
 import com.myproject.services.BookingService;
 import com.myproject.services.ChuyenDiService;
 import com.myproject.services.NhanVienService;
@@ -20,12 +17,10 @@ import com.myproject.services.TicketService;
 import com.myproject.services.XeKhachService;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
-import java.sql.Time;
 import java.time.LocalDate;
-import static java.time.LocalDate.now;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +28,6 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,20 +37,27 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * FXML Controller class
  *
  * @author vbmho
  */
-public class BookingController implements Initializable {
+public class SellTicketController implements Initializable {
 
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }   
+    
     private int id;
     @FXML private TextField txtHoVaTen;
     @FXML private TextField txtSDT;
@@ -103,19 +104,10 @@ public class BookingController implements Initializable {
     private static final XeKhachService xk = new XeKhachService();
     private static final NhanVienService nv = new NhanVienService();
     private static final BookingService bk = new BookingService();
-    private static final TicketService tk = new TicketService();
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        
-        // TODO
-        
-    }    
+    private static final TicketService tk = new TicketService();  
     
          
-    public void loadBookingForm(int id) throws SQLException {
+    public void loadSellTicket(int id) throws SQLException {
         this.id = id;
         ChuyenDi a = cd.getChuyenDiByMaChuyenDi(id);
         this.maChuyenDi.setText(String.valueOf(a.getMaChuyenDi()));
@@ -146,32 +138,33 @@ public class BookingController implements Initializable {
         long timeKhoiHanh = (a.getNgayKhoiHanh().getTime() + a.getGioKhoiHanh().getTime());
         long timeHienTai = System.currentTimeMillis();
         long s =  timeKhoiHanh - timeHienTai;
-        sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
+        sec = TimeUnit.MILLISECONDS.toMinutes(s)+480; 
         this.time.setText(String.valueOf(sec));
+        
     }
     
-    public void bookingHandler(ActionEvent event) {
-        if (sec > 60) {
+    public void sellingHandler(ActionEvent event) {
+        if (sec > 5) {
             if (this.txtHoVaTen.getText().length() != 0 && this.txtSDT.getText().length() != 0 && this.txtDiemDon.getText().length() != 0) {
                 if (bk.checkSDT(this.txtSDT.getText())) {
                     RadioButton selectedRadioButton = (RadioButton) Ghe.getSelectedToggle();
                     String viTriGhe = selectedRadioButton.getText();
-                    VeXe v = new VeXe(this.txtHoVaTen.getText(), Date.valueOf(LocalDate.now()), this.txtSDT.getText(), Integer.parseInt(this.maChuyenDi.getText()), viTriGhe, "Đã đặt", mnv, 1, this.txtDiemDon.getText());
+                    VeXe v = new VeXe(this.txtHoVaTen.getText(), Date.valueOf(LocalDate.now()), this.txtSDT.getText(), Integer.parseInt(this.maChuyenDi.getText()), viTriGhe, "Đã xuất",mnv, 1, this.txtDiemDon.getText());
                     try {
                         bk.addVeXe(v);
-                        Utils.getBox("Đặt vé thành công", Alert.AlertType.INFORMATION).show();
+                        Utils.getBox("Bán vé thành công", Alert.AlertType.INFORMATION).show();
                         this.resetForm();
-                        this.loadBookingForm(id);
+                        this.loadSellTicket(id);
                     } catch (SQLException ex) {
-                        Utils.getBox("Đặt vé thất bại: " + ex.getMessage(), Alert.AlertType.WARNING).show();
-                        this.time.setText(ex.getMessage());
+                        Utils.getBox("Bán vé thất bại: " + ex.getMessage(), Alert.AlertType.WARNING).show();
+                        this.time.setText(String.valueOf(v.getMaVe()));
                     }
                 } else 
                     Utils.getBox("Số điện thoại không hợp lệ !", Alert.AlertType.WARNING).show();             
             } else 
                 Utils.getBox("Vui lòng nhập đầy đủ thông tin !", Alert.AlertType.WARNING).show();       
         } else
-            Utils.getBox("Đặt vé thất bại: Chỉ được Đặt vé trước 60 phút khi chuyến xe khởi hành.", Alert.AlertType.WARNING).show(); 
+            Utils.getBox("Bán thất bại: Chỉ được bán vé trước khi chuyến xe khởi hành 5 phút.", Alert.AlertType.WARNING).show(); 
     }
     
     public void actionQuayVe(ActionEvent event) throws IOException {
@@ -191,7 +184,5 @@ public class BookingController implements Initializable {
         this.txtSDT.setText("");
         this.txtDiemDon.setText("");
     }
-    
-    
     
 }

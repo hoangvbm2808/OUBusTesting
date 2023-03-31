@@ -1,5 +1,6 @@
 package com.myproject.oubus;
 
+import com.myproject.conf.Utils;
 import com.myproject.pojo.ChuyenDi;
 import com.myproject.services.ChuyenDiService;
 import java.io.IOException;
@@ -31,6 +32,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -71,6 +74,8 @@ public class ListTourAdminController implements Initializable {
     @FXML private TextField giaVeField; 
     
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+    
+    @FXML private Text maChuyenDi;
     
     StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
         DateTimeFormatter dateFormatter
@@ -143,7 +148,7 @@ public class ListTourAdminController implements Initializable {
         TableColumn colDiemKhoiHanh = new TableColumn("Điểm khởi hành");
         colDiemKhoiHanh.setCellValueFactory(new PropertyValueFactory("diemKhoiHanh"));
         
-        TableColumn colDiemKetThuc = new TableColumn("Ddiemr kết thúc");
+        TableColumn colDiemKetThuc = new TableColumn("Điểm kết thúc");
         colDiemKetThuc.setCellValueFactory(new PropertyValueFactory("diemKetThuc"));
         
         TableColumn colSoGheTrong = new TableColumn("Ghế trống");
@@ -205,9 +210,10 @@ public class ListTourAdminController implements Initializable {
             maXeField.setText("");
             noiDiField.setText("");
             noiDenField.setText("");
-    //        ngayKhoiHanhField.setTime("");
+            ngayKhoiHanhField.setValue(null);
             tgKhoiHanhField.setText("");
             giaVeField.setText("");
+            maChuyenDi.setText("");
         } catch (SQLException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Add failed" + ex.getMessage());
@@ -217,22 +223,61 @@ public class ListTourAdminController implements Initializable {
     }
     
     
+    
     //xoa chuyen di
-    public void delete(ActionEvent e) {
-//        ChuyenDi t = table.getSelectionModel().getSelectedItem();
-//            tourList.remove(t);
+    public void delete(ActionEvent e) throws SQLException {
+        ChuyenDi t = tableChuyenDi.getSelectionModel().getSelectedItem();
+//        Time time = Time.valueOf(tgKhoiHanhField.getText() + ":00");
+        if (c.deleteTour(t.getMaChuyenDi()) == true) {
+            Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
+            this.loadTableData();
+            maXeField.setText("");
+            noiDiField.setText("");
+            noiDenField.setText("");
+            ngayKhoiHanhField.setValue(null);
+            tgKhoiHanhField.setText("");
+            giaVeField.setText("");
+            maChuyenDi.setText("");
+        } else
+            Utils.getBox("Delete failed", Alert.AlertType.ERROR).show();
     }
     
-    //cap nhat chuyen di
-    public void update(ActionEvent e) {
-//        ChuyenDi tour = new ChuyenDi();
-//        ChuyenDi t = table.getSelectionModel().getSelectedItem();
-//        tour.setMaChuyenDi(t.getMaChuyenDi());
-//        tour.setDiemKhoiHanh(t.getDiemKhoiHanh());
-//        tour.setDiemKetThuc(t.getDiemKetThuc());
-//        tour.setNgayKhoiHanh(t.getNgayKhoiHanh());
-//        tour.setGioKhoiHanh(t.getGioKhoiHanh());
-//        tour.setGiaVe(t.getGiaVe());
+    
+    public void getTour(MouseEvent event) {
+        ChuyenDi t = tableChuyenDi.getSelectionModel().getSelectedItem();
+        maXeField.setText(String.valueOf(t.getMaXe()));
+        noiDiField.setText(t.getDiemKhoiHanh());
+        noiDenField.setText(t.getDiemKetThuc());
+        ngayKhoiHanhField.setValue(LocalDate.parse(String.valueOf(t.getNgayKhoiHanh())));
+        tgKhoiHanhField.setText(String.valueOf(t.getGioKhoiHanh()));
+        giaVeField.setText(String.valueOf(t.getGiaVe()));
+        maChuyenDi.setText(String.valueOf(t.getMaChuyenDi()));
+        
     }
+    
+    
+    //cap nhat chuyen di
+    public void update(ActionEvent e) throws SQLException {
+        int giaVe = Integer.parseInt(giaVeField.getText());
+        String noiDi = noiDiField.getText();
+        String noiDen = noiDenField.getText();
+        Date ngayKH = Date.valueOf(ngayKhoiHanhField.getValue());
+        String tg = tgKhoiHanhField.getText();
+        int maXe = Integer.parseInt(maXeField.getText());
+        int maChuyen = Integer.parseInt(this.maChuyenDi.getText());
+        if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tg)==true) {
+            Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
+            this.loadTableData();
+            maXeField.setText("");
+            noiDiField.setText("");
+            noiDenField.setText("");
+            ngayKhoiHanhField.setValue(null);
+            tgKhoiHanhField.setText("");
+            giaVeField.setText("");
+            maChuyenDi.setText("");
+        } else
+            Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+    }
+    
     
 }

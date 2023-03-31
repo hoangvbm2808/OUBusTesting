@@ -10,17 +10,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author vbmho
  */
 public class XeKhachService {
-    public XeKhach getXeKhachByMaXe(String MaXe) throws SQLException {
+    public XeKhach getXeKhachByMaXe(int MaXe) throws SQLException {
         XeKhach results = null;
         try ( Connection conn = jdbcUtils.getConn()) {
             PreparedStatement stm = conn.prepareCall("SELECT * FROM xekhach WHERE id = ?");
-            stm.setString(1, MaXe);
+            stm.setInt(1, MaXe);
 
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -29,4 +32,5 @@ public class XeKhachService {
         }
         return results;
     }
+    
 }
