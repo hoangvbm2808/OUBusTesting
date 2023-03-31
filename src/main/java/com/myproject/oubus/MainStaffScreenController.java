@@ -65,7 +65,7 @@ public class MainStaffScreenController implements Initializable {
         }
     }    
     
-    private void loadTableColumns() {
+    public void loadTableColumns() {
         TableColumn colMaChuyen = new TableColumn("Mã chuyến");
         colMaChuyen.setCellValueFactory(new PropertyValueFactory("maChuyenDi"));
         

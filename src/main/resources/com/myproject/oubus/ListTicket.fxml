@@ -45,6 +45,7 @@
             </VBox>
             <VBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="349.0">
                <children>
+                  <Label fx:id="bug" />
                   <Button mnemonicParsing="false" onAction="#actionQuayVe" text="Quay lại" />
                </children>
             </VBox>

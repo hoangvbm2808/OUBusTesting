@@ -147,7 +147,6 @@ public class BookingController implements Initializable {
         long timeHienTai = System.currentTimeMillis();
         long s =  timeKhoiHanh - timeHienTai;
         sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
-        this.time.setText(String.valueOf(sec));
     }
     
     public void bookingHandler(ActionEvent event) {
@@ -164,7 +163,6 @@ public class BookingController implements Initializable {
                         this.loadBookingForm(id);
                     } catch (SQLException ex) {
                         Utils.getBox("Đặt vé thất bại: " + ex.getMessage(), Alert.AlertType.WARNING).show();
-                        this.time.setText(ex.getMessage());
                     }
                 } else 
                     Utils.getBox("Số điện thoại không hợp lệ !", Alert.AlertType.WARNING).show();             

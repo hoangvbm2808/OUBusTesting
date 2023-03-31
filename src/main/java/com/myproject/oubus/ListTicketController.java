@@ -8,14 +8,17 @@ import com.myproject.conf.Utils;
 import static com.myproject.oubus.MainStaffScreenController.ticket;
 import com.myproject.pojo.ChuyenDi;
 import com.myproject.pojo.VeXe;
+import com.myproject.services.ChuyenDiService;
 import com.myproject.services.TicketService;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -28,6 +31,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -43,8 +47,12 @@ public class ListTicketController implements Initializable {
     private int id;
     static TicketService tk = new TicketService();
     @FXML private TableView<VeXe> tableVeXe;
+    @FXML private Label bug;
+    private final List<VeXe> listVeXe = new ArrayList();
     String pattern = "dd/MM/yyyy HH:mm:ss";
+    long sec;
     SimpleDateFormat df = new SimpleDateFormat(pattern);
+    private static final ChuyenDiService cd = new ChuyenDiService();
     /**
      * Initializes the controller class.
      */
@@ -54,7 +62,7 @@ public class ListTicketController implements Initializable {
             // TODO
             loadTableTicketColumns();
         try {
-            loadTableDataTicket(this.id);
+            loadTableDataTicket(this.getId());
         } catch (SQLException ex) {
             Logger.getLogger(ListTicketController.class.getName()).log(Level.SEVERE, null, ex);
             Utils.getBox( ex.getMessage(), Alert.AlertType.WARNING).show();
@@ -134,7 +142,10 @@ public class ListTicketController implements Initializable {
     }
     
     public void loadTableDataTicket(int id) throws SQLException {
-        this.id = id;
+        this.setId(id);
+        if(autoDeleteVeXe(this.id)){
+                Utils.getBox("Hệ thống đã tự hủy các vé chưa được xuất", Alert.AlertType.WARNING).show();
+        }
         List<VeXe> ve = ticket.getVeTheoMa(id);
         this.tableVeXe.setItems(FXCollections.observableList(ve));
     }
@@ -163,4 +174,27 @@ public class ListTicketController implements Initializable {
                                 Stage stagelogin = (Stage) btn.getScene().getWindow();
                                 stagelogin.close();
     }
+    
+    public boolean autoDeleteVeXe(int id) throws SQLException{
+       boolean flag = false;
+       this.listVeXe.addAll(tk.getVeTheoMa(this.getId()));
+       this.bug.setText(String.valueOf(id));
+       for(VeXe v : this.listVeXe){  
+           
+           ChuyenDi c = cd.getChuyenDiByMaChuyenDi(v.getMaChuyenDi());
+           // Tính thời gian khởi hành và thời gian hiện tại
+            long timeKhoiHanh = (c.getNgayKhoiHanh().getTime() + c.getGioKhoiHanh().getTime());
+            long timeHienTai = System.currentTimeMillis();
+            long s =  timeKhoiHanh - timeHienTai;
+            sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
+           if (sec <= 30) {
+               if (v.getTrangThai().equals("Đã đặt")) {
+                   tk.deleteTicket(v);
+                   flag = true;
+               }
+           }
+       }
+       return flag;
+    }
+    
 }

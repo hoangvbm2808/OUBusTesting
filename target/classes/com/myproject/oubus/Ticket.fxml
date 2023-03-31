@@ -297,7 +297,7 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="375.0" prefWidth="194.0" spacing="30.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="198.0" styleClass="ButtonExportTicket" text="Xuất vé">
+            <Button mnemonicParsing="false" onAction="#actionExportTicket" prefHeight="52.0" prefWidth="198.0" styleClass="ButtonExportTicket" text="Xuất vé">
                <font>
                   <Font name="Tahoma" size="18.0" />
                </font>
@@ -305,7 +305,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="198.0" styleClass="ButtonChangeTicket" text="Đổi vé">
+            <Button mnemonicParsing="false" onAction="#actionChangeTicket" prefHeight="52.0" prefWidth="198.0" styleClass="ButtonChangeTicket" text="Đổi vé">
                <font>
                   <Font name="Tahoma" size="18.0" />
                </font>
@@ -313,7 +313,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="198.0" styleClass="ButtonCancelTicket" text="Hủy vé">
+            <Button mnemonicParsing="false" onAction="#actionDeleteTicket" prefHeight="52.0" prefWidth="198.0" styleClass="ButtonCancelTicket" text="Hủy vé">
                <font>
                   <Font name="Tahoma" size="18.0" />
                </font>

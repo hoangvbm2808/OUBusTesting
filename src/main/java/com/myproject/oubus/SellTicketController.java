@@ -32,6 +32,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -138,12 +140,11 @@ public class SellTicketController implements Initializable {
         long timeKhoiHanh = (a.getNgayKhoiHanh().getTime() + a.getGioKhoiHanh().getTime());
         long timeHienTai = System.currentTimeMillis();
         long s =  timeKhoiHanh - timeHienTai;
-        sec = TimeUnit.MILLISECONDS.toMinutes(s)+480; 
-        this.time.setText(String.valueOf(sec));
+        sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
         
     }
     
-    public void sellingHandler(ActionEvent event) {
+    public void sellingHandler(ActionEvent event) throws IOException {
         if (sec > 5) {
             if (this.txtHoVaTen.getText().length() != 0 && this.txtSDT.getText().length() != 0 && this.txtDiemDon.getText().length() != 0) {
                 if (bk.checkSDT(this.txtSDT.getText())) {
@@ -155,9 +156,19 @@ public class SellTicketController implements Initializable {
                         Utils.getBox("Bán vé thành công", Alert.AlertType.INFORMATION).show();
                         this.resetForm();
                         this.loadSellTicket(id);
+                        
+                        Stage stage = new Stage();
+                        FXMLLoader loader = new FXMLLoader();
+                        loader.setLocation(getClass().getResource("Ticket.fxml"));
+                        Parent ticketView = loader.load();
+                        Scene scene = new Scene(ticketView);
+                        TicketController controller = loader.getController();
+                        controller.loadTicket(v.getMaVe());
+                        stage.setScene(scene);
+                        
+                        
                     } catch (SQLException ex) {
                         Utils.getBox("Bán vé thất bại: " + ex.getMessage(), Alert.AlertType.WARNING).show();
-                        this.time.setText(String.valueOf(v.getMaVe()));
                     }
                 } else 
                     Utils.getBox("Số điện thoại không hợp lệ !", Alert.AlertType.WARNING).show();             

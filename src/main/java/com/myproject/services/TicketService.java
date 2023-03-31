@@ -55,4 +55,36 @@ public class TicketService {
         }
         return vexe;
     }
+    
+    
+    public void exportTicket(VeXe ve) throws SQLException {
+        try (Connection conn = jdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+            
+            String sql = "UPDATE vexe SET trangThai='Đã xuất' WHERE id =?;";     
+            PreparedStatement stm1 = conn.prepareCall(sql);
+            stm1.setString(1, ve.getMaVe());
+            stm1.executeUpdate();
+        
+            conn.commit();
+        }
+    }
+    
+    public void deleteTicket(VeXe ve) throws SQLException {
+        try (Connection conn = jdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+            
+            PreparedStatement stm = conn.prepareCall("DELETE FROM vexe WHERE id = ?");
+            stm.setString(1, ve.getMaVe());
+            stm.executeUpdate();
+            
+            String sql = "UPDATE chuyendi SET SoGheTrong = SoGheTrong+1, SoGheDat = SoGheDat-1 WHERE id = ?";     
+            PreparedStatement stm2 = conn.prepareCall(sql);
+            stm2.setInt(1, ve.getMaChuyenDi());
+            stm2.executeUpdate();
+        
+            conn.commit();
+        }
+    }
 }
+
