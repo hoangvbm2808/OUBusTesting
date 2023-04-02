@@ -5,6 +5,7 @@
 package com.myproject.services;
 
 import com.myproject.conf.jdbcUtils;
+import com.myproject.pojo.ChuyenDi;
 import com.myproject.pojo.NhanVien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,15 +19,36 @@ import java.util.List;
  * @author vbmho
  */
 public class NhanVienService {
+    
+    public boolean addNhanVien(NhanVien nvien) throws SQLException {
+        try ( Connection conn = jdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+            String sql = "INSERT INTO nhanvien(id, tenNhanVien, maLoaiNhanVien, ngaySinh, soDienThoai, cMND, queQuan, maAccount) VALUES(?, ?, ?, ?, ?, ?, ?, ?)"; // sql injection
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setInt(1, nvien.getMaNhanVien());
+            stm.setString(2, nvien.getTenNhanVien());
+            stm.setString(3,nvien.getMaLoaiNhanVien());
+            stm.setDate(4, nvien.getNgaySinh());
+            stm.setString(5, nvien.getSoDienThoai());
+            stm.setString(6, nvien.getCMND());
+            stm.setString(7, nvien.getCMND());
+            stm.setInt(8, nvien.getMaAccount());
+            int r = stm.executeUpdate();
 
-    public NhanVien getNhanVienByMaNV(String maNV) throws SQLException {
+            try {
+                conn.commit();
+                return true;
+            } catch (SQLException ex) {
+                System.err.println(ex.getMessage());
+                return false;
+            }
+        }
+    }
+    public NhanVien getNhanVienByMaNV(int maNV) throws SQLException {
         NhanVien results = null;
         try (Connection conn = jdbcUtils.getConn()) {
-//                String sql = "SELECT * FROM nhanvien WHERE id LIKE concat('%', '" + maNV + "', '%')";
-//                PreparedStatement stm = conn.prepareStatement(sql);
-//                ResultSet rs = stm.executeQuery(sql);
-                    PreparedStatement stm = conn.prepareCall("SELECT * FROM nhanvien WHERE id LIKE concat('%',?,'%')");
-                    stm.setString(1, maNV);
+                    PreparedStatement stm = conn.prepareCall("SELECT * FROM nhanvien WHERE id =?");
+                    stm.setInt(1, maNV);
 
                     ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -38,4 +60,6 @@ public class NhanVienService {
         }
         return results;
     }
+
+
 }

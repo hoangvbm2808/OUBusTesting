@@ -1,8 +1,6 @@
 
 import com.myproject.conf.jdbcUtils;
-import com.myproject.pojo.Account;
 import com.myproject.pojo.VeXe;
-import com.myproject.services.AccountService;
 import com.myproject.services.BookingService;
 import java.sql.Connection;
 import java.sql.Date;
@@ -24,7 +22,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  *
- * @author admin
+ * @author vbmho
  */
 public class BookingTester {
     private static final BookingService bk = new BookingService();
@@ -51,6 +49,27 @@ public class BookingTester {
         }
     }
     
+    
+    @Test
+    public void testTextField() throws SQLException{
+        boolean actual = bk.checkTextField("","","");
+        Assertions.assertFalse(actual);
+    }
+    @Test
+    public void testTextField2() throws SQLException{
+        boolean actual = bk.checkTextField("A","","");
+        Assertions.assertFalse(actual);
+    }
+    @Test
+    public void testTextField3() throws SQLException{
+        boolean actual = bk.checkTextField("A","A","");
+        Assertions.assertFalse(actual);
+    }
+    @Test
+    public void testTextField4() throws SQLException{
+        boolean actual = bk.checkTextField("A","A","A");
+        Assertions.assertTrue(actual);
+    }
     
     @Test
     public void testCheckSDT() throws SQLException{

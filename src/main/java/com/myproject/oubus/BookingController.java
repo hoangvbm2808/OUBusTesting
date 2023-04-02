@@ -125,7 +125,7 @@ public class BookingController implements Initializable {
         this.giaVe.setText(String.valueOf(a.getGiaVe()));
         XeKhach b = xk.getXeKhachByMaXe(a.getMaXe());
         this.bienSoXe.setText(b.getBienSoXe());
-        NhanVien c = nv.getNhanVienByMaNV(String.valueOf(b.getMaNhanVien()));
+        NhanVien c = nv.getNhanVienByMaNV(b.getMaNhanVien());
         this.nhanVien.setText(c.getTenNhanVien());
         
         this.listConTrong.addAll(Arrays.asList(A01, A02, A03, A04, A05, A06, A07, A08, A09, A10, B01, B02, B03, B04, B05, B06, B07, B08, B09, B10));

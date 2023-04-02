@@ -10,6 +10,7 @@ module-info.class
 com\myproject\oubus\BookingController.class
 com\myproject\oubus\MainStaffScreenController$1.class
 com\myproject\pojo\DoanhThuChuyenDi.class
+com\myproject\services\BookingService.class
 com\myproject\oubus\LoginController.class
 com\myproject\oubus\ListTourAdminController$1.class
 com\myproject\oubus\MainStaffScreenController.class
@@ -22,6 +23,7 @@ com\myproject\oubus\ListTourAdminController.class
 com\myproject\oubus\App.class
 com\myproject\pojo\NhanVien.class
 com\myproject\pojo\ChuyenDi.class
+com\myproject\oubus\SellTicketController.class
 com\myproject\services\ChuyenDiService.class
 com\myproject\oubus\TicketController.class
 com\myproject\services\NhanVienService.class
