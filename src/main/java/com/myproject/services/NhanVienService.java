@@ -19,6 +19,22 @@ import java.util.List;
  * @author vbmho
  */
 public class NhanVienService {
+    public NhanVien getNhanVienByMaNV(int maNV) throws SQLException {
+        NhanVien results = null;
+        try (Connection conn = jdbcUtils.getConn()) {
+                    PreparedStatement stm = conn.prepareCall("SELECT * FROM nhanvien WHERE id =?");
+                    stm.setInt(1, maNV);
+
+                    ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                results = new NhanVien(rs.getInt("id"),
+                        rs.getString("TenNhanVien"), rs.getString("MaLoaiNhanVien"),
+                        rs.getDate("NgaySinh"), rs.getString("SoDienThoai"),
+                        rs.getString("CMND"), rs.getString("QueQuan"), rs.getInt("MaAccount"));
+            }
+        }
+        return results;
+    }
     
     public boolean addNhanVien(NhanVien nvien) throws SQLException {
         try ( Connection conn = jdbcUtils.getConn()) {
@@ -44,22 +60,4 @@ public class NhanVienService {
             }
         }
     }
-    public NhanVien getNhanVienByMaNV(int maNV) throws SQLException {
-        NhanVien results = null;
-        try (Connection conn = jdbcUtils.getConn()) {
-                    PreparedStatement stm = conn.prepareCall("SELECT * FROM nhanvien WHERE id =?");
-                    stm.setInt(1, maNV);
-
-                    ResultSet rs = stm.executeQuery();
-            while (rs.next()) {
-                results = new NhanVien(rs.getInt("id"),
-                        rs.getString("TenNhanVien"), rs.getString("MaLoaiNhanVien"),
-                        rs.getDate("NgaySinh"), rs.getString("SoDienThoai"),
-                        rs.getString("CMND"), rs.getString("QueQuan"), rs.getInt("MaAccount"));
-            }
-        }
-        return results;
-    }
-
-
 }

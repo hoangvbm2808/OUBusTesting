@@ -2,6 +2,7 @@
 import com.myproject.conf.jdbcUtils;
 import com.myproject.pojo.VeXe;
 import com.myproject.services.BookingService;
+import com.myproject.services.TicketService;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -26,6 +27,7 @@ import org.junit.jupiter.api.Test;
  */
 public class BookingTester {
     private static final BookingService bk = new BookingService();
+    private static final TicketService tk = new TicketService();
     private static Connection conn;
     
     @BeforeAll

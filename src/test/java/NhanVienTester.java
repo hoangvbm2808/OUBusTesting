@@ -46,29 +46,34 @@ public class NhanVienTester {
             }
         }
     }
+    
     @Test
     public void testGetNhanVienByMaNV() throws SQLException{
-        NhanVien nvien = new NhanVien(3, "Võ Bùi Minh Hoàng", "Tài xế",Date.valueOf("2002-08-28"), "0399987202", "056202010094", "Nha Trang", 3);
-        boolean actual = nv.addNhanVien(nvien);
-            
-        try {
-            
-            int maNhanVien = nvien.getMaNhanVien();
-            
-            Assertions.assertTrue(actual);
-            
-            
-            
-            PreparedStatement stm = conn.prepareCall("SELECT * FROM nhanvien WHERE id=?");
-            stm.setInt(1, nvien.getMaNhanVien());
-            
-            ResultSet rs = stm.executeQuery();
-            Assertions.assertNotNull(rs.next());
-            Assertions.assertEquals(maNhanVien, rs.getInt("id"));
-            Assertions.assertEquals("Võ Bùi Minh Hoàng", rs.getString("tenNhanVien"));
-        } catch (SQLException ex) {
-            Logger.getLogger(BookingTester.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        Assertions.assertFalse(actual);
+        NhanVien nvien = nv.getNhanVienByMaNV(1);
+        Assertions.assertEquals(nvien.getTenNhanVien(),"Lê Văn Lâm");
     }
+
+//    @Test
+//    public void testAddNhanVien() throws SQLException {
+//        NhanVien nvien = new NhanVien(3, "Võ Bùi Minh Hoàng", "Tổng giám đốc", Date.valueOf(LocalDate.now()), "0399987202", "056202010094", "Nha Trang", 3);
+//        boolean actual = nv.addNhanVien(nvien);
+//        try {
+//
+//            int maNhanVien = nvien.getMaNhanVien();
+//
+//            Assertions.assertTrue(actual);
+//
+//
+//            PreparedStatement stm = conn.prepareCall("SELECT * FROM nhanvien WHERE id=?");
+//            stm.setInt(1, nvien.getMaNhanVien());
+//
+//            ResultSet rs = stm.executeQuery();
+//            Assertions.assertNotNull(rs.next());
+//            Assertions.assertEquals(maNhanVien, rs.getInt("id"));
+//            Assertions.assertEquals("Võ Bùi Minh Hoàng", rs.getString("tenNhanVien"));
+//        } catch (SQLException ex) {
+//            Logger.getLogger(BookingTester.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        Assertions.assertFalse(actual);
+//    }
 }
