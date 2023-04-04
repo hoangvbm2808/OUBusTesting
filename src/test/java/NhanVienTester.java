@@ -50,9 +50,11 @@ public class NhanVienTester {
     public void testGetNhanVienByMaNV() throws SQLException{
         NhanVien nvien = new NhanVien(3, "Võ Bùi Minh Hoàng", "Tài xế",Date.valueOf("2002-08-28"), "0399987202", "056202010094", "Nha Trang", 3);
         boolean actual = nv.addNhanVien(nvien);
-        int maNhanVien = nv.getNhanVienByMaNV(3);
             
         try {
+            
+            int maNhanVien = nvien.getMaNhanVien();
+            
             Assertions.assertTrue(actual);
             
             

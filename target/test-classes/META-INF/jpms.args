@@ -1,4 +1,0 @@
---patch-module
-com.myproject.oubus=_
---add-reads
-com.myproject.oubus=ALL-UNNAMED
