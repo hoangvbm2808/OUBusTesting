@@ -50,7 +50,7 @@ public class MainStaffScreenController implements Initializable {
     static TicketService ticket = new TicketService();
     @FXML private TableView<ChuyenDi> tableChuyenDi;
     @FXML private TableView<VeXe> tableVeXe;
-    
+    @FXML private TextField noiDiField;
     /**
      * Initializes the controller class.
      */
@@ -59,10 +59,17 @@ public class MainStaffScreenController implements Initializable {
         // TODO
         try {
             this.loadTableColumns();
-            this.loadTableData();
+            this.loadTableData(null);
         } catch (SQLException ex) {
             Logger.getLogger(ListTourAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.noiDiField.textProperty().addListener(e -> {
+            try {
+                this.loadTableData(this.noiDiField.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }    
     
     public void loadTableColumns() {
@@ -202,8 +209,8 @@ public class MainStaffScreenController implements Initializable {
                 colSoGheTrong, colTrangThai,colXemVe, colDatVe, colBanVe);
     }
     
-    private void loadTableData() throws SQLException {
-        List<ChuyenDi> chuyendi = c.getChuyenDi();
+    private void loadTableData(String kw) throws SQLException {
+        List<ChuyenDi> chuyendi = c.getChuyenDi(kw);
         
         this.tableChuyenDi.getItems().clear();
         this.tableChuyenDi.setItems(FXCollections.observableList(chuyendi));

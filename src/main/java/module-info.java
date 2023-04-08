@@ -8,6 +8,9 @@ module com.myproject.oubus {
     opens com.myproject.oubus to javafx.fxml;
     exports com.myproject.oubus;
     exports com.myproject.pojo;
+    exports com.myproject.conf;
+    exports com.myproject.services;
     requires org.apache.commons.lang3;
+    requires mysql.connector.j;
 }
 

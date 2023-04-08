@@ -21,11 +21,17 @@ import java.util.List;
  * @author Thanh
  */
 public class ChuyenDiService {
-     public List<ChuyenDi> getChuyenDi() throws SQLException {
+     public List<ChuyenDi> getChuyenDi(String diemKH) throws SQLException {
         List<ChuyenDi> chuyendi = new ArrayList<>();
         try (Connection conn = jdbcUtils.getConn()) {
-            Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT * FROM chuyendi");
+            String sql = "SELECT * FROM chuyendi";
+            if (diemKH != null && !diemKH.isEmpty()) 
+                sql += " WHERE diemKhoiHanh like concat('%', ?, '%')";
+            PreparedStatement stm = conn.prepareCall(sql);
+            if (diemKH != null && !diemKH.isEmpty())  
+                stm.setString(1, diemKH);
+            ResultSet rs = stm.executeQuery();
+            
             while (rs.next()) {
                 ChuyenDi c = new ChuyenDi(rs.getInt("id"), rs.getInt("maXe"), rs.getInt("giaVe"), 
                         rs.getDate("ngayKhoiHanh"), rs.getTime("gioKhoiHanh"),

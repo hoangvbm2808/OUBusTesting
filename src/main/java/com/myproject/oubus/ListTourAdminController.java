@@ -106,7 +106,7 @@ public class ListTourAdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         try {
             this.loadTableColumns();
-            this.loadTableData();
+            this.loadTableData(null);
         } catch (SQLException ex) {
             Logger.getLogger(ListTourAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -165,8 +165,8 @@ public class ListTourAdminController implements Initializable {
                 colSoGheTrong, colSoGheDat, colTrangThai);
     }
     
-    private void loadTableData() throws SQLException {
-        List<ChuyenDi> chuyendi = c.getChuyenDi();
+    private void loadTableData(String kw) throws SQLException {
+        List<ChuyenDi> chuyendi = c.getChuyenDi(kw);
         
         this.tableChuyenDi.getItems().clear();
         this.tableChuyenDi.setItems(FXCollections.observableList(chuyendi));
@@ -188,6 +188,7 @@ public class ListTourAdminController implements Initializable {
     //them chuyen di
     public void add(ActionEvent e) throws SQLException {
         Time time = Time.valueOf(tgKhoiHanhField.getText() + ":00");
+        System.out.print("------------ " + String.valueOf(time));
         ChuyenDi tour = new ChuyenDi(Integer.parseInt(giaVeField.getText()), 
                 noiDiField.getText(),noiDenField.getText(), Date.valueOf(ngayKhoiHanhField.getValue()),
                 time, Integer.parseInt(maXeField.getText()));
@@ -205,7 +206,7 @@ public class ListTourAdminController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setContentText("Add successful");
             alert.show();
-            loadTableData();
+            loadTableData(null);
 //            tableChuyenDi.ad;
             maXeField.setText("");
             noiDiField.setText("");
@@ -230,7 +231,7 @@ public class ListTourAdminController implements Initializable {
 //        Time time = Time.valueOf(tgKhoiHanhField.getText() + ":00");
         if (c.deleteTour(t.getMaChuyenDi()) == true) {
             Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
-            this.loadTableData();
+            this.loadTableData(null);
             maXeField.setText("");
             noiDiField.setText("");
             noiDenField.setText("");
@@ -267,7 +268,7 @@ public class ListTourAdminController implements Initializable {
         int maChuyen = Integer.parseInt(this.maChuyenDi.getText());
         if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tg)==true) {
             Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
-            this.loadTableData();
+            this.loadTableData(null);
             maXeField.setText("");
             noiDiField.setText("");
             noiDenField.setText("");

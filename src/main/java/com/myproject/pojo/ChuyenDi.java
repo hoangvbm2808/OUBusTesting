@@ -5,11 +5,9 @@
 package com.myproject.pojo;
 
 import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 import java.sql.Date;
-
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -43,11 +41,9 @@ public class ChuyenDi {
     public void setGioKhoiHanh(Time gioKhoiHanh) {
         this.gioKhoiHanh = gioKhoiHanh;
     }
-    
-    public ChuyenDi() {
-    }
 
-    public ChuyenDi( int giaVe, String diemKhoiHanh, String diemKetThuc,Date ngayKhoiHanh, Time gioKhoiHanh, int maXe) {
+    public ChuyenDi( int giaVe, String diemKhoiHanh, String diemKetThuc,
+                     Date ngayKhoiHanh, Time gioKhoiHanh, int maXe) {
         this.maXe = maXe;
         this.giaVe = giaVe;
         this.ngayKhoiHanh = ngayKhoiHanh;
@@ -71,7 +67,7 @@ public class ChuyenDi {
         this.trangThai = trangThai;
     }
 
-    
+    public ChuyenDi() {}
 
     /**
      * @return the giaVe
