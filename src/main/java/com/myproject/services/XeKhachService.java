@@ -32,5 +32,18 @@ public class XeKhachService {
         }
         return results;
     }
-    
+
+    public List<XeKhach> getTenXeKhach() throws SQLException {
+        List<XeKhach> results = new ArrayList<>();
+        try ( Connection conn = jdbcUtils.getConn()) {
+            PreparedStatement stm = conn.prepareCall("SELECT * FROM xekhach");
+
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                XeKhach xe = new XeKhach(rs.getInt("id"), rs.getString("bienSoXe"));
+                results.add(xe);
+            }
+        }
+        return results;
+    }
 }

@@ -2,10 +2,13 @@ package com.myproject.oubus;
 
 import com.myproject.conf.Utils;
 import com.myproject.pojo.ChuyenDi;
+import com.myproject.pojo.XeKhach;
 import com.myproject.services.ChuyenDiService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import com.myproject.services.XeKhachService;
 import javafx.collections.FXCollections;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -21,17 +24,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import static javafx.collections.FXCollections.*;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -45,6 +42,7 @@ import javafx.util.StringConverter;
 public class ListTourAdminController implements Initializable {
     static DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_TIME;
     static ChuyenDiService c = new ChuyenDiService();
+    static XeKhachService x = new XeKhachService();
     @FXML private TableView<ChuyenDi> tableChuyenDi;
     
 //    @FXML private TableColumn<ChuyenDi, String> maColumn;
@@ -59,9 +57,9 @@ public class ListTourAdminController implements Initializable {
     
 //    private ObservableList<ChuyenDi> tourList;
 //    
-//    @FXML private TextField maField;
-    
-    @FXML private TextField maXeField;
+    @FXML private TextField timKiem;
+
+    @FXML private ComboBox<XeKhach> cbbmaXe;
     
     @FXML private TextField noiDiField;
     
@@ -105,12 +103,23 @@ public class ListTourAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            List<XeKhach> xeKhaches = x.getTenXeKhach();
+            this.cbbmaXe.setItems(FXCollections.observableList(xeKhaches));
+
             this.loadTableColumns();
             this.loadTableData(null);
+
         } catch (SQLException ex) {
             Logger.getLogger(ListTourAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+        this.timKiem.textProperty().addListener(e -> {
+            try {
+                this.loadTableData(this.timKiem.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }    
     
     private void loadTableColumns() {
@@ -191,16 +200,7 @@ public class ListTourAdminController implements Initializable {
         System.out.print("------------ " + String.valueOf(time));
         ChuyenDi tour = new ChuyenDi(Integer.parseInt(giaVeField.getText()), 
                 noiDiField.getText(),noiDenField.getText(), Date.valueOf(ngayKhoiHanhField.getValue()),
-                time, Integer.parseInt(maXeField.getText()));
-//         tour.setMaChuyenDi(maField.getText());
-//        tour.setMaXe(Integer.parseInt(maXeField.getText()));
-//        tour.setDiemKhoiHanh(noiDiField.getText());
-//        tour.setDiemKetThuc(noiDenField.getText());
-//        tour.setNgayKhoiHanh(Date.valueOf(ngayKhoiHanhField.getValue()));
-////        LocalTime lt = LocalTime.parse(tgKhoiHanhField.getText(),formatter);
-////        tour.setGioKhoiHanh(lt);
-//        tour.getGioKhoiHanh(tgKhoiHanhField.getText());
-//        tour.setGiaVe(Integer.parseInt(giaVeField.getText()));      
+                time, cbbmaXe.getSelectionModel().getSelectedItem().getMaXe());
         try {
             c.addTour(tour);
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -208,7 +208,7 @@ public class ListTourAdminController implements Initializable {
             alert.show();
             loadTableData(null);
 //            tableChuyenDi.ad;
-            maXeField.setText("");
+            cbbmaXe.setValue(null);
             noiDiField.setText("");
             noiDenField.setText("");
             ngayKhoiHanhField.setValue(null);
@@ -223,8 +223,6 @@ public class ListTourAdminController implements Initializable {
         
     }
     
-    
-    
     //xoa chuyen di
     public void delete(ActionEvent e) throws SQLException {
         ChuyenDi t = tableChuyenDi.getSelectionModel().getSelectedItem();
@@ -232,7 +230,7 @@ public class ListTourAdminController implements Initializable {
         if (c.deleteTour(t.getMaChuyenDi()) == true) {
             Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
             this.loadTableData(null);
-            maXeField.setText("");
+            cbbmaXe.setValue(null);
             noiDiField.setText("");
             noiDenField.setText("");
             ngayKhoiHanhField.setValue(null);
@@ -242,20 +240,27 @@ public class ListTourAdminController implements Initializable {
         } else
             Utils.getBox("Delete failed", Alert.AlertType.ERROR).show();
     }
-    
-    
+
+    //lay du lieu tu table truyen xuong tung textbox
     public void getTour(MouseEvent event) {
+
         ChuyenDi t = tableChuyenDi.getSelectionModel().getSelectedItem();
-        maXeField.setText(String.valueOf(t.getMaXe()));
-        noiDiField.setText(t.getDiemKhoiHanh());
-        noiDenField.setText(t.getDiemKetThuc());
-        ngayKhoiHanhField.setValue(LocalDate.parse(String.valueOf(t.getNgayKhoiHanh())));
-        tgKhoiHanhField.setText(String.valueOf(t.getGioKhoiHanh()));
-        giaVeField.setText(String.valueOf(t.getGiaVe()));
-        maChuyenDi.setText(String.valueOf(t.getMaChuyenDi()));
+        try {
+            XeKhach xeKhach = x.getXeKhachByMaXe(t.getMaXe());
+//            public final void setPromptText();
+            cbbmaXe.setPromptText(xeKhach.getBienSoXe());
+            noiDiField.setText(t.getDiemKhoiHanh());
+            noiDenField.setText(t.getDiemKetThuc());
+            ngayKhoiHanhField.setValue(LocalDate.parse(String.valueOf(t.getNgayKhoiHanh())));
+            tgKhoiHanhField.setText(String.valueOf(t.getGioKhoiHanh()));
+            giaVeField.setText(String.valueOf(t.getGiaVe()));
+            maChuyenDi.setText(String.valueOf(t.getMaChuyenDi()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         
     }
-    
     
     //cap nhat chuyen di
     public void update(ActionEvent e) throws SQLException {
@@ -264,12 +269,12 @@ public class ListTourAdminController implements Initializable {
         String noiDen = noiDenField.getText();
         Date ngayKH = Date.valueOf(ngayKhoiHanhField.getValue());
         String tg = tgKhoiHanhField.getText();
-        int maXe = Integer.parseInt(maXeField.getText());
+//        int maXe = Integer.parseInt(maXeField.getText());
         int maChuyen = Integer.parseInt(this.maChuyenDi.getText());
         if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tg)==true) {
             Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
             this.loadTableData(null);
-            maXeField.setText("");
+            cbbmaXe.setValue(null);
             noiDiField.setText("");
             noiDenField.setText("");
             ngayKhoiHanhField.setValue(null);
@@ -279,6 +284,18 @@ public class ListTourAdminController implements Initializable {
         } else
             Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
     }
-    
+
+    //Exit
+    public void ActionLockOut(ActionEvent event) throws IOException {
+        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("Login.fxml"));
+        Scene scene = new Scene(fxmloader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("OuBus Login");
+        stage.show();
+        Button btn = (Button) event.getSource();
+        Stage stagelogin = (Stage) btn.getScene().getWindow();
+        stagelogin.close();
+    }
     
 }
