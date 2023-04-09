@@ -6,6 +6,9 @@
 
 }
 
-Label.Subject {
+Text.Subject {
     -fx-alignment: CENTER;
+    -fx-fill: red;
+    -fx-stroke: gold;
+    -fx-stroke-width: 3;
 }
