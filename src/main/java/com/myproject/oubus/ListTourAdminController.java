@@ -197,7 +197,7 @@ public class ListTourAdminController implements Initializable {
     //them chuyen di
     public void add(ActionEvent e) throws SQLException {
         Time time = Time.valueOf(tgKhoiHanhField.getText() + ":00");
-        System.out.print("------------ " + String.valueOf(time));
+//        System.out.print("------------ " + String.valueOf(time));
         ChuyenDi tour = new ChuyenDi(Integer.parseInt(giaVeField.getText()), 
                 noiDiField.getText(),noiDenField.getText(), Date.valueOf(ngayKhoiHanhField.getValue()),
                 time, cbbmaXe.getSelectionModel().getSelectedItem().getMaXe());
