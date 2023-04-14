@@ -55,7 +55,7 @@ public class NhanVienTester {
 
     @Test
     public void testAddNhanVien() throws SQLException {
-        NhanVien nvien = new NhanVien(6, "Võ Bùi Minh Hoàng", "Tổng giám đốc", Date.valueOf(LocalDate.now()), "0399987202", "056202010094", "Nha Trang", 1);
+        NhanVien nvien = new NhanVien(7, "Võ Bùi Minh Hoàng", "Tổng giám đốc", Date.valueOf(LocalDate.now()), "0399987202", "056202010094", "Nha Trang", 5);
         boolean actual = nv.addNhanVien(nvien);
         try {
 

@@ -243,5 +243,25 @@ public class ChuyenDiTester {
         }
     }
 
+    @Test
+    public void testUpdateTrangThai() {
+        boolean actual = false;
+        try {
+            actual = cd.updateTrangThaiTour(20);
+            Assertions.assertTrue(actual);
+
+            PreparedStatement stm = conn.prepareCall("SELECT * FROM chuyendi WHERE id= ?");
+            stm.setInt(1, 20);
+
+            ResultSet rs = stm.executeQuery();
+            Assertions.assertNotNull(rs.next());
+            Assertions.assertEquals(20, rs.getInt("id"));
+            Assertions.assertEquals("Đã khởi hành", rs.getString("trangThai"));
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
 
