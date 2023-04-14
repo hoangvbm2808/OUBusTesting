@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -46,11 +47,13 @@ import javafx.stage.Stage;
  * @author vbmho
  */
 public class MainStaffScreenController implements Initializable {
-    static ChuyenDiService c = new ChuyenDiService();
     static TicketService ticket = new TicketService();
     @FXML private TableView<ChuyenDi> tableChuyenDi;
     @FXML private TableView<VeXe> tableVeXe;
-    
+    @FXML private TextField noiDiField;
+    private final List<ChuyenDi> listChuyenDi = new ArrayList();
+    private static final ChuyenDiService cd = new ChuyenDiService();
+    long sec;
     /**
      * Initializes the controller class.
      */
@@ -58,11 +61,23 @@ public class MainStaffScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         try {
+            List<ChuyenDi> chuyendi = cd.getChuyenDi(null);
+            for(ChuyenDi cdi : chuyendi) {
+                this.autoChangeTrangThai(cdi.getMaChuyenDi());
+            }
             this.loadTableColumns();
-            this.loadTableData();
+            this.loadTableData(null);
+
         } catch (SQLException ex) {
             Logger.getLogger(ListTourAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.noiDiField.textProperty().addListener(e -> {
+            try {
+                this.loadTableData(this.noiDiField.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }    
     
     public void loadTableColumns() {
@@ -202,11 +217,37 @@ public class MainStaffScreenController implements Initializable {
                 colSoGheTrong, colTrangThai,colXemVe, colDatVe, colBanVe);
     }
     
-    private void loadTableData() throws SQLException {
-        List<ChuyenDi> chuyendi = c.getChuyenDi();
-        
+    private void loadTableData(String kw) throws SQLException {
+        List<ChuyenDi> chuyendi = cd.getChuyenDi(kw);
         this.tableChuyenDi.getItems().clear();
         this.tableChuyenDi.setItems(FXCollections.observableList(chuyendi));
     }
-    
+
+    public boolean autoChangeTrangThai(int id) throws SQLException{
+        boolean flag = false;
+        ChuyenDi c = cd.getChuyenDiByMaChuyenDi(id);
+
+        // Tính thời gian khởi hành và thời gian hiện tại
+        long timeKhoiHanh = (c.getNgayKhoiHanh().getTime() + c.getGioKhoiHanh().getTime());
+        long timeHienTai = System.currentTimeMillis();
+        long s =  timeKhoiHanh - timeHienTai;
+        sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
+        if (sec <= 0) {
+            cd.updateTrangThaiTour(id);
+            flag = true;
+        }
+        return flag;
+    }
+
+    public void ActionLockOut(ActionEvent event) throws IOException {
+        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("Login.fxml"));
+        Scene scene = new Scene(fxmloader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setTitle("OuBus Login");
+        stage.show();
+        Button btn = (Button) event.getSource();
+        Stage stagelogin = (Stage) btn.getScene().getWindow();
+        stagelogin.close();
+    }
 }

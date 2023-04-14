@@ -19,21 +19,6 @@ import java.util.List;
  * @author vbmho
  */
 public class AccountService {
-//    public List<Account> getAccounts() throws SQLException{
-//        List<Account> results = new ArrayList<>();
-//        try(Connection conn = jdbcUtils.getConn()){
-//            Statement stm = conn.createStatement();
-//            ResultSet rs = stm.executeQuery("SELECT * FROM account");
-//            
-//            while(rs.next()){
-//                Account a = new Account(rs.getInt("id"), rs.getString("TaiKhoan"), 
-//                        rs.getString("MatKhau"), rs.getInt("MaQuyen"));
-//                results.add(a);
-//            }
-//        }
-//        return results;
-//    }
-    
     
     public Account getAccount(String tk) throws SQLException{
         Account results = null;

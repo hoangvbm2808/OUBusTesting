@@ -116,8 +116,7 @@ public class TicketController implements Initializable {
                 Optional<ButtonType> option = alert.showAndWait();
                 if (option.get() == ButtonType.OK) {
                     this.actionQuayVe(event);
-                }  
-                this.actionQuayVe(event);
+                }
             }
             else{
                 Utils.getBox("Vé đã xuất!", Alert.AlertType.WARNING).show(); 

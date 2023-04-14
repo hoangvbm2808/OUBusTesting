@@ -47,7 +47,6 @@ public class ListTicketController implements Initializable {
     private int id;
     static TicketService tk = new TicketService();
     @FXML private TableView<VeXe> tableVeXe;
-    @FXML private Label bug;
     private final List<VeXe> listVeXe = new ArrayList();
     String pattern = "dd/MM/yyyy HH:mm:ss";
     long sec;
@@ -178,7 +177,6 @@ public class ListTicketController implements Initializable {
     public boolean autoDeleteVeXe(int id) throws SQLException{
        boolean flag = false;
        this.listVeXe.addAll(tk.getVeTheoMa(this.getId()));
-       this.bug.setText(String.valueOf(id));
        for(VeXe v : this.listVeXe){  
            
            ChuyenDi c = cd.getChuyenDiByMaChuyenDi(v.getMaChuyenDi());

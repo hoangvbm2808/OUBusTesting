@@ -42,16 +42,5 @@ public class MainAdminScreenController implements Initializable {
                                 stagelogin.close();
     }
     
-    //Exit
-    public void ActionLockOut(ActionEvent event) throws IOException {
-        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("Login.fxml"));
-                                Scene scene = new Scene(fxmloader.load());
-                                Stage stage = new Stage();
-                                stage.setScene(scene);
-                                stage.setTitle("OuBus Login");
-                                stage.show();
-                                Button btn = (Button) event.getSource();
-                                Stage stagelogin = (Stage) btn.getScene().getWindow();
-                                stagelogin.close();
-    }
+
 }

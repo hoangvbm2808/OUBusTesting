@@ -2,6 +2,9 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
-
+Text.tieuDe {
+     -fx-fill: red;
+     -fx-stroke: gold;
+     -fx-stroke-width: 3;
+     -fx-font-size: 30;
 }

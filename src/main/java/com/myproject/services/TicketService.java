@@ -6,11 +6,8 @@ package com.myproject.services;
 
 import com.myproject.conf.jdbcUtils;
 import com.myproject.pojo.VeXe;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +31,8 @@ public class TicketService {
                         rs.getInt("maNhanVien"), rs.getInt("maDoanhThu"), rs.getString("diemDon"));
                     vexe.add(ve);
             }
+        } catch(SQLException ex) {
+            return null;
         }
         return vexe;
     }
@@ -52,11 +51,12 @@ public class TicketService {
                         rs.getInt("maNhanVien"), rs.getInt("maDoanhThu"), rs.getString("diemDon"));
                     
             }
+        } catch (SQLException ex) {
+            ex.getMessage();
         }
         return vexe;
     }
-    
-    
+
     public void exportTicket(VeXe ve) throws SQLException {
         try (Connection conn = jdbcUtils.getConn()) {
             conn.setAutoCommit(false);
@@ -85,6 +85,21 @@ public class TicketService {
         
             conn.commit();
         }
+    }
+
+    public boolean deleteListTicket(int id) throws SQLException {
+        List<VeXe> dsve = getVeTheoMa(id);
+        try (Connection conn = jdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+
+            for (VeXe ve : dsve) {
+                PreparedStatement stm = conn.prepareCall("DELETE FROM vexe WHERE maCHuyenDi = ?");
+                stm.setInt(1, ve.getMaChuyenDi());
+                stm.executeUpdate();
+            }
+            conn.commit();
+        }
+        return false;
     }
 }
 

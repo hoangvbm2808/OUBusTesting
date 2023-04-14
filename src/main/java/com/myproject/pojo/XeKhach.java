@@ -23,7 +23,12 @@ public class XeKhach {
         this.soGhe = soGhe;
         this.maNhanVien = MaNhanVien;
     }
-    
+
+    public XeKhach(int maXe, String bienSoXe) {
+        this.maXe = maXe;
+        this.bienSoXe = bienSoXe;
+    }
+
     /**
      * @return the maXe
      */
@@ -68,7 +73,7 @@ public class XeKhach {
     
     @Override
     public String toString(){
-        return String.valueOf(this.maXe);
+        return String.valueOf(this.bienSoXe);
     }
 
     /**
