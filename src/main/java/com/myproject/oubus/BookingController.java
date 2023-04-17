@@ -151,9 +151,10 @@ public class BookingController implements Initializable {
     
     public void bookingHandler(ActionEvent event) {
         if (sec > 60) {
-            if (this.txtHoVaTen.getText().length() != 0 && this.txtSDT.getText().length() != 0 && this.txtDiemDon.getText().length() != 0) {
+            RadioButton selectedRadioButton = (RadioButton) Ghe.getSelectedToggle();
+            if (this.txtHoVaTen.getText().length() != 0 && this.txtSDT.getText().length() != 0 && this.txtDiemDon.getText().length() != 0
+                    && Ghe.getSelectedToggle() != null) {
                 if (bk.checkSDT(this.txtSDT.getText())) {
-                    RadioButton selectedRadioButton = (RadioButton) Ghe.getSelectedToggle();
                     String viTriGhe = selectedRadioButton.getText();
                     VeXe v = new VeXe(this.txtHoVaTen.getText(), Date.valueOf(LocalDate.now()), this.txtSDT.getText(), Integer.parseInt(this.maChuyenDi.getText()), viTriGhe, "Đã đặt", mnv, 1, this.txtDiemDon.getText());
                     try {

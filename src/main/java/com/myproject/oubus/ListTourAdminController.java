@@ -251,18 +251,24 @@ public class ListTourAdminController implements Initializable {
         ChuyenDi t = tableChuyenDi.getSelectionModel().getSelectedItem();
 //        Time time = Time.valueOf(tgKhoiHanhField.getText() + ":00");
 //        Utils.getBox(maChuyenDi.getText(), Alert.AlertType.INFORMATION).show();
-        if (c.deleteTour(Integer.parseInt(maChuyenDi.getText())) == true) {
-            Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
-            this.loadTableData(null);
-            cbbmaXe.setValue(null);
-            noiDiField.setText("");
-            noiDenField.setText("");
-            ngayKhoiHanhField.setValue(null);
-            tgKhoiHanhField.setText("");
-            giaVeField.setText("");
-            maChuyenDi.setText("");
-        } else
-            Utils.getBox("Delete failed", Alert.AlertType.ERROR).show();
+        if (maChuyenDi.getText() != null && cbbmaXe.getSelectionModel().getSelectedItem() != null && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
+                && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0) {
+            if (c.deleteTour(Integer.parseInt(maChuyenDi.getText())) == true) {
+                Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
+                this.loadTableData(null);
+                cbbmaXe.setValue(null);
+                noiDiField.setText("");
+                noiDenField.setText("");
+                ngayKhoiHanhField.setValue(null);
+                tgKhoiHanhField.setText("");
+                giaVeField.setText("");
+                maChuyenDi.setText("");
+            } else
+                Utils.getBox("Delete failed", Alert.AlertType.ERROR).show();
+        }
+        else {
+            Utils.getBox("Vui lòng nhập đầy đủ thông tin !", Alert.AlertType.WARNING).show();
+        }
     }
 
     //lay du lieu tu table truyen xuong tung textbox
@@ -288,25 +294,32 @@ public class ListTourAdminController implements Initializable {
     
     //cap nhat chuyen di
     public void update(ActionEvent e) throws SQLException {
-        int giaVe = Integer.parseInt(giaVeField.getText());
-        String noiDi = noiDiField.getText();
-        String noiDen = noiDenField.getText();
-        Date ngayKH = Date.valueOf(ngayKhoiHanhField.getValue());
-        String tg = tgKhoiHanhField.getText();
+        if (maChuyenDi.getText() != null && cbbmaXe.getSelectionModel().getSelectedItem() != null && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
+                && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0)
+        {
+                int giaVe = Integer.parseInt(giaVeField.getText());
+                String noiDi = noiDiField.getText();
+                String noiDen = noiDenField.getText();
+                Date ngayKH = Date.valueOf(ngayKhoiHanhField.getValue());
+                String tg = tgKhoiHanhField.getText();
 //        int maXe = Integer.parseInt(maXeField.getText());
-        int maChuyen = Integer.parseInt(this.maChuyenDi.getText());
-        if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tg)==true) {
-            Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
-            this.loadTableData(null);
-            cbbmaXe.setValue(null);
-            noiDiField.setText("");
-            noiDenField.setText("");
-            ngayKhoiHanhField.setValue(null);
-            tgKhoiHanhField.setText("");
-            giaVeField.setText("");
-            maChuyenDi.setText("");
-        } else
-            Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+                int maChuyen = Integer.parseInt(this.maChuyenDi.getText());
+                if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tg) == true) {
+                    Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
+                    this.loadTableData(null);
+                    cbbmaXe.setValue(null);
+                    noiDiField.setText("");
+                    noiDenField.setText("");
+                    ngayKhoiHanhField.setValue(null);
+                    tgKhoiHanhField.setText("");
+                    giaVeField.setText("");
+                    maChuyenDi.setText("");
+                } else
+                    Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+            }
+        else {
+            Utils.getBox("Vui lòng nhập đầy đủ thông tin !", Alert.AlertType.WARNING).show();
+        }
     }
 
 
