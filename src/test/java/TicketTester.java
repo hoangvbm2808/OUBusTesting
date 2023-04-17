@@ -1,5 +1,6 @@
 import com.myproject.conf.jdbcUtils;
 import com.myproject.pojo.VeXe;
+import com.myproject.services.BookingService;
 import com.myproject.services.ChuyenDiService;
 import com.myproject.services.TicketService;
 import org.junit.jupiter.api.AfterAll;
@@ -7,10 +8,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,6 +18,7 @@ import java.util.logging.Logger;
 public class TicketTester {
     private static Connection conn;
     private static TicketService ticket;
+    private static BookingService bk;
 
     @BeforeAll
     public static void beforeAll() {
@@ -29,6 +29,7 @@ public class TicketTester {
         }
 
         ticket = new TicketService();
+        bk = new BookingService();
     }
 
     @AfterAll
@@ -47,8 +48,8 @@ public class TicketTester {
     public void checkGetVeTheoMa() {
         List<VeXe> dsve = new ArrayList<>();
         try {
-            dsve = ticket.getVeTheoMa(16);
-            Assertions.assertEquals(3,dsve.size());
+            dsve = ticket.getVeTheoMa(16, null);
+            Assertions.assertEquals(2,dsve.size());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -59,7 +60,7 @@ public class TicketTester {
     public void checkGetVeTheoMa2() {
         List<VeXe> dsve = new ArrayList<>();
         try {
-            dsve = ticket.getVeTheoMa(22);
+            dsve = ticket.getVeTheoMa(22, null);
             Assertions.assertEquals(0, dsve.size());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,7 +72,7 @@ public class TicketTester {
     public void checkGetVeTheoMa3() {
         List<VeXe> dsve = new ArrayList<>();
         try {
-            dsve = ticket.getVeTheoMa(700);
+            dsve = ticket.getVeTheoMa(700, null);
             Assertions.assertEquals(0,dsve.size());
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,7 +102,6 @@ public class TicketTester {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     //Co ma ve de xuat
@@ -136,12 +136,62 @@ public class TicketTester {
         Assertions.assertThrows(NullPointerException.class, () -> ticket.exportTicket(ticket.getVeTheoMaVe(id)));
     }
 
+    //Xoa ma ve da co trong ds ve
     @Test
     public void checkDeleteTicket() {
-        String id = "6";
+        VeXe ve = new VeXe("6","Minh Hoang", Date.valueOf(LocalDate.now()) , "0399987202",
+                100, "B02", "Đã đặt",
+                2, 1, "Nha Trang");
         try {
-             ticket.deleteTicket(ticket.getVeTheoMaVe(id));
+            bk.addVeXe(ve);
+            String id = "6";
+            try {
+                ticket.deleteTicket(ticket.getVeTheoMaVe(id));
+                VeXe veXe = ticket.getVeTheoMaVe(id);
+                Assertions.assertNull(veXe);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    //Xoa ma ve khong co trong ds ve
+    @Test
+    public void checkDeleteTicket2() {
+        String id = "6";
+        Assertions.assertThrows(NullPointerException.class, ()->ticket.deleteTicket(ticket.getVeTheoMaVe(id)));
+    }
+
+    //Xoa danh sach ve cua 1 chuyen xe
+    @Test
+    public void checkDeleteListTicket() {
+        boolean actual = false;
+        int id = 53;
+        try {
+            actual = ticket.deleteListTicket(53);
+            Assertions.assertTrue(actual);
+
+            List<VeXe> dsve = new ArrayList<>();
+            VeXe vexe = new VeXe();
+            PreparedStatement stm = conn.prepareCall("SELECT * FROM vexe");
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                vexe = new VeXe( rs.getString("id"),rs.getString("tenKhachHang"),
+                        rs.getDate("ngayDat"), rs.getString("sdt"),
+                        rs.getInt("maChuyenDi"), rs.getString("viTriGhe"),
+                        rs.getString("trangThai"),
+                        rs.getInt("maNhanVien"), rs.getInt("maDoanhThu"), rs.getString("diemDon"));
+                dsve.add(vexe);
+            }
+            for (VeXe ve : dsve){
+                if (ve.getMaChuyenDi() == id) {
+                    actual = false;
+                }
+            }
+            Assertions.assertTrue(actual);
 
         } catch (SQLException e) {
             e.printStackTrace();

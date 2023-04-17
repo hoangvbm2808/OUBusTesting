@@ -132,7 +132,7 @@ public class BookingController implements Initializable {
         
         //Lấy danh sách vé đã đặt
         try {
-            this.listDaDat = tk.getVeTheoMa(Integer.parseInt(this.maChuyenDi.getText()));
+            this.listDaDat = tk.getVeTheoMa(Integer.parseInt(this.maChuyenDi.getText()), null);
         } catch (SQLException ex) {
             Logger.getLogger(BookingController.class.getName()).log(Level.SEVERE, null, ex);
         }

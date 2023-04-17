@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="512.0" stylesheets="@../../../css/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.LoginController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="512.0" style="-fx-background-color: lightblue;" stylesheets="@../../../css/Login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.LoginController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="365.5999359130859" minWidth="10.0" prefWidth="171.20003662109377" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.6000274658203" minWidth="10.0" prefWidth="341.5999633789062" />
@@ -31,12 +31,12 @@
       </Text>
       <Label alignment="CENTER" prefHeight="27.0" prefWidth="229.0" text="Tên đăng nhập" GridPane.rowIndex="1">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <Label alignment="CENTER" prefHeight="27.0" prefWidth="226.0" text="Mật khẩu" GridPane.rowIndex="2">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <TextField fx:id="txtTaiKhoan" prefHeight="35.0" prefWidth="330.0" promptText="Tên đăng nhập" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -48,12 +48,12 @@
          <children>
             <Button mnemonicParsing="false" onAction="#loginHandler" prefHeight="40.0" prefWidth="114.0" text="Đăng nhập">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Button>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#ActionClose" prefHeight="40.0" prefWidth="114.0" text="Thoát">
                <font>
-                  <Font size="18.0" />
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Button>
          </children>

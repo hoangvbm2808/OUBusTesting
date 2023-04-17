@@ -16,13 +16,18 @@ import java.util.List;
  * @author Thanh
  */
 public class TicketService {
-    public List<VeXe> getVeTheoMa(int id) throws SQLException {
+    public List<VeXe> getVeTheoMa(int id, String kw) throws SQLException {
         List<VeXe> vexe = new ArrayList<>();
         try (Connection conn = jdbcUtils.getConn()) {
-            String sql = "SELECT * FROM vexe WHERE maChuyenDi=?";
+            String sql = "SELECT * FROM vexe WHERE maChuyenDi = ?";
+            if (kw != null && !kw.isEmpty())
+                sql += " and tenKhachHang like concat('%', ?, '%')";
             PreparedStatement stm = conn.prepareCall(sql);
             stm.setInt(1, id);
+            if (kw != null && !kw.isEmpty())
+                stm.setString(2, kw);
             ResultSet rs = stm.executeQuery();
+
             while (rs.next()) {
                 VeXe ve = new VeXe( rs.getString("id"),rs.getString("tenKhachHang"), 
                         rs.getDate("ngayDat"), rs.getString("sdt"),
@@ -31,12 +36,13 @@ public class TicketService {
                         rs.getInt("maNhanVien"), rs.getInt("maDoanhThu"), rs.getString("diemDon"));
                     vexe.add(ve);
             }
+
         } catch(SQLException ex) {
             return null;
         }
         return vexe;
     }
-    
+
     public VeXe getVeTheoMaVe(String id) throws SQLException {
         VeXe vexe = null;
         try (Connection conn = jdbcUtils.getConn()) {
@@ -84,11 +90,13 @@ public class TicketService {
             stm2.executeUpdate();
         
             conn.commit();
+        } catch (SQLException e) {
+            e.getMessage();
         }
     }
 
     public boolean deleteListTicket(int id) throws SQLException {
-        List<VeXe> dsve = getVeTheoMa(id);
+        List<VeXe> dsve = getVeTheoMa(id,null);
         try (Connection conn = jdbcUtils.getConn()) {
             conn.setAutoCommit(false);
 
@@ -98,8 +106,10 @@ public class TicketService {
                 stm.executeUpdate();
             }
             conn.commit();
+        } catch (SQLException e) {
+            e.getMessage();
         }
-        return false;
+        return true;
     }
 }
 
