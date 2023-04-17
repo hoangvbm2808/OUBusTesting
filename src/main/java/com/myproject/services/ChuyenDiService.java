@@ -7,6 +7,7 @@ package com.myproject.services;
 import com.myproject.conf.jdbcUtils;
 import com.myproject.pojo.ChuyenDi;
 import com.myproject.pojo.VeXe;
+import javafx.scene.control.Alert;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -24,17 +25,41 @@ import java.util.List;
 public class ChuyenDiService {
     TicketService ticketService = new TicketService();
 
-    public List<ChuyenDi> getChuyenDi(String diemKH) throws SQLException {
+    public List<ChuyenDi> getChuyenDi(String diemKH, String diemKT) throws SQLException {
         List<ChuyenDi> chuyendi = new ArrayList<>();
         try (Connection conn = jdbcUtils.getConn()) {
             String sql = "SELECT * FROM chuyendi";
-            if (diemKH != null && !diemKH.isEmpty())
-                sql += " WHERE diemKhoiHanh like concat('%', ?, '%')";
+//            if (diemKH != null && !diemKH.isEmpty())
+//                sql += " WHERE diemKhoiHanh like concat('%', ?, '%')";
+//            if (diemKT != null && !diemKT.isEmpty())
+//                sql += " AND diemKetThuc like concat('%', ?, '%')";
+//            PreparedStatement stm = conn.prepareCall(sql);
+//            if (diemKH != null && !diemKH.isEmpty())
+//                stm.setString(1, diemKH);
+//            if (diemKT != null && !diemKT.isEmpty())
+//                stm.setString(2, diemKT);
             PreparedStatement stm = conn.prepareCall(sql);
-            if (diemKH != null && !diemKH.isEmpty())
+            if (diemKH != null  && diemKT != null) {
+                sql += " WHERE diemKhoiHanh like concat('%', ?, '%') AND diemKetThuc like concat('%', ?, '%')";
+                stm = conn.prepareCall(sql);
                 stm.setString(1, diemKH);
+                stm.setString(2, diemKT);
+            }
+            else if (diemKH == null  && diemKT != null) {
+                sql += " WHERE diemKetThuc like concat('%', ?, '%')";
+                stm = conn.prepareCall(sql);
+                stm.setString(1, diemKT);
+            }
+            else if (diemKH != null && diemKT == null ) {
+                sql += " WHERE diemKhoiHanh like concat('%', ?, '%')";
+                stm = conn.prepareCall(sql);
+                stm.setString(1, diemKH);
+            }
+            else if (diemKH == null && diemKT == null) {
+                stm = conn.prepareCall(sql);
+            }
+            
             ResultSet rs = stm.executeQuery();
-
             while (rs.next()) {
                 ChuyenDi c = new ChuyenDi(rs.getInt("id"), rs.getInt("maXe"), rs.getInt("giaVe"),
                         rs.getDate("ngayKhoiHanh"), rs.getTime("gioKhoiHanh"),
@@ -110,14 +135,14 @@ public class ChuyenDiService {
         }
     }
 
-
     public boolean deleteTour(int id) throws SQLException {
         try (Connection conn = jdbcUtils.getConn()) {
             ticketService.deleteListTicket(id);
 
-            String sql = "DELETE FROM chuyendi WHERE id=?";
+            String sql = "DELETE FROM chuyendi WHERE id= ?";
             PreparedStatement stm = conn.prepareCall(sql);
             stm.setInt(1, id);
+            stm.executeUpdate();
 
             return true;
         }
@@ -165,6 +190,74 @@ public class ChuyenDiService {
         } catch (SQLException ex) {
             return false;
         }
+    }
+
+    public String checkDinhDangTime(String tgKH) {
+        String gio, phut;
+        //Kiem tra gio theo dinh danh hh:mm va kiem tra chuoi
+        if (tgKH.length() == 5) {
+            int viTri = tgKH.indexOf(":");
+            if (viTri != -1) {
+                gio = tgKH.substring(0,viTri);
+                phut = tgKH.substring(viTri + 1, 5);
+                return gio + ":" + phut;
+            }
+            else {
+                return " ";
+            }
+        }
+        else if (tgKH.length() == 4) {
+            int viTri = tgKH.indexOf(":");
+            if (viTri != -1) {
+                if (tgKH.substring(0,viTri).length() < 2) {
+                    gio = "0" + tgKH.substring(0,viTri);
+                    phut = tgKH.substring(viTri + 1, 4);
+                    return gio + ":" + phut;
+                }
+                else if (tgKH.substring(0,viTri).length() == 2) {
+                    gio = tgKH.substring(0,viTri);
+                    //phut = tgKH.substring(viTri, 4);
+                    phut = "0" + tgKH.substring(viTri + 1, 4);
+                    return gio + ":" + phut;
+                }
+            }
+            else {
+                return " ";
+            }
+        }
+        else if (tgKH.length() == 3) {
+            int viTri = tgKH.indexOf(":");
+            if (viTri != -1) {
+                if (tgKH.substring(0,viTri).length() == 1 && tgKH.substring(viTri + 1, 3).length() == 1) {
+                    gio = "0" + tgKH.substring(0,viTri);
+                    phut = "0" + tgKH.substring(viTri + 1, 3);
+                    return gio + ":" + phut;
+                }
+            }
+            else {
+                return " ";
+            }
+        }
+        else if (tgKH.length() == 2) {
+            return tgKH + ":00";
+        }
+        else if (tgKH.length() == 1) {
+            return "0" + tgKH + ":00";
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Add time failed");
+            alert.show();
+            return "";
+        }
+        return " ";
+    }
+
+    public boolean checkTimeKieuSo(String sdt){
+        Integer b = Integer.parseInt(sdt.substring(0,1));
+        if(sdt.length() < 6  && b % 1 == 0)
+            return true;
+        return false;
     }
 
 }

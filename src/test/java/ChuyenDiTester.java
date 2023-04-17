@@ -54,7 +54,7 @@ public class ChuyenDiTester {
     //Truyen null
     @Test
     public void checkTimKiem() throws SQLException {
-        List<ChuyenDi> ds = cd.getChuyenDi(null);
+        List<ChuyenDi> ds = cd.getChuyenDi(null, null);
         List<ChuyenDi> dscd = new ArrayList<>();
         try (Connection conn = jdbcUtils.getConn()) {
             String sql = "SELECT * FROM chuyendi";
@@ -74,27 +74,27 @@ public class ChuyenDiTester {
     //Truyen du lieu co trong ds
     @Test
     public void checkTimKiem2() throws SQLException {
-        List<ChuyenDi> ds = cd.getChuyenDi("HCM");
+        List<ChuyenDi> ds = cd.getChuyenDi("HCM", null);
         Assertions.assertEquals(1, ds.size());
     }
 
     //Truyen du lieu so
     @Test
     public void checkTimKiem3() throws SQLException {
-        List<ChuyenDi> ds = cd.getChuyenDi("1");
+        List<ChuyenDi> ds = cd.getChuyenDi("1", null);
         Assertions.assertEquals(0, ds.size());
     }
 
     //Truyen ki tu dac biet
     @Test
     public void checkTimKiem4() throws SQLException {
-        List<ChuyenDi> ds = cd.getChuyenDi("@TPHCM");
+        List<ChuyenDi> ds = cd.getChuyenDi("@TPHCM", null);
         Assertions.assertEquals(0, ds.size());
     }
 
     @Test
     public void checkTimKiem5() throws SQLException {
-        List<ChuyenDi> ds = cd.getChuyenDi("Thanh pho Ho Chi Minh");
+        List<ChuyenDi> ds = cd.getChuyenDi("Thanh pho Ho Chi Minh", null);
         Assertions.assertEquals(0, ds.size());
     }
 

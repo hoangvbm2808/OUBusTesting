@@ -51,6 +51,7 @@ public class MainStaffScreenController implements Initializable {
     @FXML private TableView<ChuyenDi> tableChuyenDi;
     @FXML private TableView<VeXe> tableVeXe;
     @FXML private TextField noiDiField;
+    @FXML private TextField noiDenField;
     private final List<ChuyenDi> listChuyenDi = new ArrayList();
     private static final ChuyenDiService cd = new ChuyenDiService();
     long sec;
@@ -61,19 +62,27 @@ public class MainStaffScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         try {
-            List<ChuyenDi> chuyendi = cd.getChuyenDi(null);
+            List<ChuyenDi> chuyendi = cd.getChuyenDi(null, null);
             for(ChuyenDi cdi : chuyendi) {
                 this.autoChangeTrangThai(cdi.getMaChuyenDi());
             }
             this.loadTableColumns();
-            this.loadTableData(null);
+            this.loadTableData(null, null);
 
         } catch (SQLException ex) {
             Logger.getLogger(ListTourAdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.noiDiField.textProperty().addListener(e -> {
             try {
-                this.loadTableData(this.noiDiField.getText());
+                this.loadTableData(this.noiDiField.getText(), this.noiDenField.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
+        this.noiDenField.textProperty().addListener(e -> {
+            try {
+                this.loadTableData(this.noiDiField.getText(), this.noiDenField.getText());
             } catch (SQLException ex) {
                 Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -136,7 +145,7 @@ public class MainStaffScreenController implements Initializable {
                         Scene scene = new Scene(ticketView);
                         ListTicketController controller = loader.getController();
                         int id = q.getMaChuyenDi();
-                        controller.loadTableDataTicket(id);
+                        controller.loadTableDataTicket(id, null);
                         stage.setScene(scene);
                     } catch (SQLException ex) {
                         Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
@@ -217,8 +226,8 @@ public class MainStaffScreenController implements Initializable {
                 colSoGheTrong, colTrangThai,colXemVe, colDatVe, colBanVe);
     }
     
-    private void loadTableData(String kw) throws SQLException {
-        List<ChuyenDi> chuyendi = cd.getChuyenDi(kw);
+    private void loadTableData(String kw, String kw1) throws SQLException {
+        List<ChuyenDi> chuyendi = cd.getChuyenDi(kw, kw1);
         this.tableChuyenDi.getItems().clear();
         this.tableChuyenDi.setItems(FXCollections.observableList(chuyendi));
     }

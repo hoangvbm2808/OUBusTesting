@@ -29,12 +29,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -47,6 +42,7 @@ public class ListTicketController implements Initializable {
     private int id;
     static TicketService tk = new TicketService();
     @FXML private TableView<VeXe> tableVeXe;
+    @FXML private TextField txtTimKiem;
     private final List<VeXe> listVeXe = new ArrayList();
     String pattern = "dd/MM/yyyy HH:mm:ss";
     long sec;
@@ -61,13 +57,21 @@ public class ListTicketController implements Initializable {
             // TODO
             loadTableTicketColumns();
         try {
-            loadTableDataTicket(this.getId());
+            loadTableDataTicket(this.getId(), null);
         } catch (SQLException ex) {
             Logger.getLogger(ListTicketController.class.getName()).log(Level.SEVERE, null, ex);
             Utils.getBox( ex.getMessage(), Alert.AlertType.WARNING).show();
             
         }
-        
+
+        this.txtTimKiem.textProperty().addListener(e -> {
+            try {
+                this.loadTableDataTicket(this.getId(), this.txtTimKiem.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(ListTicketController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
         
     }    
     
@@ -140,12 +144,13 @@ public class ListTicketController implements Initializable {
         tableVeXe.getColumns().addAll(colTen, colSdt, colNgayDat, colViTriGhe, colTrangThai, colChiTiet);
     }
     
-    public void loadTableDataTicket(int id) throws SQLException {
+    public void loadTableDataTicket(int id, String kw) throws SQLException {
         this.setId(id);
         if(autoDeleteVeXe(this.id)){
                 Utils.getBox("Hệ thống đã tự hủy các vé chưa được xuất", Alert.AlertType.WARNING).show();
         }
-        List<VeXe> ve = ticket.getVeTheoMa(id);
+        List<VeXe> ve = ticket.getVeTheoMa(id, kw);
+        this.tableVeXe.getItems().clear();
         this.tableVeXe.setItems(FXCollections.observableList(ve));
     }
 
@@ -176,7 +181,7 @@ public class ListTicketController implements Initializable {
     
     public boolean autoDeleteVeXe(int id) throws SQLException{
        boolean flag = false;
-       this.listVeXe.addAll(tk.getVeTheoMa(this.getId()));
+       this.listVeXe.addAll(tk.getVeTheoMa(this.getId(),null));
        for(VeXe v : this.listVeXe){  
            
            ChuyenDi c = cd.getChuyenDiByMaChuyenDi(v.getMaChuyenDi());
