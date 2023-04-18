@@ -98,6 +98,7 @@ public class ChuyenDiTester {
         Assertions.assertEquals(0, ds.size());
     }
 
+    //chuyen theo ma
     @Test
     public void checkMaChuyenDi() throws Exception {
         Assertions.assertNull(cd.getChuyenDiByMaChuyenDi(-1));
@@ -109,6 +110,7 @@ public class ChuyenDiTester {
         Assertions.assertEquals(27, c.getMaChuyenDi());
     }
 
+    //them chuyen
     @Test
     public void checkAddChuyenDi() throws ParseException {
         ChuyenDi c = new ChuyenDi(200, 1, 123000,
@@ -182,7 +184,6 @@ public class ChuyenDiTester {
         }
     }
 
-
     //    truyen du lieu xoa
     @Test
     public void checkDeleteChuyenDi() {
@@ -223,6 +224,7 @@ public class ChuyenDiTester {
         }
     }
 
+    //update chuyen
     @Test
     public void checkUpdateChuyenDi() {
         boolean actual = false;
@@ -243,6 +245,7 @@ public class ChuyenDiTester {
         }
     }
 
+    //update trang thai chuyen
     @Test
     public void testUpdateTrangThai() {
         boolean actual = false;

@@ -21,6 +21,7 @@ public class BookingService {
             return false;
         return true;
     }
+
     public boolean checkSDT(String sdt){
         String a = sdt.substring(0, 1);
         try {

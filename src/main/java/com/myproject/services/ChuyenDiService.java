@@ -253,10 +253,10 @@ public class ChuyenDiService {
         return " ";
     }
 
-    public boolean checkTimeKieuSo(String sdt) {
+    public boolean checkTimeKieuSo(String time) {
         try {
-            Integer b = Integer.parseInt(sdt.substring(0, 1));
-            if (sdt.length() < 6 && b % 1 == 0)
+            Integer b = Integer.parseInt(time.substring(0, 1));
+            if (time.length() < 6 && b % 1 == 0)
                 return true;
             return false;
         }
@@ -265,4 +265,16 @@ public class ChuyenDiService {
         }
     }
 
+    public boolean checkGia(String gia) {
+        try {
+            String g = String.valueOf(gia);
+            Integer b = Integer.parseInt(g.substring(0, 1));
+            if (g.length() > 0 && g.length() < 10  && b % 1 == 0)
+                return true;
+            return false;
+        }
+        catch (NumberFormatException ex) {
+            return false;
+        }
+    }
 }
