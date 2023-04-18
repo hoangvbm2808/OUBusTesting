@@ -81,7 +81,7 @@ public class TicketTester {
 
     //Co ve
     @Test
-    public void checkGetVeTheoMaVe() {
+    public void checkGetVeTheoMaVeXuatDS() {
         String id = "12f0c751-ac21-4f90-bc29-31ebf6373248";
         try {
             VeXe vx = ticket.getVeTheoMaVe(id);
@@ -94,7 +94,7 @@ public class TicketTester {
 
     //K co ve
     @Test
-    public void checkGetVeTheoMaVe2() {
+    public void checkGetVeTheoMaVeXuatDS2() {
         String id = "12f0c751-ac21-4f9031ebf6373248";
         try {
             VeXe vx = ticket.getVeTheoMaVe(id);

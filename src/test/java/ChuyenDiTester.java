@@ -229,7 +229,7 @@ public class ChuyenDiTester {
     public void checkUpdateChuyenDi() {
         boolean actual = false;
         try {
-            actual = cd.updateTour(61, 100000, "Hue", "Sai Gon", Date.valueOf(LocalDate.now()), String.valueOf(Time.valueOf("17:00" + ":00")));
+            actual = cd.updateTour(1, 61, 100000, "Hue", "Sai Gon", Date.valueOf(LocalDate.now()), String.valueOf(Time.valueOf("17:00" + ":00")));
             Assertions.assertTrue(actual);
 
             PreparedStatement stm = conn.prepareCall("SELECT * FROM chuyendi WHERE id= ?");

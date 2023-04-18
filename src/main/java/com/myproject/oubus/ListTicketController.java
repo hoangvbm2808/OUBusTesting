@@ -53,7 +53,6 @@ public class ListTicketController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
             // TODO
             loadTableTicketColumns();
         try {
@@ -71,8 +70,6 @@ public class ListTicketController implements Initializable {
                 Logger.getLogger(ListTicketController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-
-        
     }    
     
     public void loadTableTicketColumns() {

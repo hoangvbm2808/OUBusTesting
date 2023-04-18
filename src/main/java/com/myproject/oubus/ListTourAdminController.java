@@ -60,19 +60,12 @@ public class ListTourAdminController implements Initializable {
 //    private ObservableList<ChuyenDi> tourList;
 //    
     @FXML private TextField timKiem;
-
     @FXML private ComboBox<XeKhach> cbbmaXe;
-    
     @FXML private TextField noiDiField;
-    
     @FXML private TextField noiDenField;
-    
     @FXML private DatePicker ngayKhoiHanhField;
-    
     @FXML private TextField tgKhoiHanhField;
-    
-    @FXML private TextField giaVeField; 
-    
+    @FXML private TextField giaVeField;
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     
     @FXML private Text maChuyenDi;
@@ -304,6 +297,7 @@ public class ListTourAdminController implements Initializable {
     
     //cap nhat chuyen di
     public void update(ActionEvent e) throws SQLException {
+                int maXe = cbbmaXe.getSelectionModel().getSelectedItem().getMaXe();
                 String giaVe = giaVeField.getText();
                 String noiDi = noiDiField.getText();
                 String noiDen = noiDenField.getText();
@@ -321,7 +315,7 @@ public class ListTourAdminController implements Initializable {
 //                    Time time = Time.valueOf(tgKH + ":00");
                         tgKH = tgKH + ":00";
                         if (c.checkGia(giaVe)) {
-                            if (c.updateTour(maChuyen, Integer.parseInt(giaVe), noiDi, noiDen, ngayKH, tgKH) == true) {
+                            if (c.updateTour(maXe, maChuyen, Integer.parseInt(giaVe), noiDi, noiDen, ngayKH, tgKH) == true) {
                                 Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
                                 this.loadTableData(null);
                                 cbbmaXe.setValue(null);

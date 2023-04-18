@@ -99,8 +99,11 @@ public class SellTicketController implements Initializable {
     private final List<RadioButton> listConTrong = new ArrayList<>();
     private List<VeXe> listDaDat = new ArrayList<>();
     long sec= 0 ;
-  
-   
+    String maVe;
+
+    public void setId(String id) {
+        this.maVe = id;
+    }
     
     private static final ChuyenDiService cd = new ChuyenDiService();
     private static final XeKhachService xk = new XeKhachService();

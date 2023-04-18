@@ -28,15 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -52,9 +44,23 @@ public class MainStaffScreenController implements Initializable {
     @FXML private TableView<VeXe> tableVeXe;
     @FXML private TextField noiDiField;
     @FXML private TextField noiDenField;
+    @FXML private Label lbMaVe;
     private final List<ChuyenDi> listChuyenDi = new ArrayList();
     private static final ChuyenDiService cd = new ChuyenDiService();
     long sec;
+    String maVe;
+    int maChuyen;
+    private VeXe ve;
+
+    public void setId(String id) {
+        this.maVe = id;
+//        lbMaVe.setText(maVe);
+    }
+
+    public void setMaChuyen(int maChuyen) {
+        this.maChuyen = maChuyen;
+    }
+
     /**
      * Initializes the controller class.
      */
@@ -87,6 +93,15 @@ public class MainStaffScreenController implements Initializable {
                 Logger.getLogger(MainStaffScreenController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+
+        {
+//            try {
+//                    ve = ticket.getVeTheoMaVe(maVe);
+
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+        }
     }    
     
     public void loadTableColumns() {
@@ -174,6 +189,8 @@ public class MainStaffScreenController implements Initializable {
                             Parent bookingView = loader.load();
                             Scene scene = new Scene(bookingView);
                             BookingController controller = loader.getController();
+                            controller.setId(this.maVe);
+                            controller.setMaChuyen(this.maChuyen);
                             int id = q.getMaChuyenDi();
                             controller.loadBookingForm(id);
                             stage.setScene(scene);

@@ -69,8 +69,7 @@ public class ChangeTicketController {
     @FXML private RadioButton B08;
     @FXML private RadioButton B09;
     @FXML private RadioButton B10;
-    @FXML
-    ToggleGroup Ghe;
+    @FXML ToggleGroup Ghe;
     private final List<RadioButton> listConTrong = new ArrayList<>();
     private List<VeXe> listDaDat = new ArrayList<>();
     long sec= 0 ;

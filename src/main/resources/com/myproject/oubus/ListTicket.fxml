@@ -2,14 +2,14 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="875.0" stylesheets="@../../../css/ListTicket.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.ListTicketController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="875.0" style="-fx-background-color: lightblue;" stylesheets="@../../../css/ListTicket.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.ListTicketController">
    <children>
       <HBox prefHeight="96.0" prefWidth="875.0">
          <children>
@@ -17,35 +17,39 @@
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <TextField fx:id="txtTimKiem" prefHeight="30.0" prefWidth="242.0" promptText="Nhập...">
+                        <TextField fx:id="txtTimKiem" prefHeight="38.0" prefWidth="278.0" promptText="Nhập tên khách hàng cần tìm ...">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="71.0" styleClass="ButtonSearch" text="Tìm" textFill="WHITE">
                            <font>
-                              <Font name="Tahoma Bold" size="14.0" />
+                              <Font size="17.0" />
                            </font>
-                           <HBox.margin>
-                              <Insets left="10.0" />
-                           </HBox.margin>
-                        </Button>
+                        </TextField>
                      </children>
                   </HBox>
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="44.0" prefWidth="178.0">
                <children>
-                  <Label prefHeight="30.0" prefWidth="174.0" text="Danh sách vé" textFill="#ff6e6c">
+                  <Text fill="#0040ff" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-stroke: white; -fx-stroke-width: 3;" text="Danh sách vé">
                      <font>
-                        <Font name="Tahoma Bold" size="24.0" />
+                        <Font name="Tahoma Bold" size="36.0" />
                      </font>
-                  </Label>
+                  </Text>
                </children>
             </VBox>
             <VBox alignment="CENTER_RIGHT" prefHeight="62.0" prefWidth="349.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#actionQuayVe" text="Quay lại" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#actionQuayVe" prefHeight="43.0" prefWidth="98.0" text="Quay lại">
+                     <font>
+                        <Font name="Tahoma Bold" size="17.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets right="10.0" />
+                     </VBox.margin></Button>
                </children>
             </VBox>
          </children>

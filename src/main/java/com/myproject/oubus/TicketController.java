@@ -75,7 +75,6 @@ public class TicketController implements Initializable {
         // TODO
     }
 
-    
     public void loadTicket(String maVe) throws SQLException {
         this.maVe = maVe;
         VeXe veXe = tk.getVeTheoMaVe(maVe);
@@ -102,7 +101,6 @@ public class TicketController implements Initializable {
         this.sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
     }
 
-
     public void actionExportTicket(ActionEvent event) throws SQLException, IOException {
         
         if (this.sec > 30) {
@@ -127,7 +125,6 @@ public class TicketController implements Initializable {
             Utils.getBox("Vé đã được thu hồi!", Alert.AlertType.WARNING).show(); 
         }
     }
-    
     
     public void actionDeleteTicket(ActionEvent event) throws SQLException, IOException {
         
@@ -157,7 +154,6 @@ public class TicketController implements Initializable {
             Utils.getBox("Hủy vé thất bại: Chỉ được hủy vé trước khi chuyến xe khởi hành 30 phút.", Alert.AlertType.WARNING).show(); 
         }
     }
-    
     
     public void actionQuayVe(ActionEvent event) throws IOException {
        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("MainStaffScreen.fxml"));
@@ -208,5 +204,28 @@ public class TicketController implements Initializable {
         else {
             Utils.getBox("Đổi vé thất bại: Chỉ được hủy vé trước khi chuyến xe khởi hành 60 phút.", Alert.AlertType.WARNING).show(); 
         }                      
+    }
+
+    public void actionChangeTour(ActionEvent event) throws SQLException {
+        if (this.sec > 60) {
+            VeXe veXe = tk.getVeTheoMaVe(this.maVe);
+            try {
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("MainStaffScreen.fxml"));
+                Parent bookingView = loader.load();
+                Scene scene = new Scene(bookingView);
+                MainStaffScreenController controller = loader.getController();
+//                controller.maChuyen = veXe.getMaChuyenDi();
+                controller.setId(veXe.getMaVe());
+                controller.setMaChuyen(veXe.getMaChuyenDi());
+                stage.setScene(scene);
+            } catch (IOException ex) {
+                Logger.getLogger(TicketController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            Utils.getBox("Đổi vé thất bại: Chỉ được hủy vé trước khi chuyến xe khởi hành 60 phút.", Alert.AlertType.WARNING).show();
+        }
     }
 }

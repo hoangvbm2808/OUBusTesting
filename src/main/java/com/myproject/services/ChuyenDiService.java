@@ -148,17 +148,18 @@ public class ChuyenDiService {
         }
     }
 
-    public boolean updateTour(int maChuyenDi, int giaVe, String noiDi, String noiDen, Date ngayKH, String tg) throws SQLException {
+    public boolean updateTour(int maxe, int maChuyenDi, int giaVe, String noiDi, String noiDen, Date ngayKH, String tg) throws SQLException {
         try (Connection conn = jdbcUtils.getConn()) {
             conn.setAutoCommit(false);
-            String sql = "UPDATE chuyendi SET giaVe=?, diemKhoiHanh=?, diemKetThuc=?, ngayKhoiHanh=?,gioKhoiHanh=? WHERE id=?"; // sql injection
+            String sql = "UPDATE chuyendi SET maXe=?, giaVe=?, diemKhoiHanh=?, diemKetThuc=?, ngayKhoiHanh=?,gioKhoiHanh=? WHERE id=?"; // sql injection
             PreparedStatement stm = conn.prepareCall(sql);
-            stm.setInt(1, giaVe);
-            stm.setString(2, noiDi);
-            stm.setString(3, noiDen);
-            stm.setDate(4, ngayKH);
-            stm.setString(5, tg);
-            stm.setInt(6, maChuyenDi);
+            stm.setInt(1, maxe);
+            stm.setInt(2, giaVe);
+            stm.setString(3, noiDi);
+            stm.setString(4, noiDen);
+            stm.setDate(5, ngayKH);
+            stm.setString(6, tg);
+            stm.setInt(7, maChuyenDi);
             int r = stm.executeUpdate();
 //            return r;
             try {
