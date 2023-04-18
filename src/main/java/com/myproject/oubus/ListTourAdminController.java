@@ -299,32 +299,35 @@ public class ListTourAdminController implements Initializable {
 
 //        int maXe = Integer.parseInt(maXeField.getText());
                 int maChuyen = Integer.parseInt(this.maChuyenDi.getText());
-        if (maChuyenDi.getText() != null && cbbmaXe.getSelectionModel().getSelectedItem() != null && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
+        if (maChuyenDi.getText() != null  && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
                 && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0) {
-
-            if (c.checkTimeKieuSo(tgKH)) {
-                tgKH = c.checkDinhDangTime(tgKH);
-                if (tgKH != " ") {
+            if (cbbmaXe.getSelectionModel().getSelectedItem() != null) {
+                if (c.checkTimeKieuSo(tgKH)) {
+                    tgKH = c.checkDinhDangTime(tgKH);
+                    if (tgKH != " ") {
 //                    Time time = Time.valueOf(tgKH + ":00");
-                    tgKH = tgKH + ":00";
-                    if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tgKH) == true) {
-                        Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
-                        this.loadTableData(null);
-                        cbbmaXe.setValue(null);
-                        noiDiField.setText("");
-                        noiDenField.setText("");
-                        ngayKhoiHanhField.setValue(null);
-                        tgKhoiHanhField.setText("");
-                        giaVeField.setText("");
-                        maChuyenDi.setText("");
-                    } else
-                        Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+                        tgKH = tgKH + ":00";
+                        if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tgKH) == true) {
+                            Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
+                            this.loadTableData(null);
+                            cbbmaXe.setValue(null);
+                            noiDiField.setText("");
+                            noiDenField.setText("");
+                            ngayKhoiHanhField.setValue(null);
+                            tgKhoiHanhField.setText("");
+                            giaVeField.setText("");
+                            maChuyenDi.setText("");
+                        } else
+                            Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+                    } else {
+                        Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
+                    }
                 } else {
                     Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
                 }
-            } else {
-                Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
             }
+            else
+                Utils.getBox("Vui lòng chọn lại mã xe!", Alert.AlertType.WARNING).show();
         }
         else {
             Utils.getBox("Vui lòng nhập đầy đủ thông tin !", Alert.AlertType.WARNING).show();

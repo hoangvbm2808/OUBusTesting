@@ -200,7 +200,7 @@ public class ChuyenDiService {
             if (viTri != -1) {
                 gio = tgKH.substring(0,viTri);
                 phut = tgKH.substring(viTri + 1, 5);
-                return gio + ":" + phut;
+                return gio + ":" + phut ;
             }
             else {
                 return " ";
@@ -239,7 +239,7 @@ public class ChuyenDiService {
             }
         }
         else if (tgKH.length() == 2) {
-            return tgKH + ":00";
+            return tgKH + ":00" ;
         }
         else if (tgKH.length() == 1) {
             return "0" + tgKH + ":00";
@@ -253,11 +253,16 @@ public class ChuyenDiService {
         return " ";
     }
 
-    public boolean checkTimeKieuSo(String sdt){
-        Integer b = Integer.parseInt(sdt.substring(0,1));
-        if(sdt.length() < 6  && b % 1 == 0)
-            return true;
-        return false;
+    public boolean checkTimeKieuSo(String sdt) {
+        try {
+            Integer b = Integer.parseInt(sdt.substring(0, 1));
+            if (sdt.length() < 6 && b % 1 == 0)
+                return true;
+            return false;
+        }
+        catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
 }
