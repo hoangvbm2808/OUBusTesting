@@ -273,7 +273,6 @@ public class ListTourAdminController implements Initializable {
 
     //lay du lieu tu table truyen xuong tung textbox
     public void getTour(MouseEvent event) {
-
         ChuyenDi t = tableChuyenDi.getSelectionModel().getSelectedItem();
         try {
             XeKhach xeKhach = x.getXeKhachByMaXe(t.getMaXe());
@@ -288,35 +287,45 @@ public class ListTourAdminController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        
     }
     
     //cap nhat chuyen di
     public void update(ActionEvent e) throws SQLException {
-        if (maChuyenDi.getText() != null && cbbmaXe.getSelectionModel().getSelectedItem() != null && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
-                && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0)
-        {
                 int giaVe = Integer.parseInt(giaVeField.getText());
                 String noiDi = noiDiField.getText();
                 String noiDen = noiDenField.getText();
                 Date ngayKH = Date.valueOf(ngayKhoiHanhField.getValue());
-                String tg = tgKhoiHanhField.getText();
+                String tgKH = tgKhoiHanhField.getText();
+
 //        int maXe = Integer.parseInt(maXeField.getText());
                 int maChuyen = Integer.parseInt(this.maChuyenDi.getText());
-                if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tg) == true) {
-                    Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
-                    this.loadTableData(null);
-                    cbbmaXe.setValue(null);
-                    noiDiField.setText("");
-                    noiDenField.setText("");
-                    ngayKhoiHanhField.setValue(null);
-                    tgKhoiHanhField.setText("");
-                    giaVeField.setText("");
-                    maChuyenDi.setText("");
-                } else
-                    Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+        if (maChuyenDi.getText() != null && cbbmaXe.getSelectionModel().getSelectedItem() != null && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
+                && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0) {
+
+            if (c.checkTimeKieuSo(tgKH)) {
+                tgKH = c.checkDinhDangTime(tgKH);
+                if (tgKH != " ") {
+//                    Time time = Time.valueOf(tgKH + ":00");
+                    tgKH = tgKH + ":00";
+                    if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tgKH) == true) {
+                        Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
+                        this.loadTableData(null);
+                        cbbmaXe.setValue(null);
+                        noiDiField.setText("");
+                        noiDenField.setText("");
+                        ngayKhoiHanhField.setValue(null);
+                        tgKhoiHanhField.setText("");
+                        giaVeField.setText("");
+                        maChuyenDi.setText("");
+                    } else
+                        Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+                } else {
+                    Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
+                }
+            } else {
+                Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
             }
+        }
         else {
             Utils.getBox("Vui lòng nhập đầy đủ thông tin !", Alert.AlertType.WARNING).show();
         }

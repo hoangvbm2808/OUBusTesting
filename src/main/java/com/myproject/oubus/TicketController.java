@@ -46,7 +46,6 @@ import javafx.stage.Stage;
  */
 public class TicketController implements Initializable {
     private int maChuyenDi;
-    private int id;
     private String maVe;
     private String hoTen;
     private String SoDienThoai;
@@ -75,7 +74,7 @@ public class TicketController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
+
     
     public void loadTicket(String maVe) throws SQLException {
         this.maVe = maVe;
@@ -102,8 +101,8 @@ public class TicketController implements Initializable {
         long s =  timeKhoiHanh - timeHienTai;
         this.sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
     }
-    
-    
+
+
     public void actionExportTicket(ActionEvent event) throws SQLException, IOException {
         
         if (this.sec > 30) {
@@ -176,22 +175,34 @@ public class TicketController implements Initializable {
         
         if (this.sec > 60) {
             VeXe veXe = tk.getVeTheoMaVe(this.maVe);
-            if(veXe.getTrangThai().equals("Đã đặt")) {
-                tk.deleteTicket(veXe);
-           
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Confirm change");
-                alert.setHeaderText("Hủy vé thành công");
-
-                Optional<ButtonType> option = alert.showAndWait();
-
-                if (option.get() == ButtonType.OK) {
-                    this.actionQuayVe(event);
-                }   
-                
-            }
-            else {
-                Utils.getBox("Vé đã xuất không thể đổi!", Alert.AlertType.WARNING).show();
+//            if(veXe.getTrangThai().equals("Đã đặt")) {
+//                tk.deleteTicket(veXe);
+//
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Confirm change");
+//                alert.setHeaderText("Hủy vé thành công");
+//
+//                Optional<ButtonType> option = alert.showAndWait();
+//
+//                if (option.get() == ButtonType.OK) {
+//                    this.actionQuayVe(event);
+//                }
+//            }
+//            else {
+//                Utils.getBox("Vé đã xuất không thể đổi!", Alert.AlertType.WARNING).show();
+//            }
+            try {
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("ChangeTicket.fxml"));
+                Parent bookingView = loader.load();
+                Scene scene = new Scene(bookingView);
+                ChangeTicketController controller = loader.getController();
+                int id = veXe.getMaChuyenDi();
+                controller.loadChangeTicket(id, maVe);
+                stage.setScene(scene);
+            } catch (SQLException ex) {
+                Logger.getLogger(TicketController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         else {
