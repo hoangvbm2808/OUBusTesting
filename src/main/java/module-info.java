@@ -12,5 +12,6 @@ module com.myproject.oubus {
     exports com.myproject.services;
     requires org.apache.commons.lang3;
     requires mysql.connector.j;
+    requires java.desktop;
 }
 

@@ -23,10 +23,15 @@ public class BookingService {
     }
     public boolean checkSDT(String sdt){
         String a = sdt.substring(0, 1);
-        Integer b = Integer.parseInt(sdt.substring(1));
-        if(sdt.length() == 10 && b % 1 == 0 && a.equals("0"))
-            return true;
-        return false;
+        try {
+            Integer b = Integer.parseInt(sdt.substring(1));
+            if (sdt.length() == 10 && b % 1 == 0 && a.equals("0"))
+                return true;
+            return false;
+        }
+        catch (NumberFormatException ex) {
+            return false;
+        }
     }
     
     public void addVeXe(VeXe v) throws SQLException {

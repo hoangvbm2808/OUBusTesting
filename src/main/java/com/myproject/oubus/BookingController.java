@@ -121,7 +121,7 @@ public class BookingController implements Initializable {
         this.maChuyenDi.setText(String.valueOf(a.getMaChuyenDi()));
         this.diemKhoiHanh.setText(a.getDiemKhoiHanh());
         this.diemKetThuc.setText(a.getDiemKetThuc());
-        this.gioKhoiHanh.setText(String.valueOf(a.getGioKhoiHanh()));
+        this.gioKhoiHanh.setText(String.valueOf(a.getNgayKhoiHanh())+String.valueOf(a.getGioKhoiHanh()));
         this.giaVe.setText(String.valueOf(a.getGiaVe()));
         XeKhach b = xk.getXeKhachByMaXe(a.getMaXe());
         this.bienSoXe.setText(b.getBienSoXe());

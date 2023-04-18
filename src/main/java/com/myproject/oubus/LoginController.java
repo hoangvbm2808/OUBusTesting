@@ -27,15 +27,17 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
+
 
 /**
  * FXML Controller class
  *
  * @author vbmho
  */
-public class LoginController implements Initializable {
+public class LoginController implements Initializable  {
     @FXML private TextField txtTaiKhoan;
     @FXML private PasswordField txtMatKhau;
     public static int mnv;
@@ -44,11 +46,8 @@ public class LoginController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+
+
     public void loginHandler(ActionEvent event) throws IOException, SQLException {
         if (this.txtTaiKhoan.getText().isEmpty() || this.txtMatKhau.getText().isEmpty()){
              Utils.getBox("Vui lòng nhập tài khoản, mật khẩu.", Alert.AlertType.WARNING).show();
@@ -99,5 +98,9 @@ public class LoginController implements Initializable {
         Platform.exit();
         System.exit(0);
     }
-    
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    }
 }
