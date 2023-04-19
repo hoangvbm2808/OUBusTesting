@@ -2,12 +2,14 @@ package com.myproject.oubus;
 
 import com.myproject.conf.Utils;
 import com.myproject.pojo.ChuyenDi;
+import com.myproject.pojo.VeXe;
 import com.myproject.pojo.XeKhach;
 import com.myproject.services.ChuyenDiService;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.myproject.services.TicketService;
 import com.myproject.services.XeKhachService;
 import com.mysql.cj.protocol.Message;
 import javafx.collections.FXCollections;
@@ -45,6 +47,7 @@ public class ListTourAdminController implements Initializable {
     static DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_TIME;
     static ChuyenDiService c = new ChuyenDiService();
     static XeKhachService x = new XeKhachService();
+    static TicketService tk = new TicketService();
     @FXML private TableView<ChuyenDi> tableChuyenDi;
     
 //    @FXML private TableColumn<ChuyenDi, String> maColumn;
@@ -261,24 +264,29 @@ public class ListTourAdminController implements Initializable {
     //xoa chuyen di
     public void delete(ActionEvent e) throws SQLException {
         ChuyenDi t = tableChuyenDi.getSelectionModel().getSelectedItem();
-//        Time time = Time.valueOf(tgKhoiHanhField.getText() + ":00");
-//        Utils.getBox(maChuyenDi.getText(), Alert.AlertType.INFORMATION).show();
         if (maChuyenDi.getText() != null && cbbmaXe.getSelectionModel().getSelectedItem() != null && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
                 && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0) {
             String gia = this.giaVeField.getText();
             if (c.checkGia(gia)) {
-                if (c.deleteTour(Integer.parseInt(maChuyenDi.getText())) == true) {
-                    Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
-                    this.loadTableData(null);
-                    cbbmaXe.setValue(null);
-                    noiDiField.setText("");
-                    noiDenField.setText("");
-                    ngayKhoiHanhField.setValue(null);
-                    tgKhoiHanhField.setText("");
-                    giaVeField.setText("");
-                    maChuyenDi.setText("");
-                } else
-                    Utils.getBox("Delete failed", Alert.AlertType.ERROR).show();
+                List<VeXe> ves = tk.getVeTheoMa(Integer.parseInt(maChuyenDi.getText()), null);
+                ChuyenDi cdi = c.getChuyenDiByMaChuyenDi(Integer.parseInt(maChuyenDi.getText()));
+                if (ves.isEmpty() && cdi.getTrangThai().equals("Chưa khởi hành") || cdi.getTrangThai().equals("Đã khởi hành")) {
+                    if (c.deleteTour(Integer.parseInt(maChuyenDi.getText())) == true) {
+                        Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
+                        this.loadTableData(null);
+                        cbbmaXe.setValue(null);
+                        noiDiField.setText("");
+                        noiDenField.setText("");
+                        ngayKhoiHanhField.setValue(null);
+                        tgKhoiHanhField.setText("");
+                        giaVeField.setText("");
+                        maChuyenDi.setText("");
+                    } else
+                        Utils.getBox("Delete failed", Alert.AlertType.ERROR).show();
+                }
+                else {
+                    Utils.getBox("Có vé xe tồn tại !", Alert.AlertType.ERROR).show();
+                }
             }
             else {
                 Utils.getBox("Gía tiền không hợp lý!", Alert.AlertType.WARNING).show();
@@ -326,23 +334,53 @@ public class ListTourAdminController implements Initializable {
                     if (tgKH != " ") {
 //                    Time time = Time.valueOf(tgKH + ":00");
                         tgKH = tgKH + ":00";
-                        if (c.checkGia(giaVe)) {
-                            if (c.updateTour(maXe, maChuyen, Integer.parseInt(giaVe), noiDi, noiDen, ngayKH, tgKH) == true) {
-                                Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
-                                this.loadTableData(null);
-                                cbbmaXe.setValue(null);
-                                noiDiField.setText("");
-                                noiDenField.setText("");
-                                ngayKhoiHanhField.setValue(null);
-                                tgKhoiHanhField.setText("");
-                                giaVeField.setText("");
-                                maChuyenDi.setText("");
+                        String tgKH1 = tgKhoiHanhField.getText();
+                        // Tính thời gian khởi hành và thời gian hiện tại
+                        Date datekh = Date.valueOf(this.ngayKhoiHanhField.getValue());
+                        Time timekh = Time.valueOf(tgKH1 + ":00");
+                        long timeKhoiHanh = (datekh.getTime() + timekh.getTime());
+                        long timeHienTai = System.currentTimeMillis();
+                        long s =  timeKhoiHanh - timeHienTai;
+                        sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
+                        if (sec > 0) {
+                            if (c.checkGia(giaVe)) {
+                                if (c.updateTour(maXe, maChuyen, Integer.parseInt(giaVe), noiDi, noiDen, ngayKH, tgKH) == true) {
+                                    Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
+                                    this.loadTableData(null);
+                                    cbbmaXe.setValue(null);
+                                    noiDiField.setText("");
+                                    noiDenField.setText("");
+                                    ngayKhoiHanhField.setValue(null);
+                                    tgKhoiHanhField.setText("");
+                                    giaVeField.setText("");
+                                    maChuyenDi.setText("");
+                                }
+                                else
+                                    Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
                             }
-                            else
-                                Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+                            else {
+                                Utils.getBox("Gía tiền không hợp lý!", Alert.AlertType.WARNING).show();
+                            }if (c.checkGia(giaVe)) {
+                                if (c.updateTour(maXe, maChuyen, Integer.parseInt(giaVe), noiDi, noiDen, ngayKH, tgKH) == true) {
+                                    Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
+                                    this.loadTableData(null);
+                                    cbbmaXe.setValue(null);
+                                    noiDiField.setText("");
+                                    noiDenField.setText("");
+                                    ngayKhoiHanhField.setValue(null);
+                                    tgKhoiHanhField.setText("");
+                                    giaVeField.setText("");
+                                    maChuyenDi.setText("");
+                                }
+                                else
+                                    Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+                            }
+                            else {
+                                Utils.getBox("Gía tiền không hợp lý!", Alert.AlertType.WARNING).show();
+                            }
                         }
                         else {
-                            Utils.getBox("Gía tiền không hợp lý!", Alert.AlertType.WARNING).show();
+                            Utils.getBox("Giờ trong quá khứ!", Alert.AlertType.WARNING).show();
                         }
                     } else {
                         Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
