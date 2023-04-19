@@ -263,5 +263,42 @@ public class ChuyenDiTester {
         }
     }
 
+    @Test
+    public void testDinhDangTime() {
+        boolean actual = true;
+        String time = "1:2";
+        Assertions.assertEquals("01:02",cd.checkDinhDangTime(time));
+        String time1 = "12";
+        Assertions.assertEquals("12:00",cd.checkDinhDangTime(time1));
+        String time2 = "1";
+        Assertions.assertEquals("01:00",cd.checkDinhDangTime(time2));
+        try{
+            cd.checkDinhDangTime("12:345");
+            cd.checkDinhDangTime("12345");
+        }
+        catch (ExceptionInInitializerError IllegalStateException) {
+            actual = false;
+            Assertions.assertFalse(actual);
+        }
+
+    }
+
+    @Test
+    public void testTimeKieuSo() {
+        boolean actual = true;
+        Assertions.assertTrue(cd.checkTimeKieuSo("12:34"));
+        Assertions.assertFalse(cd.checkTimeKieuSo("12:345"));
+        Assertions.assertFalse(cd.checkTimeKieuSo("123:12"));
+        Assertions.assertTrue(cd.checkTimeKieuSo("1:3"));
+        try{
+            cd.checkTimeKieuSo("ab:cx");
+        }
+        catch (NumberFormatException ex){
+            actual = false;
+            Assertions.assertFalse(actual);
+        }
+    }
+
+
 }
 

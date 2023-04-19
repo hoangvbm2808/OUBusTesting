@@ -26,6 +26,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import static java.time.LocalDate.now;
+
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,6 +50,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 import org.apache.commons.lang3.RandomStringUtils;
 
 /**
@@ -70,8 +73,6 @@ public class BookingController implements Initializable {
     @FXML private Label giaVe;
     @FXML private Label time;
     @FXML private Label time1;
-    String pattern = "dd/MM/yyyy HH:mm:ss";
-    SimpleDateFormat df = new SimpleDateFormat(pattern);
     @FXML private RadioButton A01;
     @FXML private RadioButton A02;
     @FXML private RadioButton A03;
@@ -96,9 +97,8 @@ public class BookingController implements Initializable {
     private final List<RadioButton> listConTrong = new ArrayList<>();
     private List<VeXe> listDaDat = new ArrayList<>();
     long sec= 0 ;
-  
-   
-    
+    String pattern = "dd/MM/yyyy HH:mm:ss";
+    SimpleDateFormat df = new SimpleDateFormat(pattern);
     private static final ChuyenDiService cd = new ChuyenDiService();
     private static final XeKhachService xk = new XeKhachService();
     private static final NhanVienService nv = new NhanVienService();
@@ -121,7 +121,7 @@ public class BookingController implements Initializable {
         this.maChuyenDi.setText(String.valueOf(a.getMaChuyenDi()));
         this.diemKhoiHanh.setText(a.getDiemKhoiHanh());
         this.diemKetThuc.setText(a.getDiemKetThuc());
-        this.gioKhoiHanh.setText(String.valueOf(a.getNgayKhoiHanh())+String.valueOf(a.getGioKhoiHanh()));
+        this.gioKhoiHanh.setText(String.valueOf(a.getGioKhoiHanh()));
         this.giaVe.setText(String.valueOf(a.getGiaVe()));
         XeKhach b = xk.getXeKhachByMaXe(a.getMaXe());
         this.bienSoXe.setText(b.getBienSoXe());
