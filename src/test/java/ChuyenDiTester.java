@@ -303,6 +303,14 @@ public class ChuyenDiTester {
         }
     }
 
+    @Test
+    public void testCheckGia() {
+        Assertions.assertTrue(cd.checkGia("125000"));
+        Assertions.assertFalse(cd.checkGia("1250000000"));
+        Assertions.assertFalse(cd.checkGia("nam tram nghin"));
+        Assertions.assertFalse(cd.checkGia("-125000"));
+        Assertions.assertFalse(cd.checkGia("5 nghin"));
+    }
 
 }
 
