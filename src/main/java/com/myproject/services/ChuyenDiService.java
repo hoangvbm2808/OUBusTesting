@@ -9,12 +9,8 @@ import com.myproject.pojo.ChuyenDi;
 import com.myproject.pojo.VeXe;
 import javafx.scene.control.Alert;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -268,9 +264,9 @@ public class ChuyenDiService {
 
     public boolean checkGia(String gia) {
         try {
-            String g = String.valueOf(gia);
-            Integer b = Integer.parseInt(g.substring(0, 1));
-            if (g.length() > 0 && g.length() < 10  && b % 1 == 0)
+//            String g = gia.substring(0,1);
+            Integer b = Integer.parseInt(gia.substring(0));
+            if (gia.length() > 0 && gia.length() < 10 && b % 1 == 0 && b > 0)
                 return true;
             return false;
         }
@@ -278,4 +274,5 @@ public class ChuyenDiService {
             return false;
         }
     }
+
 }
