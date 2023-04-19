@@ -69,6 +69,7 @@ public class ListTourAdminController implements Initializable {
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     
     @FXML private Text maChuyenDi;
+    long sec = 0;
     
     StringConverter<LocalDate> converter = new StringConverter<LocalDate>() {
         DateTimeFormatter dateFormatter
@@ -195,50 +196,61 @@ public class ListTourAdminController implements Initializable {
     
     //them chuyen di
     public void add(ActionEvent e) throws SQLException {
+
+
         if (cbbmaXe.getSelectionModel().getSelectedItem() != null && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
                 && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0){
             String tgKH = tgKhoiHanhField.getText();
-            if (c.checkTimeKieuSo(tgKH)) {
-                tgKH = c.checkDinhDangTime(tgKH);
-                if (tgKH != " ") {
-                    Time time = Time.valueOf(tgKH + ":00");
-//        System.out.print("------------ " + String.valueOf(time));
-                    String gia = this.giaVeField.getText();
-                    if (c.checkGia(gia)) {
-                    ChuyenDi tour = new ChuyenDi(Integer.parseInt(giaVeField.getText()),
-                            noiDiField.getText(), noiDenField.getText(), Date.valueOf(ngayKhoiHanhField.getValue()),
-                            time, cbbmaXe.getSelectionModel().getSelectedItem().getMaXe());
+            // Tính thời gian khởi hành và thời gian hiện tại
+            Date datekh = Date.valueOf(this.ngayKhoiHanhField.getValue());
+            Time timekh = Time.valueOf(tgKH + ":00");
+            long timeKhoiHanh = (datekh.getTime() + timekh.getTime());
+            long timeHienTai = System.currentTimeMillis();
+            long s =  timeKhoiHanh - timeHienTai;
+            sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
 
-                        try {
-                            c.addTour(tour);
-                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setContentText("Add successful");
-                            alert.show();
-                            loadTableData(null);
-//            tableChuyenDi.ad;
-                            cbbmaXe.setValue(null);
-                            noiDiField.setText("");
-                            noiDenField.setText("");
-                            ngayKhoiHanhField.setValue(null);
-                            tgKhoiHanhField.setText("");
-                            giaVeField.setText("");
-                            maChuyenDi.setText("");
-                        } catch (SQLException ex) {
-                            Alert alert = new Alert(Alert.AlertType.ERROR);
-                            alert.setContentText("Add failed" + ex.getMessage());
-                            alert.show();
+            if (sec > 0) {
+                if (c.checkTimeKieuSo(tgKH)) {
+                    tgKH = c.checkDinhDangTime(tgKH);
+                    if (tgKH != " ") {
+                        Time time = Time.valueOf(tgKH + ":00");
+                        String gia = this.giaVeField.getText();
+                        if (c.checkGia(gia)) {
+                            ChuyenDi tour = new ChuyenDi(Integer.parseInt(giaVeField.getText()),
+                                    noiDiField.getText(), noiDenField.getText(), Date.valueOf(ngayKhoiHanhField.getValue()),
+                                    time, cbbmaXe.getSelectionModel().getSelectedItem().getMaXe());
+
+                            try {
+                                c.addTour(tour);
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setContentText("Add successful");
+                                alert.show();
+                                loadTableData(null);
+                                //            tableChuyenDi.ad;
+                                cbbmaXe.setValue(null);
+                                noiDiField.setText("");
+                                noiDenField.setText("");
+                                ngayKhoiHanhField.setValue(null);
+                                tgKhoiHanhField.setText("");
+                                giaVeField.setText("");
+                                maChuyenDi.setText("");
+                            } catch (SQLException ex) {
+                                Alert alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setContentText("Add failed" + ex.getMessage());
+                                alert.show();
+                            }
+                        } else {
+                            Utils.getBox("Gía tiền không hợp lý!", Alert.AlertType.WARNING).show();
                         }
+                    } else {
+                        Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
                     }
-                    else {
-                        Utils.getBox("Gía tiền không hợp lý!", Alert.AlertType.WARNING).show();
-                    }
-                }
-                else {
+                } else {
                     Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
                 }
             }
             else {
-                Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
+                Utils.getBox("Giờ trong quá khứ!", Alert.AlertType.WARNING).show();
             }
         }
         else {
