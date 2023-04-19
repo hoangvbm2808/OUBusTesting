@@ -149,7 +149,7 @@ public class SellTicketController implements Initializable {
     
     public void sellingHandler(ActionEvent event) throws IOException {
         if (sec > 5) {
-            if (this.txtHoVaTen.getText().length() != 0 && this.txtSDT.getText().length() != 0 && this.txtDiemDon.getText().length() != 0) {
+            if (this.txtHoVaTen.getText().length() != 0 && this.txtSDT.getText().length() != 0 && this.txtDiemDon.getText().length() != 0 && Ghe.getSelectedToggle() != null) {
                 if (bk.checkSDT(this.txtSDT.getText())) {
                     RadioButton selectedRadioButton = (RadioButton) Ghe.getSelectedToggle();
                     String viTriGhe = selectedRadioButton.getText();

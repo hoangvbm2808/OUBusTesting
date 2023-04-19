@@ -102,6 +102,9 @@ public class ListTourAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
+            ngayKhoiHanhField.setConverter(converter);
+            ngayKhoiHanhField.setPromptText("dd-MM-yyyy");
+
             List<ChuyenDi> chuyendi = c.getChuyenDi(null, null);
             for(ChuyenDi cdi : chuyendi) {
                 this.autoChangeTrangThai(cdi.getMaChuyenDi());
@@ -270,7 +273,7 @@ public class ListTourAdminController implements Initializable {
             if (c.checkGia(gia)) {
                 List<VeXe> ves = tk.getVeTheoMa(Integer.parseInt(maChuyenDi.getText()), null);
                 ChuyenDi cdi = c.getChuyenDiByMaChuyenDi(Integer.parseInt(maChuyenDi.getText()));
-                if (ves.isEmpty() && cdi.getTrangThai().equals("Chưa khởi hành") || cdi.getTrangThai().equals("Đã khởi hành")) {
+                if (ves.isEmpty() && cdi.getTrangThai().equals("Chua khoi hanh") || cdi.getTrangThai().equals("Đã khởi hành")) {
                     if (c.deleteTour(Integer.parseInt(maChuyenDi.getText())) == true) {
                         Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
                         this.loadTableData(null);
