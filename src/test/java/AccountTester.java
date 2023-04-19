@@ -66,6 +66,14 @@ public class AccountTester {
         Account ac = acService.getAccount("1");
         Assertions.assertNull(ac);
     }
+
+    @Test
+    public void testGetAccountById() throws SQLException{
+        Account ac = acService.getAccountById(1);
+        Assertions.assertEquals("admin", ac.getTaiKhoan());
+        Account ac2 = acService.getAccountById(2);
+        Assertions.assertEquals("staff", ac2.getTaiKhoan());
+    }
     
     
 }

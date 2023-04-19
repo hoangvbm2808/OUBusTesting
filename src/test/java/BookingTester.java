@@ -93,18 +93,18 @@ public class BookingTester {
     
     @Test
     public void testAddTicket() throws SQLException{
-        VeXe ve = new VeXe("3","Minh Hoang", Date.valueOf(LocalDate.now()) , "0399987202", 
-            7, "B02", "Đã đặt", 
+        VeXe ve = new VeXe("5","Minh Hoang", Date.valueOf(LocalDate.now()) , "0399987202",
+            7, "B02", "Đã đặt",
             2, 1, "Nha Trang");
-       
+
         try {
             bk.addVeXe(ve);
             String MaChuyen = ve.getMaVe();
 //            Assertions.assertTrue(actual);
-            
+
             PreparedStatement stm = conn.prepareCall("SELECT * FROM vexe WHERE id=?");
             stm.setString(1, ve.getMaVe());
-            
+
             ResultSet rs = stm.executeQuery();
             Assertions.assertNotNull(rs.next());
             Assertions.assertEquals(MaChuyen, rs.getString("id"));
@@ -114,4 +114,29 @@ public class BookingTester {
         }
 //        Assertions.assertFalse(actual);
     }
+
+    @Test
+    public void testUpdateTicket() throws SQLException{
+        VeXe ve = new VeXe("2","Minh Hoang", Date.valueOf(LocalDate.now()) , "0399987202",
+                7, "B02", "Đã đặt",
+                2, 1, "Nha Trang");
+
+        try {
+            bk.update(ve);
+            String MaChuyen = ve.getMaVe();
+//            Assertions.assertTrue(actual);
+
+            PreparedStatement stm = conn.prepareCall("SELECT * FROM vexe WHERE id=?");
+            stm.setString(1, ve.getMaVe());
+
+            ResultSet rs = stm.executeQuery();
+            Assertions.assertNotNull(rs.next());
+            Assertions.assertEquals(MaChuyen, rs.getString("id"));
+            Assertions.assertEquals("Minh Hoang", rs.getString("tenKhachHang"));
+        } catch (SQLException ex) {
+            Logger.getLogger(BookingTester.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        Assertions.assertFalse(actual);
+    }
+
 }
