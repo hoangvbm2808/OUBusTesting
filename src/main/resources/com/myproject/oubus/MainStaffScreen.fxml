@@ -14,9 +14,9 @@
    <top>
       <VBox alignment="CENTER_RIGHT" prefHeight="90.0" prefWidth="914.0" BorderPane.alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: red; -fx-stroke: gold; -fx-stroke-width: 3;" text="Danh sách chuyến đi" textAlignment="CENTER" wrappingWidth="913.6723756790161">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #0040ff; -fx-stroke: white; -fx-stroke-width: 3;" text="Danh sách chuyến đi" textAlignment="CENTER" wrappingWidth="913.6723756790161">
                <font>
-                  <Font size="35.0" />
+                  <Font name="Tahoma Bold" size="36.0" />
                </font>
             </Text>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
@@ -26,7 +26,7 @@
                         <Insets />
                      </opaqueInsets>
                      <font>
-                        <Font size="15.0" />
+                        <Font size="17.0" />
                      </font>
                   </TextField>
                   <TextField fx:id="noiDenField" prefHeight="26.0" prefWidth="601.0" promptText="Nhập nơi kết thúc ..." style="-fx-max-width: 300;">
@@ -34,7 +34,7 @@
                         <Insets />
                      </opaqueInsets>
                      <font>
-                        <Font size="15.0" />
+                        <Font size="17.0" />
                      </font>
                   </TextField>
                </children>
@@ -49,12 +49,12 @@
                <VBox.margin>
                   <Insets />
                </VBox.margin></TableView>
-            <Button mnemonicParsing="false" onAction="#ActionLockOut" text="Đăng xuất">
+            <Button mnemonicParsing="false" onAction="#ActionLockOut" prefHeight="43.0" prefWidth="151.0" text="Đăng xuất">
                <VBox.margin>
                   <Insets right="10.0" top="10.0" />
                </VBox.margin>
                <font>
-                  <Font size="18.0" />
+                  <Font name="Tahoma Bold" size="17.0" />
                </font>
             </Button>
          </children>

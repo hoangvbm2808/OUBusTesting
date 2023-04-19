@@ -60,19 +60,12 @@ public class ListTourAdminController implements Initializable {
 //    private ObservableList<ChuyenDi> tourList;
 //    
     @FXML private TextField timKiem;
-
     @FXML private ComboBox<XeKhach> cbbmaXe;
-    
     @FXML private TextField noiDiField;
-    
     @FXML private TextField noiDenField;
-    
     @FXML private DatePicker ngayKhoiHanhField;
-    
     @FXML private TextField tgKhoiHanhField;
-    
-    @FXML private TextField giaVeField; 
-    
+    @FXML private TextField giaVeField;
     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
     
     @FXML private Text maChuyenDi;
@@ -210,27 +203,34 @@ public class ListTourAdminController implements Initializable {
                 if (tgKH != " ") {
                     Time time = Time.valueOf(tgKH + ":00");
 //        System.out.print("------------ " + String.valueOf(time));
+                    String gia = this.giaVeField.getText();
+                    if (c.checkGia(gia)) {
                     ChuyenDi tour = new ChuyenDi(Integer.parseInt(giaVeField.getText()),
                             noiDiField.getText(), noiDenField.getText(), Date.valueOf(ngayKhoiHanhField.getValue()),
                             time, cbbmaXe.getSelectionModel().getSelectedItem().getMaXe());
-                    try {
-                        c.addTour(tour);
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setContentText("Add successful");
-                        alert.show();
-                        loadTableData(null);
+
+                        try {
+                            c.addTour(tour);
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setContentText("Add successful");
+                            alert.show();
+                            loadTableData(null);
 //            tableChuyenDi.ad;
-                        cbbmaXe.setValue(null);
-                        noiDiField.setText("");
-                        noiDenField.setText("");
-                        ngayKhoiHanhField.setValue(null);
-                        tgKhoiHanhField.setText("");
-                        giaVeField.setText("");
-                        maChuyenDi.setText("");
-                    } catch (SQLException ex) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("Add failed" + ex.getMessage());
-                        alert.show();
+                            cbbmaXe.setValue(null);
+                            noiDiField.setText("");
+                            noiDenField.setText("");
+                            ngayKhoiHanhField.setValue(null);
+                            tgKhoiHanhField.setText("");
+                            giaVeField.setText("");
+                            maChuyenDi.setText("");
+                        } catch (SQLException ex) {
+                            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setContentText("Add failed" + ex.getMessage());
+                            alert.show();
+                        }
+                    }
+                    else {
+                        Utils.getBox("Gía tiền không hợp lý!", Alert.AlertType.WARNING).show();
                     }
                 }
                 else {
@@ -253,18 +253,24 @@ public class ListTourAdminController implements Initializable {
 //        Utils.getBox(maChuyenDi.getText(), Alert.AlertType.INFORMATION).show();
         if (maChuyenDi.getText() != null && cbbmaXe.getSelectionModel().getSelectedItem() != null && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
                 && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0) {
-            if (c.deleteTour(Integer.parseInt(maChuyenDi.getText())) == true) {
-                Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
-                this.loadTableData(null);
-                cbbmaXe.setValue(null);
-                noiDiField.setText("");
-                noiDenField.setText("");
-                ngayKhoiHanhField.setValue(null);
-                tgKhoiHanhField.setText("");
-                giaVeField.setText("");
-                maChuyenDi.setText("");
-            } else
-                Utils.getBox("Delete failed", Alert.AlertType.ERROR).show();
+            String gia = this.giaVeField.getText();
+            if (c.checkGia(gia)) {
+                if (c.deleteTour(Integer.parseInt(maChuyenDi.getText())) == true) {
+                    Utils.getBox("Delete successful", Alert.AlertType.INFORMATION).show();
+                    this.loadTableData(null);
+                    cbbmaXe.setValue(null);
+                    noiDiField.setText("");
+                    noiDenField.setText("");
+                    ngayKhoiHanhField.setValue(null);
+                    tgKhoiHanhField.setText("");
+                    giaVeField.setText("");
+                    maChuyenDi.setText("");
+                } else
+                    Utils.getBox("Delete failed", Alert.AlertType.ERROR).show();
+            }
+            else {
+                Utils.getBox("Gía tiền không hợp lý!", Alert.AlertType.WARNING).show();
+            }
         }
         else {
             Utils.getBox("Vui lòng nhập đầy đủ thông tin !", Alert.AlertType.WARNING).show();
@@ -273,7 +279,6 @@ public class ListTourAdminController implements Initializable {
 
     //lay du lieu tu table truyen xuong tung textbox
     public void getTour(MouseEvent event) {
-
         ChuyenDi t = tableChuyenDi.getSelectionModel().getSelectedItem();
         try {
             XeKhach xeKhach = x.getXeKhachByMaXe(t.getMaXe());
@@ -288,35 +293,55 @@ public class ListTourAdminController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        
     }
     
     //cap nhat chuyen di
     public void update(ActionEvent e) throws SQLException {
-        if (maChuyenDi.getText() != null && cbbmaXe.getSelectionModel().getSelectedItem() != null && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
-                && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0)
-        {
-                int giaVe = Integer.parseInt(giaVeField.getText());
+                int maXe = cbbmaXe.getSelectionModel().getSelectedItem().getMaXe();
+                String giaVe = giaVeField.getText();
                 String noiDi = noiDiField.getText();
                 String noiDen = noiDenField.getText();
                 Date ngayKH = Date.valueOf(ngayKhoiHanhField.getValue());
-                String tg = tgKhoiHanhField.getText();
+                String tgKH = tgKhoiHanhField.getText();
+
 //        int maXe = Integer.parseInt(maXeField.getText());
                 int maChuyen = Integer.parseInt(this.maChuyenDi.getText());
-                if (c.updateTour(maChuyen, giaVe, noiDi, noiDen, ngayKH, tg) == true) {
-                    Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
-                    this.loadTableData(null);
-                    cbbmaXe.setValue(null);
-                    noiDiField.setText("");
-                    noiDenField.setText("");
-                    ngayKhoiHanhField.setValue(null);
-                    tgKhoiHanhField.setText("");
-                    giaVeField.setText("");
-                    maChuyenDi.setText("");
-                } else
-                    Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+        if (maChuyenDi.getText() != null  && this.noiDiField.getText().length() != 0 && this.noiDenField.getText().length() != 0
+                && this.ngayKhoiHanhField.getValue() != null && this.tgKhoiHanhField.getText().length() != 0 && this.giaVeField.getText().length() != 0) {
+            if (cbbmaXe.getSelectionModel().getSelectedItem() != null) {
+                if (c.checkTimeKieuSo(tgKH)) {
+                    tgKH = c.checkDinhDangTime(tgKH);
+                    if (tgKH != " ") {
+//                    Time time = Time.valueOf(tgKH + ":00");
+                        tgKH = tgKH + ":00";
+                        if (c.checkGia(giaVe)) {
+                            if (c.updateTour(maXe, maChuyen, Integer.parseInt(giaVe), noiDi, noiDen, ngayKH, tgKH) == true) {
+                                Utils.getBox("Update successful", Alert.AlertType.INFORMATION).show();
+                                this.loadTableData(null);
+                                cbbmaXe.setValue(null);
+                                noiDiField.setText("");
+                                noiDenField.setText("");
+                                ngayKhoiHanhField.setValue(null);
+                                tgKhoiHanhField.setText("");
+                                giaVeField.setText("");
+                                maChuyenDi.setText("");
+                            }
+                            else
+                                Utils.getBox("Update failed", Alert.AlertType.ERROR).show();
+                        }
+                        else {
+                            Utils.getBox("Gía tiền không hợp lý!", Alert.AlertType.WARNING).show();
+                        }
+                    } else {
+                        Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
+                    }
+                } else {
+                    Utils.getBox("Giờ không hợp lệ!", Alert.AlertType.WARNING).show();
+                }
             }
+            else
+                Utils.getBox("Vui lòng chọn lại mã xe!", Alert.AlertType.WARNING).show();
+        }
         else {
             Utils.getBox("Vui lòng nhập đầy đủ thông tin !", Alert.AlertType.WARNING).show();
         }

@@ -49,10 +49,6 @@ public class AccountService {
         }
         return results;
     }
-    
-    
-//    public Account checkAccount(){
-//        return;
-//    }
+
     
 }

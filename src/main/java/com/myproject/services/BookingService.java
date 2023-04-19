@@ -21,6 +21,7 @@ public class BookingService {
             return false;
         return true;
     }
+
     public boolean checkSDT(String sdt){
         String a = sdt.substring(0, 1);
         try {
@@ -35,7 +36,6 @@ public class BookingService {
     }
     
     public void addVeXe(VeXe v) throws SQLException {
-        
           try ( Connection conn = jdbcUtils.getConn()) {
             conn.setAutoCommit(false);
             String sql = "INSERT INTO vexe(id, tenKhachHang, ngayDat, sdt, viTriGhe, trangThai ,maChuyenDi ,maNhanVien, maDoanhThu, diemDon)"
@@ -60,6 +60,29 @@ public class BookingService {
             stm2.executeUpdate();
             
             conn.commit();
+        }
+    }
+
+    public boolean update(VeXe v) throws SQLException {
+        VeXe ve = v;
+        try ( Connection conn = jdbcUtils.getConn()) {
+            conn.setAutoCommit(false);
+            String sql = "UPDATE vexe set tenKhachHang = ?, ngayDat = ?, sdt = ?, viTriGhe = ?, trangThai = ?,maChuyenDi = ?, " +
+                    "maNhanVien = ?, maDoanhThu = ?, diemDon = ? WHERE id = ?";
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setString(1, v.getTenKhachHang());
+            stm.setDate(2, v.getNgayDat());
+            stm.setString(3, v.getSdt());
+            stm.setString(4, v.getViTriGhe());
+            stm.setString(5, v.getTrangThai());
+            stm.setInt(6, v.getMaChuyenDi());
+            stm.setInt(7, v.getMaNhanVien());
+            stm.setInt(8, v.getMaDoanhThu());
+            stm.setString(9, v.getDiemDon());
+            stm.setString(10, v.getMaVe());
+            stm.executeUpdate();
+            conn.commit();
+            return true;
         }
     }
 }

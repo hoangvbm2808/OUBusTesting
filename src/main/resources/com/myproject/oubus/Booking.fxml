@@ -13,12 +13,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="875.0" stylesheets="@../../../css/Booking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.BookingController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="375.0" prefWidth="875.0" style="-fx-background-color: lightblue;" stylesheets="@../../../css/Booking.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.myproject.oubus.BookingController">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="431.99998779296874" minWidth="10.0" prefWidth="279.00001220703126" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.4000366210937" minWidth="10.0" prefWidth="116.20002441406251" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="597.7999633789062" minWidth="10.0" prefWidth="126.5999755859375" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="431.99998779296874" minWidth="10.0" prefWidth="242.40001220703124" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="494.4000366210937" minWidth="10.0" prefWidth="145.60003662109375" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="597.7999633789062" minWidth="10.0" prefWidth="143.19996337890626" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.4000244140624" minWidth="10.0" prefWidth="343.0000244140625" />
   </columnConstraints>
   <rowConstraints>
@@ -27,18 +28,18 @@
     <RowConstraints maxHeight="255.19998779296873" minHeight="0.0" prefHeight="58.4000244140625" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Thông tin chuyến đi" textFill="#ff6e6c" GridPane.halignment="CENTER">
+      <Text fill="#0040ff" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-stroke: white; -fx-stroke-width: 3;" text="Thông tin chuyến đi" GridPane.columnSpan="4" GridPane.halignment="CENTER">
          <font>
-            <Font name="Tahoma Bold" size="26.0" />
+            <Font name="Tahoma Bold" size="36.0" />
          </font>
-      </Label>
+      </Text>
       <VBox prefHeight="319.0" prefWidth="134.0" spacing="10.0" GridPane.rowIndex="1">
          <children>
             <HBox prefHeight="22.0" prefWidth="301.0">
                <children>
-                  <Label text="Mã chuyến:" textFill="#ff6e6c">
+                  <Label text="Mã chuyến:">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
                   </Label>
                   <Label fx:id="maChuyenDi" prefHeight="26.0" prefWidth="44.0" textFill="#ff6e6c">
@@ -55,9 +56,9 @@
                <children>
                   <HBox prefHeight="22.0" prefWidth="301.0">
                      <children>
-                        <Label text="Điểm đi:" textFill="#ff6e6c">
+                        <Label text="Điểm đi:">
                            <font>
-                              <Font size="17.0" />
+                              <Font name="Tahoma Bold" size="17.0" />
                            </font>
                         </Label>
                         <Label fx:id="diemKhoiHanh" textFill="#ff6e6c">
@@ -74,9 +75,9 @@
             </HBox>
             <HBox prefHeight="22.0" prefWidth="301.0">
                <children>
-                  <Label text="Điểm đến:" textFill="#ff6e6c">
+                  <Label text="Điểm đến:">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
                   </Label>
                   <Label fx:id="diemKetThuc" textFill="#ff6e6c">
@@ -91,9 +92,9 @@
             </HBox>
             <HBox prefHeight="22.0" prefWidth="301.0">
                <children>
-                  <Label text="Giờ khởi hành:" textFill="#ff6e6c">
+                  <Label text="Giờ khởi hành:">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
                   </Label>
                   <Label fx:id="gioKhoiHanh" textFill="#ff6e6c">
@@ -108,9 +109,9 @@
             </HBox>
             <HBox prefHeight="22.0" prefWidth="301.0">
                <children>
-                  <Label text="Biển số xe: " textFill="#ff6e6c">
+                  <Label text="Biển số xe: ">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
                   </Label>
                   <Label fx:id="bienSoXe" textFill="#ff6e6c">
@@ -125,9 +126,9 @@
             </HBox>
             <HBox prefHeight="22.0" prefWidth="301.0">
                <children>
-                  <Label text="Tên tài xế:" textFill="#ff6e6c">
+                  <Label text="Tên tài xế:">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
                   </Label>
                   <Label fx:id="nhanVien" textFill="#ff6e6c">
@@ -142,9 +143,9 @@
             </HBox>
             <HBox prefHeight="22.0" prefWidth="301.0">
                <children>
-                  <Label text="Giá vé:" textFill="#ff6e6c">
+                  <Label text="Giá vé:">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
                   </Label>
                   <Label fx:id="giaVe" textFill="#ff6e6c">
@@ -176,11 +177,17 @@
                      <toggleGroup>
                         <ToggleGroup fx:id="Ghe" />
                      </toggleGroup>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="A02" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A02" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -190,11 +197,17 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="A04" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A04" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -204,11 +217,17 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="A06" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A06" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -218,11 +237,17 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="A08" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A08" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -232,11 +257,17 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="A10" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="A10" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -256,11 +287,17 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="B02" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B02" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -270,11 +307,17 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="B04" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B04" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -284,11 +327,17 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="B06" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B06" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -298,11 +347,17 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="B08" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B08" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -312,11 +367,17 @@
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                   <RadioButton fx:id="B10" mnemonicParsing="false" prefHeight="18.0" prefWidth="66.0" text="B10" toggleGroup="$Ghe">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
+                     <font>
+                        <Font name="Tahoma Bold" size="13.0" />
+                     </font>
                   </RadioButton>
                </children>
             </HBox>
@@ -325,18 +386,18 @@
             <Insets left="20.0" />
          </GridPane.margin>
       </VBox>
-      <Label alignment="TOP_LEFT" contentDisplay="TOP" text="Thông tin khách đi" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-         <font>
-            <Font name="Tahoma" size="17.0" />
-         </font>
-      </Label>
-      <VBox prefHeight="255.0" prefWidth="286.0" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+      <VBox alignment="CENTER" prefHeight="255.0" prefWidth="286.0" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
          <children>
+            <Label alignment="CENTER" contentDisplay="TOP" text="Thông tin khách đi">
+               <font>
+                  <Font name="Tahoma Bold" size="20.0" />
+               </font>
+            </Label>
             <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="242.0" spacing="10.0" styleClass="HBoxCss">
                <children>
-                  <Label contentDisplay="TOP" text="Họ tên:">
+                  <Label contentDisplay="TOP" prefHeight="22.0" prefWidth="78.0" text="Họ tên:">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
                   </Label>
                   <TextField fx:id="txtHoVaTen" prefHeight="26.0" prefWidth="174.0" styleClass="lbName" HBox.hgrow="ALWAYS">
@@ -353,7 +414,7 @@
                <children>
                   <Label contentDisplay="TOP" text="Số điện thoại:">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
                   </Label>
                   <TextField fx:id="txtSDT" prefHeight="26.0" prefWidth="174.0" HBox.hgrow="ALWAYS">
@@ -368,9 +429,9 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="29.0" prefWidth="237.0" spacing="10.0">
                <children>
-                  <Label contentDisplay="TOP" text="Điểm đón:">
+                  <Label contentDisplay="TOP" prefHeight="22.0" prefWidth="98.0" text="Điểm đón:">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="Tahoma Bold" size="17.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -383,9 +444,9 @@
                   </TextField>
                </children>
             </HBox>
-            <HBox alignment="CENTER" layoutX="10.0" layoutY="92.0" prefHeight="29.0" prefWidth="237.0" spacing="10.0">
+            <HBox alignment="TOP_CENTER" layoutX="10.0" layoutY="92.0" prefHeight="29.0" prefWidth="237.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#bookingHandler" prefHeight="34.0" prefWidth="83.0" styleClass="ButtonBook" text="Đặt vé" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#bookingHandler" prefHeight="28.0" prefWidth="128.0" styleClass="ButtonBook" text="Đặt vé" textFill="WHITE">
                      <font>
                         <Font name="Tahoma Bold" size="14.0" />
                      </font>

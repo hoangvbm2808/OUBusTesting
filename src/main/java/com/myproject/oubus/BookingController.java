@@ -61,6 +61,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 public class BookingController implements Initializable {
 
     private int id;
+    @FXML private TextField txtMaVe;
     @FXML private TextField txtHoVaTen;
     @FXML private TextField txtSDT;
     @FXML private TextField txtDiemDon;
@@ -71,7 +72,7 @@ public class BookingController implements Initializable {
     @FXML private Label bienSoXe;
     @FXML private Label nhanVien;
     @FXML private Label giaVe;
-    @FXML private Label time;
+    @FXML private Label lbMaVe;
     @FXML private Label time1;
     @FXML private RadioButton A01;
     @FXML private RadioButton A02;
@@ -99,21 +100,35 @@ public class BookingController implements Initializable {
     long sec= 0 ;
     String pattern = "dd/MM/yyyy HH:mm:ss";
     SimpleDateFormat df = new SimpleDateFormat(pattern);
+    String maVe;
+    private VeXe veXe;
+    int maChuyen;
+    @FXML private Label labelMaVe;
+
     private static final ChuyenDiService cd = new ChuyenDiService();
     private static final XeKhachService xk = new XeKhachService();
     private static final NhanVienService nv = new NhanVienService();
     private static final BookingService bk = new BookingService();
     private static final TicketService tk = new TicketService();
+
+    public void setId(String id) {
+        this.maVe = id;
+//        lbMaVe.setText(maVe);
+    }
+
+    public void setMaChuyen(int maChuyen) {
+        this.maChuyen = maChuyen;
+    }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         // TODO
-        
-    }    
-    
+
+    }
+
          
     public void loadBookingForm(int id) throws SQLException {
         this.id = id;
@@ -138,17 +153,31 @@ public class BookingController implements Initializable {
         }
         //setDisable các vé đã đặt
         this.listDaDat.forEach(v -> {
-            for(int i = 0; i < listConTrong.size(); i++)
-                if(v.getViTriGhe().equals(listConTrong.get(i).getId()))
+            for(int i = 0; i < listConTrong.size(); i++) {
+                if (v.getViTriGhe().equals(listConTrong.get(i).getId()))
                     this.listConTrong.get(i).setDisable(true);
+            }
         }); 
         // Tính thời gian khởi hành và thời gian hiện tại
         long timeKhoiHanh = (a.getNgayKhoiHanh().getTime() + a.getGioKhoiHanh().getTime());
         long timeHienTai = System.currentTimeMillis();
         long s =  timeKhoiHanh - timeHienTai;
         sec = TimeUnit.MILLISECONDS.toMinutes(s)+480;
+
+        //Hien thong tin ve neu dat lai chuyen
+        if (maVe != null)
+        {
+            veXe = tk.getVeTheoMaVe(maVe);
+//            labelMaVe.setDisable(false);
+//            txtMaVe.setDisable(false);
+//            this.txtMaVe.setText(veXe.getMaVe());
+            this.txtHoVaTen.setText(veXe.getTenKhachHang());
+            this.txtSDT.setText(veXe.getSdt());
+            this.txtDiemDon.setText(veXe.getDiemDon());
+            tk.deleteTicket(veXe);
+        }
     }
-    
+
     public void bookingHandler(ActionEvent event) {
         if (sec > 60) {
             RadioButton selectedRadioButton = (RadioButton) Ghe.getSelectedToggle();
@@ -158,10 +187,22 @@ public class BookingController implements Initializable {
                     String viTriGhe = selectedRadioButton.getText();
                     VeXe v = new VeXe(this.txtHoVaTen.getText(), Date.valueOf(LocalDate.now()), this.txtSDT.getText(), Integer.parseInt(this.maChuyenDi.getText()), viTriGhe, "Đã đặt", mnv, 1, this.txtDiemDon.getText());
                     try {
-                        bk.addVeXe(v);
-                        Utils.getBox("Đặt vé thành công", Alert.AlertType.INFORMATION).show();
-                        this.resetForm();
-                        this.loadBookingForm(id);
+
+//                        if (this.txtMaVe.getText() == "") {
+                            bk.addVeXe(v);
+                            Utils.getBox("Đặt vé mới thành công", Alert.AlertType.INFORMATION).show();
+                            this.resetForm();
+                            this.loadBookingForm(id);
+//                        }
+//                        else {
+//                            VeXe ve = new VeXe(this.txtMaVe.getText(),this.txtHoVaTen.getText(), Date.valueOf(LocalDate.now()), this.txtSDT.getText(), Integer.parseInt(this.maChuyenDi.getText()), viTriGhe, "Đã đặt", mnv, 1, this.txtDiemDon.getText());
+//                            bk.update(ve);
+//                            Utils.getBox("Đặt vé thành công", Alert.AlertType.INFORMATION).show();
+//                            labelMaVe.setDisable(true);
+//                            txtMaVe.setDisable(true);
+//                            this.resetForm();
+//                            this.loadBookingForm(id);
+//                        }
                     } catch (SQLException ex) {
                         Utils.getBox("Đặt vé thất bại: " + ex.getMessage(), Alert.AlertType.WARNING).show();
                     }
@@ -172,6 +213,30 @@ public class BookingController implements Initializable {
         } else
             Utils.getBox("Đặt vé thất bại: Chỉ được Đặt vé trước 60 phút khi chuyến xe khởi hành.", Alert.AlertType.WARNING).show(); 
     }
+
+//    public void bookingHandler(ActionEvent event) {
+//        if (sec > 60) {
+//            RadioButton selectedRadioButton = (RadioButton) Ghe.getSelectedToggle();
+//            if (this.txtHoVaTen.getText().length() != 0 && this.txtSDT.getText().length() != 0 && this.txtDiemDon.getText().length() != 0
+//                    && Ghe.getSelectedToggle() != null) {
+//                if (bk.checkSDT(this.txtSDT.getText())) {
+//                    String viTriGhe = selectedRadioButton.getText();
+//                    VeXe v = new VeXe( this.txtHoVaTen.getText(), Date.valueOf(LocalDate.now()), this.txtSDT.getText(), Integer.parseInt(this.maChuyenDi.getText()), viTriGhe, "Đã đặt", mnv, 1, this.txtDiemDon.getText());
+//                    try {
+//                        bk.addVeXe(v);
+//                        Utils.getBox("Đặt vé thành công", Alert.AlertType.INFORMATION).show();
+//                        this.resetForm();
+//                        this.loadBookingForm(id);
+//                    } catch (SQLException ex) {
+//                        Utils.getBox("Đặt vé thất bại: " + ex.getMessage(), Alert.AlertType.WARNING).show();
+//                    }
+//                } else
+//                    Utils.getBox("Số điện thoại không hợp lệ !", Alert.AlertType.WARNING).show();
+//            } else
+//                Utils.getBox("Vui lòng nhập đầy đủ thông tin !", Alert.AlertType.WARNING).show();
+//        } else
+//            Utils.getBox("Đặt vé thất bại: Chỉ được Đặt vé trước 60 phút khi chuyến xe khởi hành.", Alert.AlertType.WARNING).show();
+//    }
     
     public void actionQuayVe(ActionEvent event) throws IOException {
        FXMLLoader fxmloader = new FXMLLoader(App.class.getResource("MainStaffScreen.fxml"));

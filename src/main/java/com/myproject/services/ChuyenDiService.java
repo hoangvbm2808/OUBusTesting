@@ -148,17 +148,18 @@ public class ChuyenDiService {
         }
     }
 
-    public boolean updateTour(int maChuyenDi, int giaVe, String noiDi, String noiDen, Date ngayKH, String tg) throws SQLException {
+    public boolean updateTour(int maxe, int maChuyenDi, int giaVe, String noiDi, String noiDen, Date ngayKH, String tg) throws SQLException {
         try (Connection conn = jdbcUtils.getConn()) {
             conn.setAutoCommit(false);
-            String sql = "UPDATE chuyendi SET giaVe=?, diemKhoiHanh=?, diemKetThuc=?, ngayKhoiHanh=?,gioKhoiHanh=? WHERE id=?"; // sql injection
+            String sql = "UPDATE chuyendi SET maXe=?, giaVe=?, diemKhoiHanh=?, diemKetThuc=?, ngayKhoiHanh=?,gioKhoiHanh=? WHERE id=?"; // sql injection
             PreparedStatement stm = conn.prepareCall(sql);
-            stm.setInt(1, giaVe);
-            stm.setString(2, noiDi);
-            stm.setString(3, noiDen);
-            stm.setDate(4, ngayKH);
-            stm.setString(5, tg);
-            stm.setInt(6, maChuyenDi);
+            stm.setInt(1, maxe);
+            stm.setInt(2, giaVe);
+            stm.setString(3, noiDi);
+            stm.setString(4, noiDen);
+            stm.setDate(5, ngayKH);
+            stm.setString(6, tg);
+            stm.setInt(7, maChuyenDi);
             int r = stm.executeUpdate();
 //            return r;
             try {
@@ -200,7 +201,7 @@ public class ChuyenDiService {
             if (viTri != -1) {
                 gio = tgKH.substring(0,viTri);
                 phut = tgKH.substring(viTri + 1, 5);
-                return gio + ":" + phut;
+                return gio + ":" + phut ;
             }
             else {
                 return " ";
@@ -239,7 +240,7 @@ public class ChuyenDiService {
             }
         }
         else if (tgKH.length() == 2) {
-            return tgKH + ":00";
+            return tgKH + ":00" ;
         }
         else if (tgKH.length() == 1) {
             return "0" + tgKH + ":00";
@@ -253,11 +254,28 @@ public class ChuyenDiService {
         return " ";
     }
 
-    public boolean checkTimeKieuSo(String sdt){
-        Integer b = Integer.parseInt(sdt.substring(0,1));
-        if(sdt.length() < 6  && b % 1 == 0)
-            return true;
-        return false;
+    public boolean checkTimeKieuSo(String time) {
+        try {
+            Integer b = Integer.parseInt(time.substring(0, 1));
+            if (time.length() < 6 && b % 1 == 0)
+                return true;
+            return false;
+        }
+        catch (NumberFormatException ex) {
+            return false;
+        }
     }
 
+    public boolean checkGia(String gia) {
+        try {
+            String g = String.valueOf(gia);
+            Integer b = Integer.parseInt(g.substring(0, 1));
+            if (g.length() > 0 && g.length() < 10  && b % 1 == 0)
+                return true;
+            return false;
+        }
+        catch (NumberFormatException ex) {
+            return false;
+        }
+    }
 }

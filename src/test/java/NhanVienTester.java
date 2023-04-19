@@ -34,8 +34,7 @@ public class NhanVienTester {
             Logger.getLogger(AccountTester.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-    
+
     @AfterAll
     public static void closeConn() {
         if (conn != null) {
@@ -46,12 +45,6 @@ public class NhanVienTester {
             }
         }
     }
-    
-//    @Test
-//    public void testGetNhanVienByMaNV() throws SQLException{
-//        NhanVien nvien = nv.getNhanVienByMaNV(1);
-//        Assertions.assertEquals(nvien.getTenNhanVien(),"Lê Văn Lâm");
-//    }
 
     @Test
     public void testAddNhanVien() throws SQLException {

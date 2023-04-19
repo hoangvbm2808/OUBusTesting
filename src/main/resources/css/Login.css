@@ -10,7 +10,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 * {
     /*-fx-background-color: ladder;*/
     /*-fx-fill: activeborder;*/
-    -fx-font-size: 15;
+    /*-fx-font-size: 15;*/
 }
 
 GripPane {
@@ -20,12 +20,6 @@ GripPane {
     -fx-alignment: CENTER;
 }
 
-Text.Subject {
-    -fx-fill: red;
-    -fx-stroke: gold;
-    -fx-stroke-width: 3;
-    -fx-font-size: 30;
-}
 
 HBox {
     -fx-spacing: 150;
