@@ -141,6 +141,8 @@ public class ChuyenDiService {
             stm.executeUpdate();
 
             return true;
+        } catch (SQLException ex) {
+            return false;
         }
     }
 

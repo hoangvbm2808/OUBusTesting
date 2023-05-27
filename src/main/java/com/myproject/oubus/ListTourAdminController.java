@@ -305,7 +305,6 @@ public class ListTourAdminController implements Initializable {
         ChuyenDi t = tableChuyenDi.getSelectionModel().getSelectedItem();
         try {
             XeKhach xeKhach = x.getXeKhachByMaXe(t.getMaXe());
-//            public final void setPromptText();
             cbbmaXe.setPromptText(xeKhach.getBienSoXe());
             noiDiField.setText(t.getDiemKhoiHanh());
             noiDenField.setText(t.getDiemKetThuc());

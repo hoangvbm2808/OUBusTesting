@@ -1,6 +1,7 @@
 import com.myproject.conf.jdbcUtils;
 import com.myproject.pojo.ChuyenDi;
 import com.myproject.pojo.VeXe;
+import com.myproject.services.BookingService;
 import com.myproject.services.ChuyenDiService;
 import com.myproject.services.TicketService;
 import org.junit.jupiter.api.AfterAll;
@@ -27,6 +28,7 @@ public class ChuyenDiTester {
     private static Connection conn;
     private static ChuyenDiService cd;
     private static TicketService ticket;
+    private static final BookingService bk = new BookingService();
 
     @BeforeAll
     public static void beforeAll() {
@@ -71,39 +73,48 @@ public class ChuyenDiTester {
         }
     }
 
-    //Truyen du lieu co trong ds
+    //Truyen du lieu Diem khoi hanh
     @Test
     public void checkTimKiem2() throws SQLException {
         List<ChuyenDi> ds = cd.getChuyenDi("HCM", null);
         Assertions.assertEquals(1, ds.size());
     }
 
-    //Truyen du lieu so
+    //Truyen du lieu Diem ket thuc
     @Test
     public void checkTimKiem3() throws SQLException {
-        List<ChuyenDi> ds = cd.getChuyenDi("1", null);
-        Assertions.assertEquals(0, ds.size());
+        List<ChuyenDi> ds = cd.getChuyenDi(null, "Sai Gon");
+        Assertions.assertEquals(1, ds.size());
+    }
+
+    //Truyen du lieu Diem khoi hanh va Diem ket thuc
+    @Test
+    public void checkTimKiem6() throws SQLException {
+        List<ChuyenDi> ds = cd.getChuyenDi("TPHCM", "Hue");
+        Assertions.assertEquals(2, ds.size());
     }
 
     //Truyen ki tu dac biet
     @Test
     public void checkTimKiem4() throws SQLException {
-        List<ChuyenDi> ds = cd.getChuyenDi("@TPHCM", null);
+        List<ChuyenDi> ds = cd.getChuyenDi("   @TPHCM", null);
         Assertions.assertEquals(0, ds.size());
     }
 
+    //Truyen du lieu khooang trang
     @Test
     public void checkTimKiem5() throws SQLException {
-        List<ChuyenDi> ds = cd.getChuyenDi("Thanh pho Ho Chi Minh", null);
+        List<ChuyenDi> ds = cd.getChuyenDi("TP   HCM", null);
         Assertions.assertEquals(0, ds.size());
     }
 
-    //chuyen theo ma
+    //chuyen theo ma am
     @Test
     public void checkMaChuyenDi() throws Exception {
         Assertions.assertNull(cd.getChuyenDiByMaChuyenDi(-1));
     }
 
+    //chuyen theo ma duong
     @Test
     public void checkMaChuyenDi2() throws Exception {
         ChuyenDi c = cd.getChuyenDiByMaChuyenDi(27);
@@ -113,7 +124,7 @@ public class ChuyenDiTester {
     //them chuyen
     @Test
     public void checkAddChuyenDi() throws ParseException {
-        ChuyenDi c = new ChuyenDi(200, 1, 123000,
+        ChuyenDi c = new ChuyenDi(47, 1, 123000,
                 Date.valueOf(LocalDate.now()), Time.valueOf("17:00" + ":00"),
                 "An Giang", "Tien Giang", 20,
                 0, "Chua khoi hanh");
@@ -133,62 +144,16 @@ public class ChuyenDiTester {
         }
     }
 
-    @Test
-    public void checkAddChuyenDi2() {
-        ChuyenDi c = new ChuyenDi(201, 2, 130000,
-                Date.valueOf(LocalDate.now()), Time.valueOf("17:00" + ":00"),
-                "Ben Tre", "Tien Giang", 20,
-                0, "Chua khoi hanh");
-        try {
-            cd.addTour(c);
-            int MaChuyen = c.getMaChuyenDi();
-
-            PreparedStatement stm = conn.prepareCall("SELECT * FROM chuyendi WHERE id= ?");
-            stm.setInt(1, MaChuyen);
-
-            ResultSet rs = stm.executeQuery();
-            Assertions.assertNotNull(rs.next());
-            Assertions.assertEquals(MaChuyen, rs.getInt("id"));
-            Assertions.assertEquals(Time.valueOf("17:00" + ":00"), rs.getString("gioKhoiHanh"));
-        } catch (SQLException ex) {
-            Logger.getLogger(ChuyenDiTester.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Test
-    public void checkAddChuyenDi3() {
-        List<ChuyenDi> ds = new ArrayList<>();
-        ChuyenDi c = new ChuyenDi(145000, "Ha Tinh",
-                "Hue", Date.valueOf(LocalDate.now()),
-                Time.valueOf("12:30" + ":00"), 1);
-
-        try {
-            cd.addTour(c);
-            PreparedStatement stm = conn.prepareCall("SELECT * FROM chuyendi WHERE diemKhoiHanh = ?");
-            stm.setString(1, c.getDiemKhoiHanh());
-
-            ResultSet rs = stm.executeQuery();
-            Assertions.assertNotNull(rs.next());
-            while (rs.next()) {
-                ChuyenDi chuyenDi = new ChuyenDi(rs.getInt("id"), rs.getInt("maXe"), rs.getInt("giaVe"),
-                        rs.getDate("ngayKhoiHanh"), rs.getTime("gioKhoiHanh"),
-                        rs.getString("diemKhoiHanh"), rs.getString("diemKetThuc"),
-                        rs.getInt("soGheTrong"), rs.getInt("soGheDat"), rs.getString("trangThai"));
-                ds.add(chuyenDi);
-            }
-            for (ChuyenDi chuyen : ds) {
-                Assertions.assertEquals(Time.valueOf("12:30" + ":00"), chuyen.getGioKhoiHanh());
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ChuyenDiTester.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    //    truyen du lieu xoa
+    //truyen du lieu xoa chuyen di khong co ve chua khoi hanh
     @Test
     public void checkDeleteChuyenDi() {
         int id = 23;
         try {
+            ChuyenDi c = new ChuyenDi(23, 2, 130000,
+                    Date.valueOf(LocalDate.now()), Time.valueOf("17:00" + ":00"),
+                    "Ben Tre", "Tien Giang", 20,
+                    0, "Chua khoi hanh");
+            cd.addTour(c);
             boolean actual = cd.deleteTour(id);
             Assertions.assertTrue(actual);
 
@@ -197,18 +162,51 @@ public class ChuyenDiTester {
             stm.setInt(1, id);
 
             ResultSet rs = stm.executeQuery();
-            Assertions.assertTrue(rs.next());
+            Assertions.assertFalse(rs.next());
 
-            Assertions.assertFalse(ticket.deleteListTicket(id));
+            Assertions.assertTrue(ticket.deleteListTicket(id));
         } catch (SQLException ex) {
             Logger.getLogger(ChuyenDiTester.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    //truyen du lieu xoa chuyen di co ve chua khoi hanh
+    @Test
+    public void checkDeleteChuyenDi3() {
+        int id = 23;
+        try {
+            ChuyenDi c = new ChuyenDi(23, 2, 130000,
+                    Date.valueOf(LocalDate.now()), Time.valueOf("17:00" + ":00"),
+                    "Ben Tre", "Tien Giang", 20,
+                    0, "Chua khoi hanh");
+            cd.addTour(c);
+            VeXe ve = new VeXe("5","Minh Hoang", Date.valueOf(LocalDate.now()) , "0399987202",
+                    23, "B02", "Đã đặt",
+                    2, 1, "Nha Trang");
+            bk.addVeXe(ve);
+            boolean actual = cd.deleteTour(id);
+            Assertions.assertFalse(actual);
+
+            String sql = "SELECT * FROM chuyendi WHERE id=?";
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setInt(1, id);
+
+            ResultSet rs = stm.executeQuery();
+            Assertions.assertTrue(rs.next());
+        } catch (SQLException ex) {
+            Logger.getLogger(ChuyenDiTester.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //Xoa chuyen di da khoi hanh va co ve
     @Test
     public void checkDeleteChuyenDi2() {
         int id = 47;
         try {
+            VeXe ve = new VeXe("5","Minh Hoang", Date.valueOf(LocalDate.now()) , "0399987202",
+                    47, "B02", "Đã đặt",
+                    2, 1, "Nha Trang");
+            bk.addVeXe(ve);
             boolean actual = cd.deleteTour(id);
             Assertions.assertTrue(actual);
 
@@ -217,8 +215,32 @@ public class ChuyenDiTester {
             stm.setInt(1, id);
 
             ResultSet rs = stm.executeQuery();
-            Assertions.assertTrue(rs.next());
-            Assertions.assertFalse(ticket.deleteListTicket(47));
+            Assertions.assertFalse(rs.next());
+            Assertions.assertTrue(ticket.deleteListTicket(47));
+        } catch (SQLException ex) {
+            Logger.getLogger(ChuyenDiTester.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    //Xoa chuyen di da khoi hanh va khong co ve
+    @Test
+    public void checkDeleteChuyenDi4() {
+        int id = 49;
+        try {
+            ChuyenDi c = new ChuyenDi(49, 2, 130000,
+                    Date.valueOf(LocalDate.now()), Time.valueOf("17:00" + ":00"),
+                    "Ben Tre", "Tien Giang", 20,
+                    0, "Đã khởi hành");
+            cd.addTour(c);
+            boolean actual = cd.deleteTour(id);
+            Assertions.assertTrue(actual);
+
+            String sql = "SELECT * FROM chuyendi WHERE id=?";
+            PreparedStatement stm = conn.prepareCall(sql);
+            stm.setInt(1, id);
+
+            ResultSet rs = stm.executeQuery();
+            Assertions.assertFalse(rs.next());
         } catch (SQLException ex) {
             Logger.getLogger(ChuyenDiTester.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -229,7 +251,7 @@ public class ChuyenDiTester {
     public void checkUpdateChuyenDi() {
         boolean actual = false;
         try {
-            actual = cd.updateTour(1, 61, 100000, "Hue", "Sai Gon", Date.valueOf(LocalDate.now()), String.valueOf(Time.valueOf("17:00" + ":00")));
+            actual = cd.updateTour(1, 61, 120000, "Hue", "Sai Gon", Date.valueOf(LocalDate.now()), String.valueOf(Time.valueOf("17:00" + ":00")));
             Assertions.assertTrue(actual);
 
             PreparedStatement stm = conn.prepareCall("SELECT * FROM chuyendi WHERE id= ?");

@@ -37,6 +37,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -102,7 +103,7 @@ public class TicketController implements Initializable {
     }
 
     public void actionExportTicket(ActionEvent event) throws SQLException, IOException {
-        
+
         if (this.sec > 30) {
             VeXe veXe = tk.getVeTheoMaVe(this.maVe);
             if(veXe.getTrangThai().equals("Đã đặt")){
@@ -125,7 +126,7 @@ public class TicketController implements Initializable {
             Utils.getBox("Vé đã được thu hồi!", Alert.AlertType.WARNING).show(); 
         }
     }
-    
+
     public void actionDeleteTicket(ActionEvent event) throws SQLException, IOException {
         
         if (this.sec > 30) {
@@ -169,7 +170,7 @@ public class TicketController implements Initializable {
     
     public void actionChangeTicket(ActionEvent event) throws IOException, SQLException{
         
-        if (this.sec > 60) {
+        if (this.sec > 30) {
             VeXe veXe = tk.getVeTheoMaVe(this.maVe);
 //            if(veXe.getTrangThai().equals("Đã đặt")) {
 //                tk.deleteTicket(veXe);
